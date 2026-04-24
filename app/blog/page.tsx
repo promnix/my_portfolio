@@ -208,7 +208,7 @@ export default function BlogPage() {
             </div>
             <a
               href="mailto:hello@yourname.dev?subject=Send%20me%20your%20latest%20articles"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5"
+              className="theme-cream-button inline-flex items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5"
             >
               Set up article delivery
               <ArrowUpRight size={15} />

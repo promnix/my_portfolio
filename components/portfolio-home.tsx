@@ -302,7 +302,7 @@ export function PortfolioHome() {
             <div className="flex flex-wrap gap-3">
               <a
                 href={siteConfig.contactHref}
-                className="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5"
+                className="theme-cream-button inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5"
               >
                 Email me
                 <ArrowUpRight size={15} />
