@@ -35,9 +35,9 @@ export function SearchClient({
     <div className="section-shell py-10 md:py-14">
       <div className="max-w-3xl">
         <p className="eyebrow text-xs text-brass">Search</p>
-        <h1 className="mt-4 font-display text-5xl md:text-6xl">Find pages, sections, and projects.</h1>
+        <h1 className="mt-4 font-display text-5xl md:text-6xl">Find pages, sections, projects, and articles.</h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">
-          The reference site includes a dedicated search route. This version keeps that pattern and searches your portfolio structure locally.
+          The reference site includes a dedicated search route. This version keeps that pattern and searches your portfolio structure and blog content locally.
         </p>
       </div>
 

@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BriefcaseBusiness, MapPin, Sparkles } from "lucide-react";
-import { featuredProjects, siteConfig, skillGroups, testimonials } from "@/lib/site-data";
+import { blogPosts, featuredProjects, siteConfig, skillGroups, testimonials } from "@/lib/site-data";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -241,6 +241,48 @@ export function PortfolioHome() {
                 <p className="text-sm text-silver">{item.role}</p>
               </footer>
             </motion.blockquote>
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section {...fadeUp} id="blog" className="section-shell py-10 md:py-14">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow text-xs text-brass">Blog</p>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">Writing that adds context to the work.</h2>
+          </div>
+          <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-silver transition hover:text-brass">
+            Open the full blog page
+            <ArrowUpRight size={15} />
+          </Link>
+        </div>
+
+        <div className="mt-8 grid gap-4 lg:grid-cols-3">
+          {blogPosts.slice(0, 3).map((post, index) => (
+            <motion.div
+              key={post.slug}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.42, delay: index * 0.06 }}
+              className="section-card rounded-[1.85rem] transition hover:border-brass hover:bg-[rgba(255,255,255,0.05)]"
+            >
+              <Link href={`/blog/${post.slug}`} className="block p-6">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
+                  <span className="eyebrow text-[0.68rem] text-brass">{post.category}</span>
+                  <span>{post.publishedAt}</span>
+                </div>
+                <h3 className="mt-4 font-display text-3xl text-balance">{post.title}</h3>
+                <p className="mt-4 text-sm leading-7 text-silver">{post.excerpt}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {post.topics.slice(0, 2).map((topic) => (
+                    <span key={topic} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </motion.section>
