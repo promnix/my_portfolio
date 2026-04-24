@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Script from "next/script";
 import { IntroSplash } from "@/components/intro-splash";
 import { SiteShell } from "@/components/site-shell";
@@ -14,23 +15,34 @@ export const metadata: Metadata = {
   description: siteConfig.description,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const initialTheme = cookieStore.get("theme")?.value === "light" ? "light" : "dark";
+
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="h-full antialiased"
+      data-theme={initialTheme}
+      suppressHydrationWarning
+    >
       <body className="intro-pending min-h-full">
         <Script id="theme-init" strategy="beforeInteractive">
           {`(() => {
             const html = document.documentElement;
+            const defaultTheme = ${JSON.stringify(initialTheme)};
 
             try {
               const storedTheme = window.localStorage.getItem("theme");
-              html.dataset.theme = storedTheme === "light" ? "light" : "dark";
+              const resolvedTheme = storedTheme === "light" || storedTheme === "dark" ? storedTheme : defaultTheme;
+              html.dataset.theme = resolvedTheme;
+              window.localStorage.setItem("theme", resolvedTheme);
             } catch {
-              html.dataset.theme = "dark";
+              html.dataset.theme = defaultTheme;
             }
           })();`}
         </Script>

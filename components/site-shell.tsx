@@ -31,6 +31,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     const nextTheme = theme === "dark" ? "light" : "dark";
 
     document.documentElement.dataset.theme = nextTheme;
+    document.cookie = `theme=${nextTheme}; path=/; max-age=31536000; SameSite=Lax`;
 
     try {
       window.localStorage.setItem("theme", nextTheme);
