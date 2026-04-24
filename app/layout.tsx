@@ -20,8 +20,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <body className="intro-pending min-h-full">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(() => {
+            const html = document.documentElement;
+
+            try {
+              const storedTheme = window.localStorage.getItem("theme");
+              html.dataset.theme = storedTheme === "light" ? "light" : "dark";
+            } catch {
+              html.dataset.theme = "dark";
+            }
+          })();`}
+        </Script>
         <Script id="intro-splash-dismiss" strategy="beforeInteractive">
           {`(() => {
             const html = document.documentElement;
