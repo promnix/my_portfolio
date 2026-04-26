@@ -1,36 +1,20 @@
-"use client";
-
-import { motion } from "motion/react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BriefcaseBusiness, MapPin, Sparkles } from "lucide-react";
 import { blogPosts, featuredProjects, siteConfig, skillGroups, testimonials } from "@/lib/site-data";
-
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.25 },
-  transition: { duration: 0.55, ease: "easeOut" },
-} as const;
 
 export function PortfolioHome() {
   return (
     <div>
       <section className="relative overflow-hidden">
         <div className="hero-grid section-shell grid items-center gap-12 py-10 md:grid-cols-[1.05fr_0.95fr] md:py-16">
-          <motion.div {...fadeUp} className="max-w-xl">
+          <div className="max-w-xl">
             <p className="eyebrow text-xs text-brass">{siteConfig.tagline}</p>
             <h1 className="mt-5 font-display text-[clamp(4.1rem,10vw,7.7rem)] leading-[0.9] text-balance">
               {siteConfig.name}
             </h1>
-            <p className="mt-4 text-lg font-semibold text-cream/90 md:text-xl">
-              {siteConfig.role}
-            </p>
-            <p className="mt-6 max-w-xl text-base leading-8 text-silver md:text-lg">
-              {siteConfig.heroLead}
-            </p>
-            <p className="mt-4 max-w-xl text-sm leading-7 text-silver/80 md:text-base">
-              {siteConfig.heroBody}
-            </p>
+            <p className="mt-4 text-lg font-semibold text-cream/90 md:text-xl">{siteConfig.role}</p>
+            <p className="mt-6 max-w-xl text-base leading-8 text-silver md:text-lg">{siteConfig.heroLead}</p>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-silver/80 md:text-base">{siteConfig.heroBody}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -59,14 +43,9 @@ export function PortfolioHome() {
                 {siteConfig.availability}
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.75, ease: "easeOut", delay: 0.12 }}
-            className="relative mx-auto w-full max-w-[34rem]"
-          >
+          <div className="relative mx-auto w-full max-w-[34rem]">
             <div className="hero-orb aspect-[0.9] rounded-[2.5rem] p-6 md:p-8">
               <div className="flex h-full flex-col justify-between rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-6">
                 <div className="flex items-center justify-between text-xs text-silver">
@@ -78,12 +57,8 @@ export function PortfolioHome() {
                   <div className="absolute inset-4 rounded-full border border-dashed border-brass/30" />
                   <div className="absolute inset-10 rounded-full border border-white/10" />
                   <div className="text-center">
-                    <p className="font-display text-[clamp(4rem,12vw,7rem)] leading-none">
-                      {siteConfig.shortName}
-                    </p>
-                    <p className="mt-2 text-xs tracking-[0.35em] text-silver uppercase">
-                      Personal Brand
-                    </p>
+                    <p className="font-display text-[clamp(4rem,12vw,7rem)] leading-none">{siteConfig.shortName}</p>
+                    <p className="mt-2 text-xs tracking-[0.35em] text-silver uppercase">Personal Brand</p>
                   </div>
                 </div>
 
@@ -99,11 +74,11 @@ export function PortfolioHome() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <motion.section {...fadeUp} id="about" className="section-shell py-8 md:py-14">
+      <section id="about" className="section-shell py-8 md:py-14">
         <div className="grid gap-8 rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:grid-cols-[0.9fr_1.1fr] md:p-8">
           <div>
             <p className="eyebrow text-xs text-brass">About</p>
@@ -124,9 +99,9 @@ export function PortfolioHome() {
             </Link>
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section {...fadeUp} id="skills" className="section-shell py-10 md:py-14">
+      <section id="skills" className="section-shell py-10 md:py-14">
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">Skills</p>
@@ -138,15 +113,8 @@ export function PortfolioHome() {
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {skillGroups.map((group, index) => (
-            <motion.div
-              key={group.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="section-card rounded-[1.75rem] p-5"
-            >
+          {skillGroups.map((group) => (
+            <div key={group.title} className="section-card rounded-[1.75rem] p-5">
               <p className="text-sm font-semibold text-cream">{group.title}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {group.items.map((item) => (
@@ -158,12 +126,12 @@ export function PortfolioHome() {
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section {...fadeUp} id="portfolio" className="section-shell py-10 md:py-14">
+      <section id="portfolio" className="section-shell py-10 md:py-14">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">Selected Work</p>
@@ -177,12 +145,8 @@ export function PortfolioHome() {
 
         <div className="mt-8 space-y-4">
           {featuredProjects.slice(0, 4).map((project, index) => (
-            <motion.article
+            <article
               key={project.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.45, delay: index * 0.05 }}
               className="project-row rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-5 md:p-7"
             >
               <div className="grid gap-5 md:grid-cols-[0.18fr_0.82fr]">
@@ -196,9 +160,7 @@ export function PortfolioHome() {
                     <span className="text-xs text-silver">{project.kind}</span>
                   </div>
                   <h3 className="mt-3 font-display text-3xl md:text-4xl">{project.title}</h3>
-                  <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">
-                    {project.summary}
-                  </p>
+                  <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">{project.summary}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {project.stack.map((item) => (
                       <span key={item} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
@@ -208,12 +170,12 @@ export function PortfolioHome() {
                   </div>
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section {...fadeUp} className="section-shell py-10 md:py-14">
+      <section className="section-shell py-10 md:py-14">
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">What people say</p>
@@ -226,26 +188,19 @@ export function PortfolioHome() {
         </div>
 
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
-          {testimonials.map((item, index) => (
-            <motion.blockquote
-              key={item.author}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.4, delay: index * 0.06 }}
-              className="section-card rounded-[1.75rem] p-6"
-            >
+          {testimonials.map((item) => (
+            <blockquote key={item.author} className="section-card rounded-[1.75rem] p-6">
               <p className="text-sm leading-8 text-silver md:text-base">“{item.quote}”</p>
               <footer className="mt-6">
                 <p className="font-semibold text-cream">{item.author}</p>
                 <p className="text-sm text-silver">{item.role}</p>
               </footer>
-            </motion.blockquote>
+            </blockquote>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section {...fadeUp} id="blog" className="section-shell py-10 md:py-14">
+      <section id="blog" className="section-shell py-10 md:py-14">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">Blog</p>
@@ -258,13 +213,9 @@ export function PortfolioHome() {
         </div>
 
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
-          {blogPosts.slice(0, 3).map((post, index) => (
-            <motion.div
+          {blogPosts.slice(0, 3).map((post) => (
+            <div
               key={post.slug}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.42, delay: index * 0.06 }}
               className="section-card rounded-[1.85rem] transition hover:border-brass hover:bg-[rgba(255,255,255,0.05)]"
             >
               <Link href={`/blog/${post.slug}`} className="block p-6">
@@ -282,12 +233,12 @@ export function PortfolioHome() {
                   ))}
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section {...fadeUp} id="contact" className="section-shell pb-20 pt-10 md:pb-24 md:pt-14">
+      <section id="contact" className="section-shell pb-20 pt-10 md:pb-24 md:pt-14">
         <div className="overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(214,161,74,0.18),rgba(255,255,255,0.04),rgba(102,169,255,0.14))] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Final CTA</p>
           <div className="mt-6 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
@@ -319,7 +270,7 @@ export function PortfolioHome() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 }

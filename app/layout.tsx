@@ -30,7 +30,7 @@ export default async function RootLayout({
       data-theme={initialTheme}
       suppressHydrationWarning
     >
-      <body className="intro-pending min-h-full">
+      <body className="min-h-full">
         <Script id="theme-init" strategy="beforeInteractive">
           {`(() => {
             const html = document.documentElement;
@@ -49,13 +49,11 @@ export default async function RootLayout({
         <Script id="intro-splash-dismiss" strategy="beforeInteractive">
           {`(() => {
             const html = document.documentElement;
-            const body = document.body;
             const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            const minVisibleMs = reduceMotion ? 240 : 1600;
-            const exitMs = reduceMotion ? 120 : 700;
+            const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+            const minVisibleMs = reduceMotion ? 240 : isTouchDevice ? 950 : 1600;
+            const exitMs = reduceMotion ? 120 : isTouchDevice ? 420 : 700;
             const startedAt = Date.now();
-
-            html.classList.add("intro-lock");
 
             const dismiss = () => {
               const remaining = Math.max(0, minVisibleMs - (Date.now() - startedAt));
@@ -64,7 +62,6 @@ export default async function RootLayout({
                 const splash = document.getElementById("intro-splash");
                 if (!splash) {
                   html.classList.remove("intro-lock");
-                  body.classList.remove("intro-pending");
                   return;
                 }
 
@@ -73,10 +70,31 @@ export default async function RootLayout({
                 window.setTimeout(() => {
                   splash.setAttribute("data-state", "hidden");
                   html.classList.remove("intro-lock");
-                  body.classList.remove("intro-pending");
                 }, exitMs);
               }, remaining);
             };
+
+            if (reduceMotion) {
+              const hideSplash = () => {
+                const splash = document.getElementById("intro-splash");
+                if (splash) {
+                  splash.setAttribute("data-state", "hidden");
+                }
+                html.classList.remove("intro-lock");
+              };
+
+              if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", hideSplash, { once: true });
+              } else {
+                hideSplash();
+              }
+
+              return;
+            }
+
+            if (!isTouchDevice) {
+              html.classList.add("intro-lock");
+            }
 
             if (document.readyState === "complete") {
               dismiss();

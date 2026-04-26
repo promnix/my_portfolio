@@ -194,12 +194,6 @@ html.intro-lock body {
   overflow: hidden;
 }
 
-body.intro-pending #app-shell {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 .app-shell {
   transition:
     opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -211,6 +205,7 @@ body.intro-pending #app-shell {
   inset: 0;
   z-index: 120;
   overflow: hidden;
+  pointer-events: none;
   background: #080808;
   transition:
     opacity 0.62s cubic-bezier(0.22, 1, 0.36, 1),

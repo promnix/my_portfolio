@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { ArrowUp, ArrowUpRight, Mail, Menu, MoonStar, Search, SunMedium, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -120,62 +119,54 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      <AnimatePresence>
-        {menuOpen ? (
-          <motion.div
-            initial={{ opacity: 0, y: -18 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -18 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="site-mobile-overlay fixed inset-0 z-40 bg-[rgba(10,10,10,0.94)] px-6 pt-28 backdrop-blur-xl md:hidden"
-          >
-            <div className="section-card mx-auto max-w-lg rounded-[2rem] p-6">
-              <p className="eyebrow text-xs text-silver">Portfolio</p>
-              <h2 className="mt-3 font-display text-4xl">{siteConfig.name}</h2>
-              <p className="mt-3 max-w-sm text-sm leading-7 text-silver">
-                {siteConfig.tagline} developer helping startups and ambitious teams launch thoughtful products.
-              </p>
+      {menuOpen ? (
+        <div className="site-mobile-overlay fixed inset-0 z-40 bg-[rgba(10,10,10,0.94)] px-6 pt-28 backdrop-blur-xl md:hidden">
+          <div className="section-card mx-auto max-w-lg rounded-[2rem] p-6">
+            <p className="eyebrow text-xs text-silver">Portfolio</p>
+            <h2 className="mt-3 font-display text-4xl">{siteConfig.name}</h2>
+            <p className="mt-3 max-w-sm text-sm leading-7 text-silver">
+              {siteConfig.tagline} developer helping startups and ambitious teams launch thoughtful products.
+            </p>
 
-              <div className="mt-8 grid gap-3">
-                <button
-                  type="button"
-                  onClick={() => {
-                    toggleTheme();
-                    setMenuOpen(false);
-                  }}
-                  className="theme-toggle rounded-2xl border border-white/10 px-4 py-3 text-left transition hover:border-brass hover:text-brass"
-                >
-                  {theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-                </button>
+            <div className="mt-8 grid gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  toggleTheme();
+                  setMenuOpen(false);
+                }}
+                className="theme-toggle rounded-2xl border border-white/10 px-4 py-3 text-left transition hover:border-brass hover:text-brass"
+              >
+                {theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              </button>
+              <Link
+                href="/"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
+              >
+                Home
+              </Link>
+              {navItems.map((item) => (
                 <Link
-                  href="/"
+                  key={item.href}
+                  href={item.href}
                   onClick={() => setMenuOpen(false)}
                   className="rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
                 >
-                  Home
+                  {item.label}
                 </Link>
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-                <a
-                  href={siteConfig.contactHref}
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal"
-                >
-                  Contact me
-                </a>
-              </div>
+              ))}
+              <a
+                href={siteConfig.contactHref}
+                onClick={() => setMenuOpen(false)}
+                className="rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal"
+              >
+                Contact me
+              </a>
             </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+          </div>
+        </div>
+      ) : null}
 
       <main className="relative z-10 pt-24">{children}</main>
 
