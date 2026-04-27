@@ -13,10 +13,10 @@ export default function ProjectPage() {
       <div className="max-w-3xl">
         <p className="eyebrow text-xs text-brass">Projects</p>
         <h1 className="mt-4 font-display text-5xl text-balance md:text-6xl">
-          A dedicated portfolio page, matching the reference site’s rhythm.
+          Selected product directions across mobile, web, and platforms.
         </h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">
-          Each project block is structured for fast scanning now, while leaving room for screenshots, live links, and deeper case study copy later.
+          Each project highlights the kind of focused interface work Promnix takes on: clearer flows, sharper presentation, and launch-ready implementation.
         </p>
       </div>
 
@@ -58,7 +58,7 @@ export default function ProjectPage() {
                       href="/#contact"
                       className="mt-6 inline-flex items-center gap-2 text-sm text-brass transition hover:text-cream"
                     >
-                      Replace with live project URL
+                      Discuss a similar build
                       <ArrowUpRight size={14} />
                     </Link>
                   </div>

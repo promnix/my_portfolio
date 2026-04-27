@@ -83,15 +83,15 @@ export function PortfolioHome() {
           <div>
             <p className="eyebrow text-xs text-brass">About</p>
             <h2 className="mt-4 max-w-sm font-display text-4xl text-balance md:text-5xl">
-              Built with the same pacing and mood as the reference portfolio.
+              Product-minded builds for teams that need clarity and finish.
             </h2>
           </div>
           <div className="space-y-5 text-sm leading-8 text-silver md:text-base">
             <p>
-              The structure follows the original closely: a cinematic hero, quiet support sections, a selected work list, testimonials, and a direct contact close.
+              Promnix helps shape digital products from early interface direction through production-ready implementation, with a focus on clean hierarchy and dependable delivery.
             </p>
             <p>
-              What changes next is the identity layer. Swap your real name, portrait, project history, and contact details, and the layout will already feel like your own.
+              The work spans mobile apps, responsive websites, product dashboards, and brand surfaces that need to feel sharp without becoming noisy.
             </p>
             <Link href="/about#about" className="inline-flex items-center gap-2 text-brass transition hover:text-cream">
               Read the full about page
@@ -108,7 +108,7 @@ export function PortfolioHome() {
             <h2 className="mt-4 font-display text-4xl md:text-5xl">Core tools and craft.</h2>
           </div>
           <p className="hidden max-w-md text-sm leading-7 text-silver md:block">
-            The original site presents capability clearly and quickly. This version keeps that compact rhythm while grouping tools into readable lanes.
+            Capabilities are grouped around the work clients actually need: mobile experiences, modern web surfaces, backend flows, and disciplined delivery.
           </p>
         </div>
 
@@ -244,10 +244,10 @@ export function PortfolioHome() {
           <div className="mt-6 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
               <h2 className="max-w-2xl font-display text-4xl text-balance text-cream md:text-6xl">
-                Ready to swap in your real identity and ship this live.
+                Bring Promnix into your next product sprint.
               </h2>
               <p className="mt-4 max-w-xl text-sm leading-7 text-silver md:text-base">
-                The main structure is already in place. Next step is replacing placeholders with your actual bio, links, projects, and portrait.
+                Share the product goal, current constraints, and launch window. We can help turn the next version into something clearer, faster, and easier to trust.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">

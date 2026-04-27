@@ -19,7 +19,7 @@ export default function BlogPage() {
             Writing on product craft, delivery pace, and cleaner interfaces.
           </h1>
           <p className="mt-5 max-w-2xl text-sm leading-8 text-silver md:text-base">
-            This page extends the portfolio with an editorial layer. Use it for product notes, behind-the-build breakdowns, design opinions, and practical development essays that deepen your credibility.
+            Promnix uses this space for product notes, behind-the-build breakdowns, design opinions, and practical development essays that make the work easier to understand.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -196,21 +196,21 @@ export default function BlogPage() {
         <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(214,161,74,0.15),rgba(255,255,255,0.04),rgba(102,169,255,0.13))] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Newsletter-style CTA</p>
           <h2 className="mt-4 max-w-xl font-display text-4xl text-balance md:text-5xl">
-            Turn writing into another trust surface for your portfolio.
+            Get product notes from the Promnix desk.
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-7 text-silver md:text-base">
-            Replace this section with a real email form, Substack link, or article archive CTA when you are ready to publish consistently.
+            For now, reach out directly for product thinking, build notes, or a closer look at how Promnix approaches launch-ready interfaces.
           </p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-[1fr_auto]">
             <div className="rounded-full border border-white/10 bg-[rgba(0,0,0,0.22)] px-5 py-3 text-sm text-silver">
-              hello@yourname.dev
+              contact@promnix.dev
             </div>
             <a
-              href="mailto:hello@yourname.dev?subject=Send%20me%20your%20latest%20articles"
+              href="mailto:contact@promnix.dev?subject=Promnix%20product%20notes"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5"
             >
-              Set up article delivery
+              Contact the desk
               <ArrowUpRight size={15} />
             </a>
           </div>

@@ -26,23 +26,24 @@ export type BlogPost = {
 };
 
 export const siteConfig = {
-  name: "Your Name",
-  shortName: "YN",
-  role: "Mobile & Web Developer",
+  name: "Promnix",
+  shortName: "PX",
+  role: "Product Design & Development Studio",
+  url: "https://promnix.dev",
   description:
-    "A premium portfolio starter for a mobile and web developer, built as a close structural clone with personalized branding placeholders.",
-  tagline: "iOS • Android • Web",
+    "Promnix designs and builds polished mobile products, web platforms, and conversion-focused digital experiences.",
+  tagline: "Mobile • Web • Product",
   heroLead:
-    "I design and ship polished mobile products and modern websites for founders, startups, and ambitious teams.",
+    "We design and ship polished mobile products and modern websites for founders, startups, and ambitious teams.",
   heroBody:
-    "This build mirrors the structure, pace, and atmosphere of the reference portfolio while keeping all content ready for your own name, projects, and links.",
-  email: "hello@yourname.dev",
+    "Promnix blends product thinking, interface craft, and reliable engineering so teams can move from idea to launch with a sharper digital presence.",
+  email: "contact@promnix.dev",
   contactHref:
-    "mailto:hello@yourname.dev?subject=Project%20Inquiry",
+    "mailto:contact@promnix.dev?subject=Project%20Inquiry",
   whatsappHref:
-    "https://wa.me/2340000000000?text=Hi%20Your%20Name%2C%20I%27d%20like%20to%20start%20a%20project.",
+    "https://wa.me/2340000000000?text=Hi%20Promnix%2C%20I%27d%20like%20to%20start%20a%20project.",
   location: "Lagos, Nigeria",
-  availability: "Open to freelance, startup, and product work",
+  availability: "Available for product builds, redesigns, and launch support",
 };
 
 export const navItems = [
@@ -53,10 +54,10 @@ export const navItems = [
 ] as const;
 
 export const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/yourhandle" },
-  { label: "GitHub", href: "https://github.com/yourhandle" },
-  { label: "X", href: "https://x.com/yourhandle" },
-  { label: "Instagram", href: "https://www.instagram.com/yourhandle" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/promnix" },
+  { label: "GitHub", href: "https://github.com/promnix" },
+  { label: "X", href: "https://x.com/promnix" },
+  { label: "Instagram", href: "https://www.instagram.com/promnix" },
 ];
 
 export const skillGroups = [
@@ -144,13 +145,13 @@ export const featuredProjects: Project[] = [
 export const testimonials = [
   {
     quote:
-      "He brings pace, clarity, and product taste to the build. Designs become working software without losing polish.",
-    author: "Founder Name",
+      "Promnix brings pace, clarity, and product taste to the build. Designs become working software without losing polish.",
+    author: "Startup Founder",
     role: "Startup founder",
   },
   {
     quote:
-      "Communication stays sharp, delivery stays organized, and the final product always feels more refined than the original brief.",
+      "Communication stays sharp, delivery stays organized, and the final product feels more refined than the original brief.",
     author: "Product Lead",
     role: "Product manager",
   },

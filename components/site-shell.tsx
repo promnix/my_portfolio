@@ -125,7 +125,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <p className="eyebrow text-xs text-silver">Portfolio</p>
             <h2 className="mt-3 font-display text-4xl">{siteConfig.name}</h2>
             <p className="mt-3 max-w-sm text-sm leading-7 text-silver">
-              {siteConfig.tagline} developer helping startups and ambitious teams launch thoughtful products.
+              {siteConfig.tagline} studio helping startups and ambitious teams launch thoughtful products.
             </p>
 
             <div className="mt-8 grid gap-3">
@@ -175,10 +175,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <div>
             <p className="eyebrow text-xs text-brass">Elsewhere</p>
             <h2 className="mt-4 max-w-lg font-display text-4xl text-balance md:text-5xl">
-              Built to feel premium now, easy to personalize next.
+              Product work with a sharper digital presence.
             </h2>
             <p className="mt-4 max-w-xl text-sm leading-7 text-silver md:text-base">
-              Replace the placeholder identity, project URLs, and social handles in one data file and the whole portfolio updates with it.
+              Follow Promnix across the channels where we share product notes, development updates, and selected launches.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -218,7 +218,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <p>
             © 2026 <span className="font-semibold text-cream">{siteConfig.name}</span>. All rights reserved.
           </p>
-          <p>Cloned structure, personalized branding, ready for content swap.</p>
+          <p>Designed and built with a focus on clarity, speed, and polish.</p>
         </div>
       </footer>
 

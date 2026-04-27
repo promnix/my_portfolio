@@ -14,16 +14,16 @@ export default function AboutPage() {
         <div>
           <p className="eyebrow text-xs text-brass">About me</p>
           <h1 className="mt-4 font-display text-5xl text-balance md:text-6xl">
-            A personal page built to carry your own story.
+            A compact studio for polished product launches.
           </h1>
         </div>
 
         <div className="space-y-5 text-sm leading-8 text-silver md:text-base">
           <p>
-            This route mirrors the reference structure by giving your portfolio a dedicated biography page instead of squeezing everything into a single homepage block.
+            Promnix works with founders, startups, and product teams that need digital interfaces to feel clear, premium, and ready for real users.
           </p>
           <p>
-            It is intentionally written with placeholder copy so the visual rhythm stays intact while you replace the text with your real experience, specialties, and client proof.
+            The studio is built around practical product thinking: define the flow, design the right interface, build the working surface, and refine the details that make the experience trusted.
           </p>
           <a href={siteConfig.contactHref} className="inline-flex items-center gap-2 text-brass transition hover:text-cream">
             Reach out directly

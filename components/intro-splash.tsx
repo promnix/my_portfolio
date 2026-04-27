@@ -17,7 +17,7 @@ export function IntroSplash() {
           <div className="intro-loader-scan absolute left-1/2 top-1/2 h-px w-[120%] -translate-x-1/2 -translate-y-1/2" />
 
           <div className="relative z-10">
-            <p className="eyebrow text-[0.68rem] text-brass/85">Launching portfolio</p>
+            <p className="eyebrow text-[0.68rem] text-brass/85">Launching Promnix</p>
             <p className="mt-4 font-display text-[clamp(4.5rem,15vw,7rem)] leading-none text-cream">
               {siteConfig.shortName}
             </p>
@@ -33,7 +33,7 @@ export function IntroSplash() {
             <div className="intro-loader-progress h-full w-full" />
           </div>
           <p className="mt-4 text-xs leading-6 text-silver/75">
-            {siteConfig.name} loads with a short cinematic intro before the site settles in.
+            {siteConfig.name} opens with a short cinematic intro before the work comes into focus.
           </p>
         </div>
       </div>
