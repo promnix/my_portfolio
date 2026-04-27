@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { useDeferredValue, useState, useTransition } from "react";
+import { useDeferredValue, useOptimistic, useTransition } from "react";
 
 type SearchEntry = {
   title: string;
@@ -20,7 +20,7 @@ export function SearchClient({
   initialQuery: string;
 }) {
   const router = useRouter();
-  const [query, setQuery] = useState(initialQuery);
+  const [query, setOptimisticQuery] = useOptimistic(initialQuery);
   const deferredQuery = useDeferredValue(query);
   const [isPending, startTransition] = useTransition();
 
@@ -48,14 +48,14 @@ export function SearchClient({
             value={query}
             onChange={(event) => {
               const nextQuery = event.target.value;
-              setQuery(nextQuery);
 
               const params = new URLSearchParams();
               if (nextQuery.trim()) {
-                params.set("q", nextQuery.trim());
+                params.set("q", nextQuery);
               }
 
               startTransition(() => {
+                setOptimisticQuery(nextQuery);
                 router.replace(params.size ? `/search?${params.toString()}` : "/search", {
                   scroll: false,
                 });
