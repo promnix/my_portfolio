@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUp, ArrowUpRight, Mail, Menu, MoonStar, Search, SunMedium, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { navItems, siteConfig, socials } from "@/lib/site-data";
 
@@ -43,7 +44,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <div className="site-shell grain min-h-screen bg-charcoal text-cream">
       <header className="fixed inset-x-0 top-0 z-50">
         <div className="section-shell pt-5">
-          <div className="site-header-shell relative flex items-center justify-between rounded-[2rem] border border-white/10 bg-[rgba(18,18,18,0.78)] px-4 py-3 shadow-[0_18px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl md:rounded-full md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: -14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+            className="site-header-shell relative flex items-center justify-between rounded-[2rem] border border-white/10 bg-[rgba(18,18,18,0.78)] px-4 py-3 shadow-[0_18px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl md:rounded-full md:px-6"
+          >
             <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(214,161,74,0.7),transparent)]" />
 
             <Link href="/" className="relative z-10 font-display text-2xl text-cream md:text-3xl">
@@ -53,7 +59,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <nav className="hidden items-center gap-7 md:flex">
               <Link
                 href="/search"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-3 py-2 text-xs text-silver transition hover:border-brass hover:text-brass"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-3 py-2 text-xs text-silver transition hover:border-brass hover:text-brass"
               >
                 <Search size={14} />
                 Search
@@ -64,7 +70,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="border-b border-transparent pb-1 transition hover:border-brass/70 hover:text-brass"
+                    className="nav-micro-link border-b border-transparent pb-1 transition hover:border-brass/70 hover:text-brass"
                   >
                     {item.label}
                   </Link>
@@ -75,7 +81,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 type="button"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 onClick={toggleTheme}
-                className="theme-toggle inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-3 py-2 text-xs text-silver transition hover:border-brass hover:text-brass"
+                className="micro-press theme-toggle inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-3 py-2 text-xs text-silver transition hover:border-brass hover:text-brass"
               >
                 {theme === "dark" ? <SunMedium size={14} /> : <MoonStar size={14} />}
                 {theme === "dark" ? "Light" : "Dark"}
@@ -83,7 +89,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
               <a
                 href={siteConfig.contactHref}
-                className="inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-5 py-2.5 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-5 py-2.5 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
               >
                 <Mail size={15} />
                 Contact me
@@ -95,14 +101,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 type="button"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 onClick={toggleTheme}
-                className="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-panel text-silver transition hover:border-brass hover:text-brass"
+                className="micro-press theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-panel text-silver transition hover:border-brass hover:text-brass"
               >
                 {theme === "dark" ? <SunMedium size={16} /> : <MoonStar size={16} />}
               </button>
               <Link
                 href="/search"
                 aria-label="Open search"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-panel text-silver transition hover:border-brass hover:text-brass"
+                className="micro-press inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-panel text-silver transition hover:border-brass hover:text-brass"
               >
                 <Search size={16} />
               </Link>
@@ -110,63 +116,77 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 type="button"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 onClick={() => setMenuOpen((open) => !open)}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-panel text-cream transition hover:border-brass"
+                className="micro-press inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-panel text-cream transition hover:border-brass"
               >
                 {menuOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </header>
 
-      {menuOpen ? (
-        <div className="site-mobile-overlay fixed inset-0 z-40 bg-[rgba(10,10,10,0.94)] px-6 pt-28 backdrop-blur-xl md:hidden">
-          <div className="section-card mx-auto max-w-lg rounded-[2rem] p-6">
-            <p className="eyebrow text-xs text-silver">Portfolio</p>
-            <h2 className="mt-3 font-display text-4xl">{siteConfig.name}</h2>
-            <p className="mt-3 max-w-sm text-sm leading-7 text-silver">
-              {siteConfig.tagline} studio helping startups and ambitious teams launch thoughtful products.
-            </p>
+      <AnimatePresence>
+        {menuOpen ? (
+          <motion.div
+            className="site-mobile-overlay fixed inset-0 z-40 bg-[rgba(10,10,10,0.94)] px-6 pt-28 backdrop-blur-xl md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.div
+              className="section-card mx-auto max-w-lg rounded-[2rem] p-6"
+              initial={{ opacity: 0, y: 18, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.985 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <p className="eyebrow text-xs text-silver">Portfolio</p>
+              <h2 className="mt-3 font-display text-4xl">{siteConfig.name}</h2>
+              <p className="mt-3 max-w-sm text-sm leading-7 text-silver">
+                {siteConfig.tagline} studio helping startups and ambitious teams launch thoughtful products.
+              </p>
 
-            <div className="mt-8 grid gap-3">
-              <button
-                type="button"
-                onClick={() => {
-                  toggleTheme();
-                  setMenuOpen(false);
-                }}
-                className="theme-toggle rounded-2xl border border-white/10 px-4 py-3 text-left transition hover:border-brass hover:text-brass"
-              >
-                {theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              </button>
-              <Link
-                href="/"
-                onClick={() => setMenuOpen(false)}
-                className="rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
-              >
-                Home
-              </Link>
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
+              <div className="mt-8 grid gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    toggleTheme();
+                    setMenuOpen(false);
+                  }}
+                  className="micro-press theme-toggle rounded-2xl border border-white/10 px-4 py-3 text-left transition hover:border-brass hover:text-brass"
                 >
-                  {item.label}
+                  {theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                </button>
+                <Link
+                  href="/"
+                  onClick={() => setMenuOpen(false)}
+                  className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
+                >
+                  Home
                 </Link>
-              ))}
-              <a
-                href={siteConfig.contactHref}
-                onClick={() => setMenuOpen(false)}
-                className="rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal"
-              >
-                Contact me
-              </a>
-            </div>
-          </div>
-        </div>
-      ) : null}
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <a
+                  href={siteConfig.contactHref}
+                  onClick={() => setMenuOpen(false)}
+                  className="micro-press rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal"
+                >
+                  Contact me
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
       <main className="relative z-10 pt-24">{children}</main>
 
@@ -188,7 +208,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-4 py-2 text-sm text-silver transition hover:-translate-y-0.5 hover:border-brass hover:text-cream"
+                  className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-4 py-2 text-sm text-silver transition hover:-translate-y-0.5 hover:border-brass hover:text-cream"
                 >
                   {social.label}
                   <ArrowUpRight size={14} />
@@ -206,7 +226,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               href={siteConfig.whatsappHref}
               target="_blank"
               rel="noreferrer"
-              className="mt-8 inline-flex items-center gap-2 rounded-full border border-brass px-5 py-2.5 text-sm text-brass transition hover:bg-brass hover:text-charcoal"
+              className="micro-link micro-press mt-8 inline-flex items-center gap-2 rounded-full border border-brass px-5 py-2.5 text-sm text-brass transition hover:bg-brass hover:text-charcoal"
             >
               Start a project
               <ArrowUpRight size={14} />

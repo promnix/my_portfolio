@@ -185,6 +185,75 @@ html[data-theme="light"] .hero-orb::after {
   contain-intrinsic-size: 560px;
 }
 
+.micro-card {
+  position: relative;
+  overflow: hidden;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.micro-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(214, 161, 74, 0.16), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 42%);
+  transition: opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.micro-card:hover::before {
+  opacity: 1;
+}
+
+.micro-link svg {
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.micro-link:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.micro-press {
+  transform-origin: center;
+  transition:
+    border-color 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.micro-press:active {
+  transform: scale(0.98);
+}
+
+.nav-micro-link {
+  position: relative;
+  border-bottom-color: transparent;
+}
+
+.nav-micro-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.15rem;
+  height: 1px;
+  background: var(--brass);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-micro-link:hover::after,
+.nav-micro-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .text-balance {
   text-wrap: balance;
 }
@@ -432,6 +501,15 @@ html[data-theme="light"] .bg-white\/5 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .app-shell {
     transition-duration: 0.12s;
   }

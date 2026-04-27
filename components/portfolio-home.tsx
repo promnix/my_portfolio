@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BriefcaseBusiness, MapPin, Sparkles } from "lucide-react";
+import { InteractiveArticle, InteractiveBlockquote, InteractiveDiv, Reveal } from "@/components/micro-interactions";
 import { blogPosts, featuredProjects, siteConfig, skillGroups, testimonials } from "@/lib/site-data";
 
 export function PortfolioHome() {
@@ -7,7 +8,7 @@ export function PortfolioHome() {
     <div>
       <section className="relative overflow-hidden">
         <div className="hero-grid section-shell grid items-center gap-12 py-10 md:grid-cols-[1.05fr_0.95fr] md:py-16">
-          <div className="max-w-xl">
+          <Reveal className="max-w-xl">
             <p className="eyebrow text-xs text-brass">{siteConfig.tagline}</p>
             <h1 className="mt-5 font-display text-[clamp(4.1rem,10vw,7.7rem)] leading-[0.9] text-balance">
               {siteConfig.name}
@@ -19,14 +20,14 @@ export function PortfolioHome() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={siteConfig.contactHref}
-                className="inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
               >
                 Contact me
                 <ArrowUpRight size={15} />
               </a>
               <Link
                 href="/project"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-6 py-3 text-sm text-cream transition hover:border-brass hover:text-brass"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-6 py-3 text-sm text-cream transition hover:border-brass hover:text-brass"
               >
                 View projects
                 <ArrowRight size={15} />
@@ -43,9 +44,9 @@ export function PortfolioHome() {
                 {siteConfig.availability}
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="relative mx-auto w-full max-w-[34rem]">
+          <Reveal delay={0.12} className="relative mx-auto w-full max-w-[34rem]">
             <div className="hero-orb aspect-[0.9] rounded-[2.5rem] p-6 md:p-8">
               <div className="flex h-full flex-col justify-between rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-6">
                 <div className="flex items-center justify-between text-xs text-silver">
@@ -74,12 +75,12 @@ export function PortfolioHome() {
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section id="about" className="section-shell py-8 md:py-14">
-        <div className="grid gap-8 rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:grid-cols-[0.9fr_1.1fr] md:p-8">
+        <Reveal className="grid gap-8 rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:grid-cols-[0.9fr_1.1fr] md:p-8">
           <div>
             <p className="eyebrow text-xs text-brass">About</p>
             <h2 className="mt-4 max-w-sm font-display text-4xl text-balance md:text-5xl">
@@ -98,11 +99,11 @@ export function PortfolioHome() {
               <ArrowUpRight size={15} />
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section id="skills" className="section-shell py-10 md:py-14">
-        <div className="flex items-end justify-between gap-6">
+        <Reveal className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">Skills</p>
             <h2 className="mt-4 font-display text-4xl md:text-5xl">Core tools and craft.</h2>
@@ -110,73 +111,74 @@ export function PortfolioHome() {
           <p className="hidden max-w-md text-sm leading-7 text-silver md:block">
             Capabilities are grouped around the work clients actually need: mobile experiences, modern web surfaces, backend flows, and disciplined delivery.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {skillGroups.map((group) => (
-            <div key={group.title} className="section-card rounded-[1.75rem] p-5">
-              <p className="text-sm font-semibold text-cream">{group.title}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-white/10 bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-xs text-silver"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
+          {skillGroups.map((group, index) => (
+            <Reveal key={group.title} delay={index * 0.05}>
+              <InteractiveDiv className="micro-card section-card h-full rounded-[1.75rem] p-5">
+                <p className="text-sm font-semibold text-cream">{group.title}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-white/10 bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-xs text-silver"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </InteractiveDiv>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section id="portfolio" className="section-shell py-10 md:py-14">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+        <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">Selected Work</p>
             <h2 className="mt-4 font-display text-4xl md:text-5xl">Projects with range and finish.</h2>
           </div>
-          <Link href="/project" className="inline-flex items-center gap-2 text-sm text-silver transition hover:text-brass">
+          <Link href="/project" className="micro-link inline-flex items-center gap-2 text-sm text-silver transition hover:text-brass">
             Browse the full project page
             <ArrowUpRight size={15} />
           </Link>
-        </div>
+        </Reveal>
 
         <div className="mt-8 space-y-4">
           {featuredProjects.slice(0, 4).map((project, index) => (
-            <article
-              key={project.slug}
-              className="project-row rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-5 md:p-7"
-            >
-              <div className="grid gap-5 md:grid-cols-[0.18fr_0.82fr]">
-                <div className="text-sm text-silver">
-                  <p>{String(index + 1).padStart(2, "0")}</p>
-                  <p className="mt-2">{project.year}</p>
-                </div>
-                <div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <p className="eyebrow text-[0.68rem] text-brass">{project.accent}</p>
-                    <span className="text-xs text-silver">{project.kind}</span>
+            <Reveal key={project.slug} delay={index * 0.05}>
+              <InteractiveArticle className="micro-card project-row rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-5 md:p-7">
+                <div className="grid gap-5 md:grid-cols-[0.18fr_0.82fr]">
+                  <div className="text-sm text-silver">
+                    <p>{String(index + 1).padStart(2, "0")}</p>
+                    <p className="mt-2">{project.year}</p>
                   </div>
-                  <h3 className="mt-3 font-display text-3xl md:text-4xl">{project.title}</h3>
-                  <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">{project.summary}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {project.stack.map((item) => (
-                      <span key={item} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
-                        {item}
-                      </span>
-                    ))}
+                  <div>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <p className="eyebrow text-[0.68rem] text-brass">{project.accent}</p>
+                      <span className="text-xs text-silver">{project.kind}</span>
+                    </div>
+                    <h3 className="mt-3 font-display text-3xl md:text-4xl">{project.title}</h3>
+                    <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">{project.summary}</p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {project.stack.map((item) => (
+                        <span key={item} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </article>
+              </InteractiveArticle>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="section-shell py-10 md:py-14">
-        <div className="flex items-end justify-between gap-6">
+        <Reveal className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">What people say</p>
             <h2 className="mt-4 font-display text-4xl md:text-5xl">Delivery with polish.</h2>
@@ -185,61 +187,62 @@ export function PortfolioHome() {
             <BriefcaseBusiness size={16} className="text-brass" />
             Trust grows in the details.
           </div>
-        </div>
+        </Reveal>
 
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
-          {testimonials.map((item) => (
-            <blockquote key={item.author} className="section-card rounded-[1.75rem] p-6">
-              <p className="text-sm leading-8 text-silver md:text-base">“{item.quote}”</p>
-              <footer className="mt-6">
-                <p className="font-semibold text-cream">{item.author}</p>
-                <p className="text-sm text-silver">{item.role}</p>
-              </footer>
-            </blockquote>
+          {testimonials.map((item, index) => (
+            <Reveal key={item.author} delay={index * 0.05}>
+              <InteractiveBlockquote className="micro-card section-card h-full rounded-[1.75rem] p-6">
+                <p className="text-sm leading-8 text-silver md:text-base">“{item.quote}”</p>
+                <footer className="mt-6">
+                  <p className="font-semibold text-cream">{item.author}</p>
+                  <p className="text-sm text-silver">{item.role}</p>
+                </footer>
+              </InteractiveBlockquote>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section id="blog" className="section-shell py-10 md:py-14">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+        <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">Blog</p>
             <h2 className="mt-4 font-display text-4xl md:text-5xl">Writing that adds context to the work.</h2>
           </div>
-          <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-silver transition hover:text-brass">
+          <Link href="/blog" className="micro-link inline-flex items-center gap-2 text-sm text-silver transition hover:text-brass">
             Open the full blog page
             <ArrowUpRight size={15} />
           </Link>
-        </div>
+        </Reveal>
 
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
-          {blogPosts.slice(0, 3).map((post) => (
-            <div
-              key={post.slug}
-              className="section-card rounded-[1.85rem] transition hover:border-brass hover:bg-[rgba(255,255,255,0.05)]"
-            >
-              <Link href={`/blog/${post.slug}`} className="block p-6">
-                <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
-                  <span className="eyebrow text-[0.68rem] text-brass">{post.category}</span>
-                  <span>{post.publishedAt}</span>
-                </div>
-                <h3 className="mt-4 font-display text-3xl text-balance">{post.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-silver">{post.excerpt}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {post.topics.slice(0, 2).map((topic) => (
-                    <span key={topic} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            </div>
+          {blogPosts.slice(0, 3).map((post, index) => (
+            <Reveal key={post.slug} delay={index * 0.05}>
+              <InteractiveDiv className="micro-card section-card h-full rounded-[1.85rem] transition hover:border-brass hover:bg-[rgba(255,255,255,0.05)]">
+                <Link href={`/blog/${post.slug}`} className="micro-link block p-6">
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
+                    <span className="eyebrow text-[0.68rem] text-brass">{post.category}</span>
+                    <span>{post.publishedAt}</span>
+                  </div>
+                  <h3 className="mt-4 font-display text-3xl text-balance">{post.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-silver">{post.excerpt}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {post.topics.slice(0, 2).map((topic) => (
+                      <span key={topic} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+                </Link>
+              </InteractiveDiv>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section id="contact" className="section-shell pb-20 pt-10 md:pb-24 md:pt-14">
-        <div className="overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(214,161,74,0.18),rgba(255,255,255,0.04),rgba(102,169,255,0.14))] p-6 md:p-8">
+        <Reveal className="overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(214,161,74,0.18),rgba(255,255,255,0.04),rgba(102,169,255,0.14))] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Final CTA</p>
           <div className="mt-6 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
@@ -253,7 +256,7 @@ export function PortfolioHome() {
             <div className="flex flex-wrap gap-3">
               <a
                 href={siteConfig.contactHref}
-                className="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5"
               >
                 Email me
                 <ArrowUpRight size={15} />
@@ -262,14 +265,14 @@ export function PortfolioHome() {
                 href={siteConfig.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm text-cream transition hover:border-cream hover:bg-white/5"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm text-cream transition hover:border-cream hover:bg-white/5"
               >
                 WhatsApp
                 <ArrowUpRight size={15} />
               </a>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
   );
