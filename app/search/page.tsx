@@ -15,7 +15,6 @@ export default async function SearchPage({
 
   return (
     <SearchClient
-      key={params.q ?? ""}
       entries={searchEntries}
       initialQuery={params.q ?? ""}
     />

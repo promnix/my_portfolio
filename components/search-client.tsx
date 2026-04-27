@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { useDeferredValue, useState, useTransition } from "react";
+import { useDeferredValue, useOptimistic, useTransition } from "react";
 
 type SearchEntry = {
   title: string;
@@ -20,7 +20,7 @@ export function SearchClient({
   initialQuery: string;
 }) {
   const router = useRouter();
-  const [query, setQuery] = useState(initialQuery);
+  const [query, setOptimisticQuery] = useOptimistic(initialQuery);
   const deferredQuery = useDeferredValue(query);
   const [isPending, startTransition] = useTransition();
 
@@ -35,9 +35,9 @@ export function SearchClient({
     <div className="section-shell py-10 md:py-14">
       <div className="max-w-3xl">
         <p className="eyebrow text-xs text-brass">Search</p>
-        <h1 className="mt-4 font-display text-5xl md:text-6xl">Find pages, sections, and projects.</h1>
+        <h1 className="mt-4 font-display text-5xl md:text-6xl">Find pages, sections, projects, and articles.</h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">
-          The reference site includes a dedicated search route. This version keeps that pattern and searches your portfolio structure locally.
+          The reference site includes a dedicated search route. This version keeps that pattern and searches your portfolio structure and blog content locally.
         </p>
       </div>
 
@@ -48,14 +48,14 @@ export function SearchClient({
             value={query}
             onChange={(event) => {
               const nextQuery = event.target.value;
-              setQuery(nextQuery);
 
               const params = new URLSearchParams();
               if (nextQuery.trim()) {
-                params.set("q", nextQuery.trim());
+                params.set("q", nextQuery);
               }
 
               startTransition(() => {
+                setOptimisticQuery(nextQuery);
                 router.replace(params.size ? `/search?${params.toString()}` : "/search", {
                   scroll: false,
                 });

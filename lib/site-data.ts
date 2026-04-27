@@ -8,6 +8,23 @@ export type Project = {
   accent: string;
 };
 
+export type BlogPost = {
+  slug: string;
+  title: string;
+  category: string;
+  publishedAt: string;
+  readingTime: string;
+  excerpt: string;
+  pullQuote: string;
+  topics: string[];
+  intro: string;
+  sections: {
+    title: string;
+    paragraphs: string[];
+  }[];
+  takeaway: string;
+};
+
 export const siteConfig = {
   name: "Your Name",
   shortName: "YN",
@@ -32,6 +49,7 @@ export const navItems = [
   { href: "/about#about", label: "About me" },
   { href: "/#skills", label: "Skills" },
   { href: "/project", label: "Projects" },
+  { href: "/blog", label: "Blog" },
 ] as const;
 
 export const socials = [
@@ -144,6 +162,184 @@ export const testimonials = [
   },
 ];
 
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "shipping-polish-without-drag",
+    title: "Shipping polish without slowing the team down.",
+    category: "Delivery notes",
+    publishedAt: "April 2026",
+    readingTime: "6 min read",
+    excerpt:
+      "A practical system for keeping interfaces sharp while still moving fast through product decisions, QA, and launch windows.",
+    pullQuote:
+      "Polish works best when it is designed into the workflow, not added as a last-minute rescue pass.",
+    topics: ["Process", "QA", "Product finish"],
+    intro:
+      "Teams usually do not lose polish because they lack taste. They lose it because refinement is treated as a separate phase that starts after the important decisions have already been rushed. The better approach is to make polish part of delivery itself.",
+    sections: [
+      {
+        title: "Build review moments into the workflow",
+        paragraphs: [
+          "A product gets better when the team knows exactly when to pause and look critically at hierarchy, spacing, copy, and edge states. If those moments are missing, quality becomes accidental.",
+          "Small scheduled review passes near key milestones work better than one dramatic cleanup sprint near launch. They reduce pressure, shorten bug lists, and make the last stretch calmer.",
+        ],
+      },
+      {
+        title: "Treat QA as part of presentation quality",
+        paragraphs: [
+          "Broken states, mismatched paddings, and awkward transitions all weaken trust in the same way. Users do not separate visual polish from reliability. They experience them together.",
+          "That is why quality assurance should cover the feel of the interface as well as the correctness of the feature. The best release checklists look at both.",
+        ],
+      },
+      {
+        title: "Leave space for the last decisions",
+        paragraphs: [
+          "The final ten percent usually contains the choices that make the product feel intentional: tightening a headline, simplifying a flow, clarifying a button, or softening a transition.",
+          "If the schedule has no room for those calls, the work ships technically complete but emotionally unfinished.",
+        ],
+      },
+    ],
+    takeaway:
+      "Make polish part of the system, not the emergency response at the end.",
+  },
+  {
+    slug: "calm-interfaces-convert-better",
+    title: "Why calmer interfaces usually convert better.",
+    category: "Interface thinking",
+    publishedAt: "March 2026",
+    readingTime: "4 min read",
+    excerpt:
+      "Visual restraint can make calls to action clearer, trust signals stronger, and decision-making easier for users.",
+    pullQuote:
+      "When every block shouts, the page stops guiding and starts negotiating with the user.",
+    topics: ["Conversion", "Visual hierarchy", "UX writing"],
+    intro:
+      "A calm interface is not a quiet one. It is an interface that chooses what deserves emphasis and refuses to compete with itself. That restraint often improves performance because users can decide faster.",
+    sections: [
+      {
+        title: "Hierarchy reduces decision fatigue",
+        paragraphs: [
+          "When every card is vivid, every headline oversized, and every message urgent, the user has to spend more effort deciding what matters. That cost is easy to miss during design reviews and obvious during real usage.",
+          "A calmer page helps the right action stand out by lowering the noise around it. The user spends less energy decoding and more energy acting.",
+        ],
+      },
+      {
+        title: "Trust often lives in restraint",
+        paragraphs: [
+          "Products that feel too eager can feel less trustworthy. Strong offers still need breathing room, credible language, and stable layout rhythm.",
+          "In practice, this means cleaner blocks, fewer competing accents, and copy that explains instead of overselling.",
+        ],
+      },
+      {
+        title: "Clarity beats ornament at the point of action",
+        paragraphs: [
+          "Buttons, forms, and comparisons are the places where conversion really happens. If those areas are crowded, the page may look energetic while actually slowing the user down.",
+          "Visual restraint gives those action zones more authority. It makes the product easier to choose.",
+        ],
+      },
+    ],
+    takeaway:
+      "Conversion usually improves when emphasis is earned, not sprayed across the page.",
+  },
+  {
+    slug: "making-mobile-web-feel-consistent",
+    title: "Making mobile and web feel like the same product.",
+    category: "Cross-platform",
+    publishedAt: "February 2026",
+    readingTime: "7 min read",
+    excerpt:
+      "Patterns for carrying one product voice across native apps, responsive sites, and internal tools without flattening each platform.",
+    pullQuote:
+      "Consistency is not duplication. It is shared intent expressed in the right native language.",
+    topics: ["React Native", "Design systems", "Product systems"],
+    intro:
+      "Cross-platform consistency fails when teams confuse sameness with coherence. A strong product identity can travel between mobile and web, but it needs to respect the different strengths of each surface.",
+    sections: [
+      {
+        title: "Start with shared principles, not shared screens",
+        paragraphs: [
+          "The strongest systems align around behavior, tone, spacing logic, and hierarchy before they align around exact layouts. That gives each platform more room to behave naturally.",
+          "When teams start by cloning screens directly, one platform usually ends up feeling borrowed.",
+        ],
+      },
+      {
+        title: "Let each platform keep its native advantages",
+        paragraphs: [
+          "Mobile rewards tighter focus, stronger sequential flow, and faster tactile action. Web often rewards scanning, side-by-side comparison, and broader context.",
+          "Consistency grows when both surfaces carry the same priorities, not when they pretend to have the same physical shape.",
+        ],
+      },
+      {
+        title: "Reuse language more than layout",
+        paragraphs: [
+          "Shared labels, motion character, tone of voice, and component logic often matter more than pixel-matching. Those are the signals users carry from one surface to another.",
+          "They make the product recognizable even when the layout appropriately changes.",
+        ],
+      },
+    ],
+    takeaway:
+      "Aim for a shared product voice with platform-specific expression.",
+  },
+  {
+    slug: "the-last-10-percent-is-the-brand",
+    title: "The last ten percent is where the brand starts.",
+    category: "Craft",
+    publishedAt: "January 2026",
+    readingTime: "5 min read",
+    excerpt:
+      "Spacing, motion timing, microcopy, and empty states often decide whether a product feels trusted or temporary.",
+    pullQuote:
+      "Users may not name the detail they noticed, but they absolutely feel the difference it makes.",
+    topics: ["Motion", "Microcopy", "Trust"],
+    intro:
+      "Brand is often discussed as identity, color, and logo. In use, though, brand is also how finished the product feels. That finish usually appears in the smallest decisions.",
+    sections: [
+      {
+        title: "Microcopy shapes confidence",
+        paragraphs: [
+          "Short lines around forms, errors, and transitions tell users whether a product feels thoughtful. Good microcopy reduces hesitation and quietly carries the product voice.",
+          "Weak microcopy does the opposite. It makes even polished interfaces feel generic.",
+        ],
+      },
+      {
+        title: "Motion tells users how refined the system is",
+        paragraphs: [
+          "Animation is not only decoration. Timing, easing, and entry behavior tell users whether the interface has been tuned carefully or assembled quickly.",
+          "Subtle motion with clear purpose usually builds more trust than loud motion added for spectacle.",
+        ],
+      },
+      {
+        title: "Empty and edge states are brand moments too",
+        paragraphs: [
+          "Users notice how a product behaves when there is no content, when something fails, or when a process is still in progress. Those moments reveal discipline.",
+          "A mature product feels designed even there, and that consistency becomes part of its identity.",
+        ],
+      },
+    ],
+    takeaway:
+      "The product starts to feel branded when the small decisions stop feeling accidental.",
+  },
+];
+
+export const editorialPillars = [
+  {
+    title: "Product clarity",
+    body: "Short essays about reducing friction, improving hierarchy, and making interfaces easier to act on.",
+  },
+  {
+    title: "Shipping systems",
+    body: "Notes on delivery pace, handoff quality, QA discipline, and keeping momentum without losing finish.",
+  },
+  {
+    title: "Cross-platform craft",
+    body: "Patterns for making mobile, web, and marketing surfaces feel related without becoming repetitive.",
+  },
+] as const;
+
+export function getBlogPostBySlug(slug: string) {
+  return blogPosts.find((post) => post.slug === slug);
+}
+
 export const timeline = [
   {
     year: "Now",
@@ -166,6 +362,7 @@ export const searchEntries = [
   { title: "Home", href: "/", category: "Page", body: "Hero, reviews, and contact section." },
   { title: "About", href: "/about#about", category: "Page", body: "Bio, process, and work approach." },
   { title: "Projects", href: "/project", category: "Page", body: "Selected portfolio work and case study summaries." },
+  { title: "Blog", href: "/blog", category: "Page", body: "Writing on product craft, delivery, and interface thinking." },
   { title: "Skills", href: "/#skills", category: "Section", body: "Mobile, frontend, backend, and workflow tools." },
   { title: "Contact", href: "/#contact", category: "Section", body: "Email and WhatsApp call to action." },
   ...featuredProjects.map((project) => ({
@@ -173,5 +370,11 @@ export const searchEntries = [
     href: `/project#${project.slug}`,
     category: project.accent,
     body: project.summary,
+  })),
+  ...blogPosts.map((post) => ({
+    title: post.title,
+    href: `/blog/${post.slug}`,
+    category: post.category,
+    body: post.excerpt,
   })),
 ];
