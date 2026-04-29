@@ -28,15 +28,15 @@ export type BlogPost = {
 export const siteConfig = {
   name: "Promnix",
   shortName: "PX",
-  role: "Product Design & Development Studio",
+  role: "Modern Websites & Digital Products for Startups and Small Businesses",
   url: "https://promnix.dev",
   description:
-    "Promnix designs and builds polished mobile products, web platforms, and conversion-focused digital experiences.",
-  tagline: "Mobile • Web • Product",
+    "Edwin Promise helps founders, startups, and small businesses turn ideas into modern websites, MVPs, and digital products that are polished, reliable, and ready to launch.",
+  tagline: "Web • Product",
   heroLead:
-    "We design and ship polished mobile products and modern websites for founders, startups, and ambitious teams.",
+    "I help founders and businesses turn ideas into polished websites, MVPs, and digital products.",
   heroBody:
-    "Promnix blends product thinking, interface craft, and reliable engineering so teams can move from idea to launch with a sharper digital presence.",
+    "I combine product thinking, clean interface design, and reliable engineering to build digital experiences that help teams launch faster, improve their online presence, and serve customers better.",
   email: "contact@promnix.dev",
   contactHref:
     "mailto:contact@promnix.dev?subject=Project%20Inquiry",
@@ -61,23 +61,44 @@ export const socials = [
 ];
 
 export const skillGroups = [
+  // {
+  //   title: "Mobile",
+  //   items: ["React Native", "Expo", "Swift", "App Store delivery"],
+  // },
   {
-    title: "Mobile",
-    items: ["React Native", "Expo", "Swift", "App Store delivery"],
+    title: "Frontend & Interface",
+    items: ["Next.js", "TypeScript", "Tailwind CSS", "Motion", "React"],
   },
   {
-    title: "Frontend",
-    items: ["Next.js", "TypeScript", "Tailwind CSS", "Motion"],
+    title: "Backend & APIs",
+    items: ["Laravel", "PHP", "Go", "REST APIs", "MySQL", "Supabase"],
   },
   {
-    title: "Backend",
-    items: ["Node.js", "Express", "REST APIs", "Auth flows"],
-  },
-  {
-    title: "Workflow",
-    items: ["GitHub", "Figma handoff", "QA passes", "Product polish"],
+    title: "CMS & Business Websites",
+    items: ["WordPress", "Elementor", "WooCommerce", "Yoast SEO"],
   },
 ];
+
+export const workPattern = [
+  {
+    title: "Understand the goal",
+    description: [
+      "Before building, I clarify what the business needs, who the users are, and what success should look like."
+    ]
+  },
+  {
+    title: "Design and build",
+    description: [
+      "I create clean interfaces and functional systems using practical tools that fit the project."
+    ]
+  },
+  {
+    title: "Launch and improve",
+    description: [
+      "I help prepare the product for real users, improve performance, and support the next version."
+    ]
+  },
+]
 
 export const featuredProjects: Project[] = [
   {

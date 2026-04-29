@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { skillGroups, siteConfig, timeline } from "@/lib/site-data";
+import PillLabel from "@/components/pill-label";
 
 export const metadata: Metadata = {
   title: "About",
@@ -14,21 +15,24 @@ export default function AboutPage() {
         <div>
           <p className="eyebrow text-xs text-brass">About me</p>
           <h1 className="mt-4 font-display text-5xl text-balance md:text-6xl">
-            A compact studio for polished product launches.
+            Building digital products with clarity, purpose, and reliable execution.
           </h1>
         </div>
 
         <div className="space-y-5 text-sm leading-8 text-silver md:text-base">
           <p>
-            Promnix works with founders, startups, and product teams that need digital interfaces to feel clear, premium, and ready for real users.
+          I’m Edwin Promise, a full-stack developer focused on helping founders, startups, and small businesses turn ideas into polished websites, MVPs, and digital products.
           </p>
           <p>
-            The studio is built around practical product thinking: define the flow, design the right interface, build the working surface, and refine the details that make the experience trusted.
+            I enjoy solving real business problems with clean interfaces, reliable backend systems, and practical product thinking. My work blends frontend development, backend architecture, SEO awareness, and launch-focused execution so businesses can move from idea to something people can actually use.
           </p>
-          <a href={siteConfig.contactHref} className="inline-flex items-center gap-2 text-brass transition hover:text-cream">
-            Reach out directly
-            <ArrowUpRight size={15} />
-          </a>
+          <p>
+            Over time, I’ve worked on production-style projects, including collaborative builds that strengthened my understanding of real-world workflows, full-stack architecture, version control, and product delivery. I’m currently deepening my skills in cloud computing, and DevOps so I can build systems that are not only beautiful, but scalable and reliable.
+          </p>
+          <p>
+            Outside code, I enjoy Asian movies, video games, and studying how digital products are designed, built, and improved. Those interests keep me creative, curious, and strategic in the way I approach problems.
+          </p>
+          <PillLabel href={siteConfig.contactHref} text="Reach out directly" />
         </div>
       </div>
 

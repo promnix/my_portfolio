@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BriefcaseBusiness, MapPin, Sparkles } from "lucide-react";
 import { InteractiveArticle, InteractiveBlockquote, InteractiveDiv, Reveal } from "@/components/micro-interactions";
-import { blogPosts, featuredProjects, siteConfig, skillGroups, testimonials } from "@/lib/site-data";
+import { blogPosts, featuredProjects, siteConfig, skillGroups, testimonials, workPattern } from "@/lib/site-data";
+import PillLabel from "./pill-label";
 
 export function PortfolioHome() {
   return (
@@ -10,7 +11,7 @@ export function PortfolioHome() {
         <div className="hero-grid section-shell grid items-center gap-12 py-10 md:grid-cols-[1.05fr_0.95fr] md:py-16">
           <Reveal className="max-w-xl">
             <p className="eyebrow text-xs text-brass">{siteConfig.tagline}</p>
-            <h1 className="mt-5 font-display text-[clamp(4.1rem,10vw,7.7rem)] leading-[0.9] text-balance">
+            <h1 className="mt-5 font-display text-[clamp(.1rem,10vw,7.7rem)] leading-[0.9] text-balance">
               {siteConfig.name}
             </h1>
             <p className="mt-4 text-lg font-semibold text-cream/90 md:text-xl">{siteConfig.role}</p>
@@ -84,20 +85,17 @@ export function PortfolioHome() {
           <div>
             <p className="eyebrow text-xs text-brass">About</p>
             <h2 className="mt-4 max-w-sm font-display text-4xl text-balance md:text-5xl">
-              Product-minded builds for teams that need clarity and finish.
+              Building digital products with clarity, purpose, and reliable execution.
             </h2>
           </div>
           <div className="space-y-5 text-sm leading-8 text-silver md:text-base">
             <p>
-              Promnix helps shape digital products from early interface direction through production-ready implementation, with a focus on clean hierarchy and dependable delivery.
+              I’m Edwin Promise, a full-stack developer focused on helping founders, startups, and small businesses turn ideas into polished websites, MVPs, and digital products.
             </p>
             <p>
-              The work spans mobile apps, responsive websites, product dashboards, and brand surfaces that need to feel sharp without becoming noisy.
+              I enjoy solving real business problems with clean interfaces, reliable backend systems, and practical product thinking. My work blends frontend development, backend architecture, SEO awareness, and launch-focused execution so businesses can move from idea to something people can actually use.
             </p>
-            <Link href="/about#about" className="inline-flex items-center gap-2 text-brass transition hover:text-cream">
-              Read the full about page
-              <ArrowUpRight size={15} />
-            </Link>
+            <PillLabel href="/about#about" text="Read the full about page" />
           </div>
         </Reveal>
       </section>
@@ -106,10 +104,10 @@ export function PortfolioHome() {
         <Reveal className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">Skills</p>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">Core tools and craft.</h2>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">Core skills for building practical digital products.</h2>
           </div>
           <p className="hidden max-w-md text-sm leading-7 text-silver md:block">
-            Capabilities are grouped around the work clients actually need: mobile experiences, modern web surfaces, backend flows, and disciplined delivery.
+            I combine frontend development, backend architecture, SEO awareness, and product-focused execution to build websites, MVPs, and digital experiences that help businesses launch with confidence.
           </p>
         </Reveal>
 
@@ -140,10 +138,7 @@ export function PortfolioHome() {
             <p className="eyebrow text-xs text-brass">Selected Work</p>
             <h2 className="mt-4 font-display text-4xl md:text-5xl">Projects with range and finish.</h2>
           </div>
-          <Link href="/project" className="micro-link inline-flex items-center gap-2 text-sm text-silver transition hover:text-brass">
-            Browse the full project page
-            <ArrowUpRight size={15} />
-          </Link>
+          <PillLabel href="/project" text="Browse the full project page" style="py-1" />
         </Reveal>
 
         <div className="mt-8 space-y-4">
@@ -177,7 +172,39 @@ export function PortfolioHome() {
         </div>
       </section>
 
-      <section className="section-shell py-10 md:py-14">
+      <section id="skills" className="section-shell py-10 md:py-14">
+        <Reveal className="flex items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow text-xs text-brass">How I work</p>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">Core skills for building practical digital products.</h2>
+          </div>
+          <p className="hidden max-w-md text-base leading-7 text-silver md:block">
+            I combine frontend development, backend architecture, SEO awareness, and product-focused execution to build websites, MVPs, and digital experiences that help businesses launch with confidence.
+          </p>
+        </Reveal>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {workPattern.map((group, index) => (
+            <Reveal key={group.title} delay={index * 0.05}>
+              <InteractiveDiv className="micro-card section-card h-full rounded-[1.75rem] p-5">
+                <p className="text-base font-semibold text-cream">{group.title}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {group.description.map((desc) => (
+                    <span
+                      key={desc}
+                      className="text-sm text-silver"
+                    >
+                      {desc}
+                    </span>
+                  ))}
+                </div>
+              </InteractiveDiv>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* <section className="section-shell py-10 md:py-14">
         <Reveal className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">What people say</p>
@@ -202,7 +229,7 @@ export function PortfolioHome() {
             </Reveal>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <section id="blog" className="section-shell py-10 md:py-14">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
@@ -210,16 +237,13 @@ export function PortfolioHome() {
             <p className="eyebrow text-xs text-brass">Blog</p>
             <h2 className="mt-4 font-display text-4xl md:text-5xl">Writing that adds context to the work.</h2>
           </div>
-          <Link href="/blog" className="micro-link inline-flex items-center gap-2 text-sm text-silver transition hover:text-brass">
-            Open the full blog page
-            <ArrowUpRight size={15} />
-          </Link>
+          <PillLabel href="/blog" text="Open the full blog page" style="py-1" />
         </Reveal>
 
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
           {blogPosts.slice(0, 3).map((post, index) => (
             <Reveal key={post.slug} delay={index * 0.05}>
-              <InteractiveDiv className="micro-card section-card h-full rounded-[1.85rem] transition hover:border-brass hover:bg-[rgba(255,255,255,0.05)]">
+              <InteractiveDiv className="micro-card hover:border section-card h-full rounded-[1.85rem] transition hover:border-brass! hover:bg-[rgba(255,255,255,0.05)]">
                 <Link href={`/blog/${post.slug}`} className="micro-link block p-6">
                   <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
                     <span className="eyebrow text-[0.68rem] text-brass">{post.category}</span>
@@ -256,7 +280,7 @@ export function PortfolioHome() {
             <div className="flex flex-wrap gap-3">
               <a
                 href={siteConfig.contactHref}
-                className="micro-link micro-press inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5"
               >
                 Email me
                 <ArrowUpRight size={15} />
