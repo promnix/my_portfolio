@@ -43,7 +43,7 @@ export const siteConfig = {
   whatsappHref:
     "https://wa.me/2340000000000?text=Hi%20Promnix%2C%20I%27d%20like%20to%20start%20a%20project.",
   location: "Lagos, Nigeria",
-  availability: "Available for product builds, redesigns, and launch support",
+  availability: "Available for websites, MVP builds, and launch support",
 };
 
 export const navItems = [
@@ -345,15 +345,15 @@ export const blogPosts: BlogPost[] = [
 
 export const editorialPillars = [
   {
-    title: "Product clarity",
+    title: "Product thinking",
     body: "Short essays about reducing friction, improving hierarchy, and making interfaces easier to act on.",
   },
   {
-    title: "Shipping systems",
+    title: "Web development",
     body: "Notes on delivery pace, handoff quality, QA discipline, and keeping momentum without losing finish.",
   },
   {
-    title: "Cross-platform craft",
+    title: "SEO & performance",
     body: "Patterns for making mobile, web, and marketing surfaces feel related without becoming repetitive.",
   },
 ] as const;
@@ -365,18 +365,18 @@ export function getBlogPostBySlug(slug: string) {
 export const timeline = [
   {
     year: "Now",
-    title: "Independent builder",
-    body: "Designing and shipping cross-platform products and marketing sites for fast-moving teams.",
+    title: "Independent full-stack developer",
+    body: "Helping founders, startups, and small businesses turn ideas into polished websites, MVPs, and digital products with clean design, reliable development, and product thinking.",
   },
   {
     year: "2025",
-    title: "Product-focused delivery",
-    body: "Leaning deeper into conversion, onboarding flow, and product clarity across web and mobile work.",
+    title: "Production and freelance experience",
+    body: "Worked on real business websites, SEO-focused pages, collaborative product interfaces, and full-stack projects while improving my workflow across React, TypeScript, Laravel, WordPress, and deployment.",
   },
   {
     year: "2023",
-    title: "Mobile-first foundation",
-    body: "Built out a workflow around React Native, iteration speed, QA discipline, and visual finish.",
+    title: "Full-stack learning foundation",
+    body: "Started building a strong foundation in web development, learning how frontend interfaces, backend logic, databases, and real user flows connect inside practical applications.",
   },
 ];
 

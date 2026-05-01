@@ -52,15 +52,15 @@ export default function AboutPage() {
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <div className="rounded-[1.5rem] border border-white/10 p-4">
               <p className="text-sm font-semibold text-cream">Discover</p>
-              <p className="mt-3 text-sm leading-7 text-silver">Understand the flow, user goal, and conversion point before building UI.</p>
+              <p className="mt-3 text-sm leading-7 text-silver">Understand the business goal, user flow, and key conversion point before designing or building.</p>
             </div>
             <div className="rounded-[1.5rem] border border-white/10 p-4">
               <p className="text-sm font-semibold text-cream">Build</p>
-              <p className="mt-3 text-sm leading-7 text-silver">Ship responsive, production-ready interfaces with motion used to support hierarchy.</p>
+              <p className="mt-3 text-sm leading-7 text-silver">Ship responsive, production-ready interfaces with clean structure, reliable functionality, and purposeful motion.</p>
             </div>
             <div className="rounded-[1.5rem] border border-white/10 p-4">
               <p className="text-sm font-semibold text-cream">Refine</p>
-              <p className="mt-3 text-sm leading-7 text-silver">Clean the edges until the product feels intentional, stable, and trusted.</p>
+              <p className="mt-3 text-sm leading-7 text-silver">Polish the details until the product feels intentional, stable, and easy to trust.</p>
             </div>
           </div>
         </div>

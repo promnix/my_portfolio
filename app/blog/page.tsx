@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, BookOpen, Clock3 } from "lucide-react";
 import { blogPosts, editorialPillars } from "@/lib/site-data";
+import PillLabel from "@/components/pill-label";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -16,10 +17,10 @@ export default function BlogPage() {
         <div className="overflow-hidden rounded-[2.4rem] border border-white/10 bg-[linear-gradient(140deg,rgba(214,161,74,0.16),rgba(255,255,255,0.03),rgba(102,169,255,0.12))] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Blog</p>
           <h1 className="mt-4 max-w-3xl font-display text-5xl text-balance md:text-6xl">
-            Writing on product craft, delivery pace, and cleaner interfaces.
+            Writing that shows how I think, build, and solve problems.
           </h1>
           <p className="mt-5 max-w-2xl text-sm leading-8 text-silver md:text-base">
-            Promnix uses this space for product notes, behind-the-build breakdowns, design opinions, and practical development essays that make the work easier to understand.
+            Practical notes on web development, product thinking, SEO, performance, and lessons from the projects I build. This space helps turn my experience into proof of how I approach real problems.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -42,15 +43,15 @@ export default function BlogPage() {
           <div className="mt-6 grid gap-4">
             <div className="rounded-[1.6rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
               <p className="text-xs text-silver">Publishing rhythm</p>
-              <p className="mt-2 text-lg font-semibold text-cream">Thoughtful, practical, and compact.</p>
+              <p className="mt-2 text-lg font-semibold text-cream">Practical, honest, and easy to understand.</p>
             </div>
             <div className="rounded-[1.6rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
               <p className="text-xs text-silver">Best use</p>
-              <p className="mt-2 text-lg font-semibold text-cream">Turn project experience into durable proof of thinking.</p>
+              <p className="mt-2 text-lg font-semibold text-cream">Turning project experience, mistakes, and lessons into proof of thinking.</p>
             </div>
             <div className="rounded-[1.6rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
               <p className="text-xs text-silver">Content mix</p>
-              <p className="mt-2 text-lg font-semibold text-cream">Process notes, product opinions, and shipping lessons.</p>
+              <p className="mt-2 text-lg font-semibold text-cream">Build breakdowns, development notes, product opinions, SEO lessons, and shipping reflections.</p>
             </div>
           </div>
         </div>
@@ -60,10 +61,10 @@ export default function BlogPage() {
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
             <p className="eyebrow text-xs text-brass">Featured note</p>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">Lead with one strong article.</h2>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">Lessons from building real digital products.</h2>
           </div>
           <p className="max-w-lg text-sm leading-7 text-silver">
-            A single featured essay gives the page a clear entry point and makes the writing feel intentionally curated.
+            A selected article showing how I approach product decisions, user flows, SEO, performance, and launch-ready execution.
           </p>
         </div>
 
@@ -97,13 +98,7 @@ export default function BlogPage() {
                 ))}
               </div>
 
-              <Link
-                href={`/blog/${featuredPost.slug}`}
-                className="mt-8 inline-flex items-center gap-2 text-sm text-brass transition hover:text-cream"
-              >
-                Read article
-                <ArrowUpRight size={15} />
-              </Link>
+              <PillLabel href={`/blog/${featuredPost.slug}`} text="Read article" style="mt-5 py-1" />
             </div>
 
             <div className="border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-6 md:p-8 lg:border-l lg:border-t-0">
@@ -148,7 +143,7 @@ export default function BlogPage() {
               id={post.slug}
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="section-card rounded-[1.9rem] p-6 transition hover:border-brass hover:bg-[rgba(255,255,255,0.05)]"
+              className="section-card rounded-[1.9rem] p-6 transition hover:border-brass! hover:bg-[rgba(255,255,255,0.05)]"
             >
               <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
                 <span className="eyebrow text-[0.68rem] text-brass">{post.category}</span>
@@ -208,7 +203,7 @@ export default function BlogPage() {
             </div>
             <a
               href="mailto:contact@promnix.dev?subject=Promnix%20product%20notes"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5"
             >
               Contact the desk
               <ArrowUpRight size={15} />

@@ -13,10 +13,10 @@ export default function ProjectPage() {
       <div className="max-w-3xl">
         <p className="eyebrow text-xs text-brass">Projects</p>
         <h1 className="mt-4 font-display text-5xl text-balance md:text-6xl">
-          Selected product directions across mobile, web, and platforms.
+          Selected projects built around real business needs.
         </h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">
-          Each project highlights the kind of focused interface work Promnix takes on: clearer flows, sharper presentation, and launch-ready implementation.
+          A mix of personal builds, freelance work, and collaborative company projects showing how I approach user flows, interface design, reliable development, and launch-ready execution.
         </p>
       </div>
 

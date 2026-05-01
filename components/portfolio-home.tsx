@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, BriefcaseBusiness, MapPin, Sparkles } from "lucide-react";
-import { InteractiveArticle, InteractiveBlockquote, InteractiveDiv, Reveal } from "@/components/micro-interactions";
-import { blogPosts, featuredProjects, siteConfig, skillGroups, testimonials, workPattern } from "@/lib/site-data";
+import { ArrowRight, ArrowUpRight, MapPin, Sparkles } from "lucide-react";
+import { InteractiveArticle, InteractiveDiv, Reveal } from "@/components/micro-interactions";
+import { blogPosts, featuredProjects, siteConfig, skillGroups, workPattern } from "@/lib/site-data";
 import PillLabel from "./pill-label";
 
 export function PortfolioHome() {
@@ -176,11 +176,8 @@ export function PortfolioHome() {
         <Reveal className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">How I work</p>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">Core skills for building practical digital products.</h2>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">A clear process from idea to launch.</h2>
           </div>
-          <p className="hidden max-w-md text-base leading-7 text-silver md:block">
-            I combine frontend development, backend architecture, SEO awareness, and product-focused execution to build websites, MVPs, and digital experiences that help businesses launch with confidence.
-          </p>
         </Reveal>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -188,7 +185,7 @@ export function PortfolioHome() {
             <Reveal key={group.title} delay={index * 0.05}>
               <InteractiveDiv className="micro-card section-card h-full rounded-[1.75rem] p-5">
                 <p className="text-base font-semibold text-cream">{group.title}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-3 flex flex-wrap gap-2">
                   {group.description.map((desc) => (
                     <span
                       key={desc}
@@ -267,14 +264,14 @@ export function PortfolioHome() {
 
       <section id="contact" className="section-shell pb-20 pt-10 md:pb-24 md:pt-14">
         <Reveal className="overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(214,161,74,0.18),rgba(255,255,255,0.04),rgba(102,169,255,0.14))] p-6 md:p-8">
-          <p className="eyebrow text-xs text-brass">Final CTA</p>
+          <p className="eyebrow text-xs text-brass">Start a project</p>
           <div className="mt-6 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
               <h2 className="max-w-2xl font-display text-4xl text-balance text-cream md:text-6xl">
-                Bring Promnix into your next product sprint.
+                Let’s turn your idea into a polished digital product.
               </h2>
               <p className="mt-4 max-w-xl text-sm leading-7 text-silver md:text-base">
-                Share the product goal, current constraints, and launch window. We can help turn the next version into something clearer, faster, and easier to trust.
+                Share what you’re building, what feels unclear, or what needs to launch next. I’ll help you turn it into a clean, reliable, and user-friendly website, MVP, or digital product.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">

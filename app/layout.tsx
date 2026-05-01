@@ -1,10 +1,48 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import { cookies } from "next/headers";
 import Script from "next/script";
 import { IntroSplash } from "@/components/intro-splash";
 import { SiteShell } from "@/components/site-shell";
 import { siteConfig } from "@/lib/site-data";
 import "./globals.css";
+
+const manrope = localFont({
+  src: "../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2",
+  variable: "--font-manrope",
+  weight: "200 800",
+  style: "normal",
+  display: "swap",
+  fallback: ["Arial", "sans-serif"],
+});
+
+const cormorantGaramond = localFont({
+  src: [
+    {
+      path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-700-normal.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-cormorant-garamond",
+  display: "swap",
+  fallback: ["Georgia", "serif"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -26,7 +64,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className="h-full antialiased"
+      className={`${manrope.variable} ${cormorantGaramond.variable} h-full antialiased`}
       data-theme={initialTheme}
       suppressHydrationWarning
     >

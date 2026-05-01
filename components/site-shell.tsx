@@ -195,10 +195,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <div>
             <p className="eyebrow text-xs text-brass">Elsewhere</p>
             <h2 className="mt-4 max-w-lg font-display text-4xl text-balance md:text-5xl">
-              Product work with a sharper digital presence.
+              Building digital products with clarity and purpose.
             </h2>
             <p className="mt-4 max-w-xl text-sm leading-7 text-silver md:text-base">
-              Follow Promnix across the channels where we share product notes, development updates, and selected launches.
+              Follow my work across the channels where I share development updates, product thinking, project notes, and selected launches.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
