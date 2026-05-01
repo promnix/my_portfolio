@@ -172,7 +172,7 @@ export function PortfolioHome() {
         </div>
       </section>
 
-      <section id="skills" className="section-shell py-10 md:py-14">
+      <section id="process" className="section-shell py-10 md:py-14">
         <Reveal className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow text-xs text-brass">How I work</p>

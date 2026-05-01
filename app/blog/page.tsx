@@ -12,7 +12,7 @@ export default function BlogPage() {
   const [featuredPost, ...recentPosts] = blogPosts;
 
   return (
-    <div className="section-shell py-10 md:py-14">
+    <div id="blog" className="section-shell py-10 md:py-14">
       <section className="grid gap-6 lg:grid-cols-[1fr_0.62fr]">
         <div className="overflow-hidden rounded-[2.4rem] border border-white/10 bg-[linear-gradient(140deg,rgba(214,161,74,0.16),rgba(255,255,255,0.03),rgba(102,169,255,0.12))] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Blog</p>

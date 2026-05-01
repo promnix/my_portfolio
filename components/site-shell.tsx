@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUp, ArrowUpRight, Mail, Menu, MoonStar, Search, SunMedium, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 import { navItems, siteConfig, socials } from "@/lib/site-data";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showTop, setShowTop] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">(() => {
@@ -40,6 +43,36 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     setTheme(nextTheme);
   };
 
+  const handleNavClick = (href: string, event: MouseEvent<HTMLAnchorElement>, closeMenu = false) => {
+    const [targetPath, hash] = href.split("#");
+    const normalizedTargetPath = targetPath || "/";
+
+    if (normalizedTargetPath !== pathname) {
+      if (closeMenu) {
+        setMenuOpen(false);
+      }
+      return;
+    }
+
+    event.preventDefault();
+
+    if (closeMenu) {
+      setMenuOpen(false);
+    }
+
+    if (hash) {
+      const target = document.getElementById(hash);
+      if (target) {
+        window.history.pushState(null, "", href);
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      return;
+    }
+
+    window.history.pushState(null, "", normalizedTargetPath);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="site-shell grain min-h-screen bg-charcoal text-cream">
       <header className="fixed inset-x-0 top-0 z-50">
@@ -52,7 +85,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           >
             <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(214,161,74,0.7),transparent)]" />
 
-            <Link href="/" className="relative z-10 font-display text-2xl text-cream md:text-3xl">
+            <Link
+              href="/"
+              onClick={(event) => handleNavClick("/", event)}
+              className="relative z-10 font-display text-2xl text-cream md:text-3xl"
+            >
               {siteConfig.name}
             </Link>
 
@@ -70,6 +107,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   <Link
                     key={item.href}
                     href={item.href}
+                    onClick={(event) => handleNavClick(item.href, event)}
                     className="nav-micro-link border-b border-transparent pb-1 transition hover:border-brass/70 hover:text-brass"
                   >
                     {item.label}
@@ -160,7 +198,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 </button>
                 <Link
                   href="/"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(event) => handleNavClick("/", event, true)}
                   className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
                 >
                   Home
@@ -169,7 +207,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={(event) => handleNavClick(item.href, event, true)}
                     className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
                   >
                     {item.label}

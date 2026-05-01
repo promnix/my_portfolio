@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ProjectPage() {
   return (
-    <div className="section-shell py-10 md:py-14">
+    <div id="projects" className="section-shell py-10 md:py-14">
       <div className="max-w-3xl">
         <p className="eyebrow text-xs text-brass">Projects</p>
         <h1 className="mt-4 font-display text-5xl text-balance md:text-6xl">
