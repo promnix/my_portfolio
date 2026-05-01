@@ -254,6 +254,10 @@ html[data-theme="light"] .hero-orb::after {
   transform-origin: left;
 }
 
+.site-mobile-overlay {
+  -webkit-overflow-scrolling: touch;
+}
+
 .text-balance {
   text-wrap: balance;
 }

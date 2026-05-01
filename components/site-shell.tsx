@@ -30,6 +30,36 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+    const scrollY = window.scrollY;
+    const previousBodyStyles = {
+      overflow: document.body.style.overflow,
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+    };
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    return () => {
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overflow = previousBodyStyles.overflow;
+      document.body.style.position = previousBodyStyles.position;
+      document.body.style.top = previousBodyStyles.top;
+      document.body.style.width = previousBodyStyles.width;
+      window.scrollTo(0, scrollY);
+    };
+  }, [menuOpen]);
+
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
 
@@ -166,61 +196,69 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <AnimatePresence>
         {menuOpen ? (
           <motion.div
-            className="site-mobile-overlay fixed inset-0 z-40 bg-[rgba(10,10,10,0.94)] px-6 pt-28 backdrop-blur-xl md:hidden"
+            className="site-mobile-overlay fixed inset-0 z-40 overflow-y-auto overscroll-contain bg-[rgba(10,10,10,0.94)] px-6 pt-28 pb-8 backdrop-blur-xl md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
           >
             <motion.div
-              className="section-card mx-auto max-w-lg rounded-[2rem] p-6"
+              className="overflow-auto max-h-[calc(100svh-7rem)]"
               initial={{ opacity: 0, y: 18, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.985 }}
               transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="eyebrow text-xs text-silver">Portfolio</p>
-              <h2 className="mt-3 font-display text-4xl">{siteConfig.name}</h2>
-              <p className="mt-3 max-w-sm text-sm leading-7 text-silver">
-                {siteConfig.tagline} studio helping startups and ambitious teams launch thoughtful products.
-              </p>
+              <motion.div
+                className="section-card mx-auto max-w-lg rounded-[2rem] p-6"
+                initial={{ opacity: 0, y: 18, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.985 }}
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="eyebrow text-xs text-silver">Portfolio</p>
+                <h2 className="mt-3 font-display text-4xl">{siteConfig.name}</h2>
+                <p className="mt-3 max-w-sm text-sm leading-7 text-silver">
+                  {siteConfig.tagline} studio helping startups and ambitious teams launch thoughtful products.
+                </p>
 
-              <div className="mt-8 grid gap-3">
-                <button
-                  type="button"
-                  onClick={() => {
-                    toggleTheme();
-                    setMenuOpen(false);
-                  }}
-                  className="micro-press theme-toggle rounded-2xl border border-white/10 px-4 py-3 text-left transition hover:border-brass hover:text-brass"
-                >
-                  {theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-                </button>
-                <Link
-                  href="/"
-                  onClick={(event) => handleNavClick("/", event, true)}
-                  className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
-                >
-                  Home
-                </Link>
-                {navItems.map((item) => (
+                <div className="mt-8 grid gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      toggleTheme();
+                      setMenuOpen(false);
+                    }}
+                    className="micro-press theme-toggle rounded-2xl border border-white/10 px-4 py-3 text-left transition hover:border-brass hover:text-brass"
+                  >
+                    {theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                  </button>
                   <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={(event) => handleNavClick(item.href, event, true)}
+                    href="/"
+                    onClick={(event) => handleNavClick("/", event, true)}
                     className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
                   >
-                    {item.label}
+                    Home
                   </Link>
-                ))}
-                <a
-                  href={siteConfig.contactHref}
-                  onClick={() => setMenuOpen(false)}
-                  className="micro-press rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal"
-                >
-                  Contact me
-                </a>
-              </div>
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={(event) => handleNavClick(item.href, event, true)}
+                      className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                  <a
+                    href={siteConfig.contactHref}
+                    onClick={() => setMenuOpen(false)}
+                    className="micro-press rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal"
+                  >
+                    Contact me
+                  </a>
+                </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         ) : null}
