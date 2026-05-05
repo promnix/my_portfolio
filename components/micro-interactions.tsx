@@ -1,10 +1,10 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "motion/react";
+import { motion, type Easing, type HTMLMotionProps } from "motion/react";
 
 const revealTransition = {
   duration: 0.58,
-  ease: [0.22, 1, 0.36, 1],
+  ease: [0.22, 1, 0.36, 1] satisfies Easing,
 } as const;
 
 export function Reveal({

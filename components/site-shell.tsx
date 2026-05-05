@@ -1,12 +1,18 @@
+
+
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUp, ArrowUpRight, Mail, Menu, MoonStar, Search, SunMedium, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import type { Easing } from "motion/react";
 import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 import { navItems, siteConfig, socials } from "@/lib/site-data";
+
+const MotionLink = motion.create(Link);
+const siteEase: Easing = [0.22, 1, 0.36, 1];
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -103,6 +109,17 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const mobileMenuItemMotion = (index: number) => ({
+    initial: { opacity: 0, x: -18 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -10 },
+    transition: {
+      duration: 0.26,
+      delay: 0.08 + index * 0.055,
+      ease: siteEase,
+    },
+  });
+
   return (
     <div className="site-shell grain min-h-screen bg-charcoal text-cream">
       <header className="fixed inset-x-0 top-0 z-50">
@@ -110,7 +127,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <motion.div
             initial={{ opacity: 0, y: -14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.52, ease: siteEase }}
             className="site-header-shell relative flex items-center justify-between rounded-[2rem] border border-white/10 bg-[rgba(18,18,18,0.78)] px-4 py-3 shadow-[0_18px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl md:rounded-full md:px-6"
           >
             <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(214,161,74,0.7),transparent)]" />
@@ -200,21 +217,21 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.24, ease: siteEase }}
           >
             <motion.div
               className="overflow-auto max-h-[calc(100svh-7rem)]"
               initial={{ opacity: 0, y: 18, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.985 }}
-              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.32, ease: siteEase }}
             >
               <motion.div
                 className="section-card mx-auto max-w-lg rounded-[2rem] p-6"
                 initial={{ opacity: 0, y: 18, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.985 }}
-                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.32, ease: siteEase }}
               >
                 <p className="eyebrow text-xs text-silver">Portfolio</p>
                 <h2 className="mt-3 font-display text-4xl">{siteConfig.name}</h2>
@@ -223,8 +240,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 </p>
 
                 <div className="mt-8 grid gap-3">
-                  <button
+                  <motion.button
                     type="button"
+                    {...mobileMenuItemMotion(0)}
                     onClick={() => {
                       toggleTheme();
                       setMenuOpen(false);
@@ -232,31 +250,34 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                     className="micro-press theme-toggle rounded-2xl border border-white/10 px-4 py-3 text-left transition hover:border-brass hover:text-brass"
                   >
                     {theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-                  </button>
-                  <Link
+                  </motion.button>
+                  <MotionLink
                     href="/"
+                    {...mobileMenuItemMotion(1)}
                     onClick={(event) => handleNavClick("/", event, true)}
                     className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
                   >
                     Home
-                  </Link>
-                  {navItems.map((item) => (
-                    <Link
+                  </MotionLink>
+                  {navItems.map((item, index) => (
+                    <MotionLink
                       key={item.href}
                       href={item.href}
+                      {...mobileMenuItemMotion(index + 2)}
                       onClick={(event) => handleNavClick(item.href, event, true)}
                       className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
                     >
                       {item.label}
-                    </Link>
+                    </MotionLink>
                   ))}
-                  <a
+                  <motion.a
                     href={siteConfig.contactHref}
+                    {...mobileMenuItemMotion(navItems.length + 2)}
                     onClick={() => setMenuOpen(false)}
                     className="micro-press rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal"
                   >
                     Contact me
-                  </a>
+                  </motion.a>
                 </div>
               </motion.div>
             </motion.div>
