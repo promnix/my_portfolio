@@ -16,6 +16,7 @@ const siteEase: Easing = [0.22, 1, 0.36, 1];
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const isStudioRoute = pathname === "/studio" || pathname.startsWith("/studio/");
   const [menuOpen, setMenuOpen] = useState(false);
   const [showTop, setShowTop] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">(() => {
@@ -119,6 +120,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       ease: siteEase,
     },
   });
+
+  if (isStudioRoute) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="site-shell grain min-h-screen bg-charcoal text-cream">
