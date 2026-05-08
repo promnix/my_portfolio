@@ -56,6 +56,17 @@ export const postBySlugQuery = defineQuery(`
       caption
     },
     seo,
-    body
+    body[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          ...,
+          "slug": reference->slug.current,
+          "type": reference->_type,
+          "title": reference->title
+        }
+      }
+    }
   }
 `);

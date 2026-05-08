@@ -221,6 +221,25 @@ export const blogPostSchema = defineType({
                   },
                 ],
               },
+              {
+                name: "externalLink",
+                title: "External Link",
+                type: "object",
+                fields: [
+                  {
+                    name: "href",
+                    title: "URL",
+                    type: "url",
+                    validation: (Rule) => Rule.required(),
+                  },
+                  {
+                    name: "openInNewTab",
+                    title: "Open in new tab",
+                    type: "boolean",
+                    initialValue: true,
+                  },
+                ],
+              }
             ],
           },
         },
