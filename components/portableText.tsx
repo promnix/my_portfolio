@@ -86,101 +86,101 @@ function InternalLink({
 }
 
 const portableTextComponents = {
-  block: {
-    normal: ({ children }) => (
-      <p className="text-sm leading-8 text-silver md:text-base">{children}</p>
-    ),
-    h2: ({ children }) => (
-      <h2 className="pt-4 font-display text-4xl text-cream md:text-5xl">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="pt-2 font-display text-3xl text-cream">{children}</h3>
-    ),
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-2 border-brass pl-5 text-lg leading-8 text-cream">
-        {children}
-      </blockquote>
-    ),
-  },
-  list: {
-    bullet: ({ children }) => (
-      <ul className="ml-5 list-disc space-y-3 text-sm leading-8 text-silver md:text-base">
-        {children}
-      </ul>
-    ),
-    number: ({ children }) => (
-      <ol className="ml-5 list-decimal space-y-3 text-sm leading-8 text-silver md:text-base">
-        {children}
-      </ol>
-    ),
-  },
-  listItem: {
-    bullet: ({ children }) => <li className="pl-1">{children}</li>,
-    number: ({ children }) => <li className="pl-1">{children}</li>,
-  },
-  marks: {
-    externalLink: ExternalLink,
-    internalLink: InternalLink,
-    code: ({ children }) => (
-      <code className="rounded-md border border-white/10 bg-black/30 px-1.5 py-0.5 font-mono text-[0.9em] text-cream">
-        {children}
-      </code>
-    ),
-  },
-  types: {
-    image: ({ value }) => {
-      const image = value as PortableImageValue;
-
-      if (!image.asset) return null;
-
-      return (
-        <figure className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03]">
-          <Image
-            src={urlFor(image).width(1200).height(760).fit("max").url()}
-            alt={image.alt || ""}
-            width={1200}
-            height={760}
-            className="h-auto w-full object-cover"
-          />
-          {image.caption ? (
-            <figcaption className="px-5 py-4 text-sm text-silver">
-              {image.caption}
-            </figcaption>
-          ) : null}
-        </figure>
-      );
+    block: {
+        normal: ({ children }) => (
+            <p className="text-sm leading-8 text-silver md:text-base">{children}</p>
+        ),
+        h2: ({ children }) => (
+            <h2 className="pt-4 font-display text-4xl text-cream md:text-5xl">
+                {children}
+            </h2>
+        ),
+        h3: ({ children }) => (
+            <h3 className="pt-2 font-display text-3xl text-cream">{children}</h3>
+        ),
+        blockquote: ({ children }) => (
+            <blockquote className="border-l-2 border-brass pl-5 text-lg leading-8 text-cream">
+                {children}
+            </blockquote>
+        ),
     },
-    callout: ({ value }) => {
-      const callout = value as CalloutValue;
-      const toneClassName =
-        callout.tone === "warning"
-          ? "border-red-400/35 bg-red-400/10"
-          : callout.tone === "tip"
-            ? "border-blue-300/30 bg-blue-300/10"
-            : "border-brass/35 bg-brass/10";
-
-      return (
-        <aside
-          className={`rounded-[1.5rem] border p-5 text-sm leading-7 text-cream ${toneClassName}`}
-        >
-          {callout.text}
-        </aside>
-      );
+    list: {
+        bullet: ({ children }) => (
+            <ul className="ml-5 list-disc space-y-3 text-sm leading-8 text-silver md:text-base">
+                {children}
+            </ul>
+        ),
+        number: ({ children }) => (
+            <ol className="ml-5 list-decimal space-y-3 text-sm leading-8 text-silver md:text-base">
+                {children}
+            </ol>
+        ),
     },
-    codeBlock: ({ value }) => {
-      const block = value as CodeBlockValue;
-
-      if (!block.code) return null;
-
-      return (
-        <pre className="overflow-x-auto rounded-[1.5rem] border border-white/10 bg-black/40 p-5 text-sm leading-7 text-silver">
-          <code>{block.code}</code>
-        </pre>
-      );
+    listItem: {
+        bullet: ({ children }) => <li className="pl-1">{children}</li>,
+        number: ({ children }) => <li className="pl-1">{children}</li>,
     },
-  },
+    marks: {
+        externalLink: ExternalLink,
+        internalLink: InternalLink,
+        code: ({ children }) => (
+            <code className="rounded-md border border-white/10 bg-black/30 px-1.5 py-0.5 font-mono text-[0.9em] text-cream">
+                {children}
+            </code>
+        ),
+    },
+    types: {
+        image: ({ value }) => {
+            const image = value as PortableImageValue;
+
+            if (!image.asset) return null;
+
+            return (
+                <figure className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03]">
+                <Image
+                    src={urlFor(image).width(1200).height(760).fit("max").url()}
+                    alt={image.alt || ""}
+                    width={1200}
+                    height={760}
+                    className="h-auto w-full object-cover"
+                />
+                {image.caption ? (
+                    <figcaption className="px-5 py-4 text-sm text-silver">
+                    {image.caption}
+                    </figcaption>
+                ) : null}
+                </figure>
+            );
+        },
+        callout: ({ value }) => {
+            const callout = value as CalloutValue;
+            const toneClassName =
+                callout.tone === "warning"
+                ? "border-red-400/35 bg-red-400/10"
+                : callout.tone === "tip"
+                    ? "border-blue-300/30 bg-blue-300/10"
+                    : "border-brass/35 bg-brass/10";
+
+            return (
+                <aside
+                className={`rounded-3xl border p-5 text-sm leading-7 text-cream ${toneClassName}`}
+                >
+                {callout.text}
+                </aside>
+            );
+        },
+        codeBlock: ({ value }) => {
+            const block = value as CodeBlockValue;
+
+            if (!block.code) return null;
+
+            return (
+                <pre className="overflow-x-auto rounded-3xl border border-white/10 bg-black/40 p-5 text-sm leading-7 text-silver">
+                    <code>{block.code}</code>
+                </pre>
+            );
+        },
+    },
 } satisfies PortableTextComponents;
 
 export default portableTextComponents;
