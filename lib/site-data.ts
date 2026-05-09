@@ -29,7 +29,7 @@ export const siteConfig = {
   name: "Promnix",
   shortName: "PX",
   role: "Modern Websites & Digital Products for Startups and Small Businesses",
-  url: "https://promnix.dev",
+  url: "http://localhost:3000",
   description:
     "Edwin Promise helps founders, startups, and small businesses turn ideas into modern websites, MVPs, and digital products that are polished, reliable, and ready to launch.",
   tagline: "Web • Product",
