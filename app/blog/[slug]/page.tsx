@@ -100,8 +100,6 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post: IPost | null = await client.fetch(postBySlugQuery, { slug });
 
-  console.dir(post?.body, { depth: null });
-
   if (!post) {
     notFound();
   }

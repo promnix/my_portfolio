@@ -191,24 +191,6 @@ export const blogPostSchema = defineType({
             ],
             annotations: [
               {
-                name: "externalLink",
-                title: "External Link",
-                type: "object",
-                fields: [
-                  {
-                    name: "href",
-                    title: "URL",
-                    type: "url",
-                  },
-                  {
-                    name: "openInNewTab",
-                    title: "Open in new tab",
-                    type: "boolean",
-                    initialValue: true,
-                  },
-                ],
-              },
-              {
                 name: "internalLink",
                 title: "Internal Link",
                 type: "object",

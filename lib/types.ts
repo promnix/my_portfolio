@@ -1,13 +1,16 @@
-interface SanityImage {
+import type { PortableTextBlock } from "@portabletext/react";
+
+declare global {
+  interface SanityImage {
     asset?: {
-        _ref: string;
-        _type: "reference";
+      _ref: string;
+      _type: "reference";
     };
     alt?: string;
     caption?: string;
-}
+  }
 
-interface SEO {
+  interface SEO {
     seoTitle?: string;
     seoDescription?: string;
     focusKeyphrase?: string;
@@ -15,9 +18,9 @@ interface SEO {
     canonicalUrl?: string;
     noIndex?: boolean;
     ogImage?: SanityImage;
-}
-  
-interface IPost {
+  }
+
+  interface IPost {
     _id: string;
     title: string;
     slug: string;
@@ -30,5 +33,6 @@ interface IPost {
     topics: string[];
     coverImage?: SanityImage | null;
     seo?: SEO;
-    body?: any[];
+    body?: PortableTextBlock[];
+  }
 }
