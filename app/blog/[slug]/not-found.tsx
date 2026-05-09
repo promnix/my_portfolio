@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function BlogPostNotFound() {
   return (
     <div className="section-shell py-16 md:py-24">
-      <div className="mx-auto max-w-3xl rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-8 text-center md:p-12">
+      <div className="mx-auto max-w-3xl rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-8 text-center md:p-12">
         <p className="eyebrow text-xs text-brass">404</p>
         <h1 className="mt-4 font-display text-5xl text-balance md:text-6xl">Article not found.</h1>
         <p className="mx-auto mt-5 max-w-xl text-sm leading-8 text-silver md:text-base">

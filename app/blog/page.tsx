@@ -1,20 +1,41 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, BookOpen, Clock3 } from "lucide-react";
-import { blogPosts, editorialPillars } from "@/lib/site-data";
+import { editorialPillars } from "@/lib/site-data";
 import PillLabel from "@/components/pill-label";
+import { client } from "@/sanity/lib/client";
+import { allPostsQuery } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Blog",
 };
 
-export default function BlogPage() {
-  const [featuredPost, ...recentPosts] = blogPosts;
+function formatDate(date?: string | null) {
+  if (!date) return null;
+
+  return new Intl.DateTimeFormat("en", {
+    month: "long",
+    year: "numeric",
+  }).format(new Date(date));
+}
+
+function formatReadingTime(readingTime?: string | null) {
+  if (!readingTime) return null;
+
+  return readingTime.includes("min") ? readingTime : `${readingTime} min read`;
+}
+
+export default async function BlogPage() {
+  const posts: IPost[] = await client.fetch(allPostsQuery);
+  const featuredPost = posts.find((post) => post.isFeatured) ?? posts[0];
+  const recentPosts = featuredPost
+    ? posts.filter((post) => post._id !== featuredPost._id)
+    : [];
 
   return (
     <div id="blog" className="section-shell py-10 md:py-14">
       <section className="grid gap-6 lg:grid-cols-[1fr_0.62fr]">
-        <div className="overflow-hidden rounded-[2.4rem] border border-white/10 bg-[linear-gradient(140deg,rgba(214,161,74,0.16),rgba(255,255,255,0.03),rgba(102,169,255,0.12))] p-6 md:p-8">
+        <div className="overflow-hidden rounded-3xl sm:rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[linear-gradient(140deg,rgba(214,161,74,0.16),rgba(255,255,255,0.03),rgba(102,169,255,0.12))] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Blog</p>
           <h1 className="mt-4 max-w-3xl font-display text-5xl text-balance md:text-6xl">
             Writing that shows how I think, build, and solve problems.
@@ -35,7 +56,7 @@ export default function BlogPage() {
           </div>
         </div>
 
-        <div className="section-card rounded-[2.4rem] p-6">
+        <div className="section-card rounded-3xl sm:rounded-[2.4rem] p-6">
           <div className="flex items-center justify-between">
             <p className="eyebrow text-xs text-brass">Editorial desk</p>
             <BookOpen size={16} className="text-brass" />
@@ -68,62 +89,66 @@ export default function BlogPage() {
           </p>
         </div>
 
-        <article
-          id={featuredPost.slug}
-          className="mt-8 overflow-hidden rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)]"
-        >
-          <div className="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="p-6 md:p-8">
-              <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
-                <span className="eyebrow text-[0.68rem] text-brass">{featuredPost.category}</span>
-                <span>{featuredPost.publishedAt}</span>
-                <span>{featuredPost.readingTime}</span>
+        {featuredPost ? (
+          <article
+            id={featuredPost.slug}
+            className="mt-8 overflow-hidden rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)]"
+          >
+            <div className="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
+              <div className="p-6 md:p-8">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
+                  <span className="eyebrow text-[0.68rem] text-brass">{featuredPost.category}</span>
+                  {formatDate(featuredPost.publishedAt) ? (
+                    <span>{formatDate(featuredPost.publishedAt)}</span>
+                  ) : null}
+                  {formatReadingTime(featuredPost.readingTime) ? (
+                    <span>{formatReadingTime(featuredPost.readingTime)}</span>
+                  ) : null}
+                </div>
+
+                <h3 className="mt-5 max-w-2xl font-display text-4xl text-balance md:text-5xl">
+                  {featuredPost.title}
+                </h3>
+                <p className="mt-5 max-w-2xl text-sm leading-8 text-silver md:text-base">
+                  {featuredPost.excerpt}
+                </p>
+
+                {featuredPost.topics?.length ? (
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {featuredPost.topics.map((topic) => (
+                      <span
+                        key={topic}
+                        className="rounded-full border border-white/10 bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-xs text-silver"
+                      >
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+
+                <PillLabel href={`/blog/${featuredPost.slug}`} text="Read article" style="mt-5 py-1" />
               </div>
 
-              <h3 className="mt-5 max-w-2xl font-display text-4xl text-balance md:text-5xl">
-                {featuredPost.title}
-              </h3>
-              <p className="mt-5 max-w-2xl text-sm leading-8 text-silver md:text-base">
-                {featuredPost.excerpt}
-              </p>
+              <div className="border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-6 md:p-8 lg:border-l lg:border-t-0">
+                <p className="text-xs text-silver">Highlighted line</p>
+                <blockquote className="mt-5 font-display text-3xl leading-tight text-cream md:text-4xl">
+                  &ldquo;{featuredPost.excerpt}&rdquo;
+                </blockquote>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {featuredPost.topics.map((topic) => (
-                  <span
-                    key={topic}
-                    className="rounded-full border border-white/10 bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-xs text-silver"
-                  >
-                    {topic}
-                  </span>
-                ))}
-              </div>
-
-              <PillLabel href={`/blog/${featuredPost.slug}`} text="Read article" style="mt-5 py-1" />
-            </div>
-
-            <div className="border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-6 md:p-8 lg:border-l lg:border-t-0">
-              <p className="text-xs text-silver">Highlighted line</p>
-              <blockquote className="mt-5 font-display text-3xl leading-tight text-cream md:text-4xl">
-                “{featuredPost.pullQuote}”
-              </blockquote>
-
-              <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
-                <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(0,0,0,0.16)] p-4">
-                  <p className="text-xs text-silver">Tone</p>
+                <div className="mt-8 rounded-3xl border border-white/10 bg-[rgba(0,0,0,0.16)] p-4">
+                  <p className="text-xs text-silver">Why read this</p>
                   <p className="mt-2 text-sm leading-7 text-cream">
-                    Editorial, practical, and clear enough to read quickly between delivery cycles.
+                    Practical notes on websites, SEO, performance, and building better digital experiences for businesses.
                   </p>
                 </div>
-                <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(0,0,0,0.16)] p-4">
-                  <p className="text-xs text-silver">Use this space for</p>
-                  <p className="mt-2 text-sm leading-7 text-cream">
-                    A cover image later, or a secondary summary block if you prefer a fully text-led blog.
-                  </p>
-                </div>
               </div>
             </div>
+          </article>
+        ) : (
+          <div className="mt-8 rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 text-sm leading-7 text-silver md:p-8">
+            No published Sanity posts are available yet.
           </div>
-        </article>
+        )}
       </section>
 
       <section className="mt-12">
@@ -147,27 +172,31 @@ export default function BlogPage() {
             >
               <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
                 <span className="eyebrow text-[0.68rem] text-brass">{post.category}</span>
-                <span>{post.publishedAt}</span>
+                {formatDate(post.publishedAt) ? <span>{formatDate(post.publishedAt)}</span> : null}
               </div>
 
               <h3 className="mt-4 font-display text-3xl text-balance">{post.title}</h3>
               <p className="mt-4 text-sm leading-7 text-silver">{post.excerpt}</p>
 
-              <div className="mt-5 flex items-center gap-2 text-xs text-silver">
-                <Clock3 size={14} className="text-brass" />
-                {post.readingTime}
-              </div>
+              {formatReadingTime(post.readingTime) ? (
+                <div className="mt-5 flex items-center gap-2 text-xs text-silver">
+                  <Clock3 size={14} className="text-brass" />
+                  {formatReadingTime(post.readingTime)}
+                </div>
+              ) : null}
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                {post.topics.map((topic) => (
-                  <span key={topic} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
-                    {topic}
-                  </span>
-                ))}
-              </div>
+              {post.topics?.length ? (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {post.topics.map((topic) => (
+                    <span key={topic} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
 
               <p className="mt-6 border-l border-white/10 pl-4 text-sm leading-7 text-cream/85">
-                “{post.pullQuote}”
+                &ldquo;{post.excerpt}&rdquo;
               </p>
             </Link>
           ))}

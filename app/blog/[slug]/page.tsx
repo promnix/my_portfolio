@@ -241,13 +241,13 @@ export default async function BlogPostPage({
         ) : null}
 
         <section className="mt-12 grid gap-6 lg:grid-cols-[0.78fr_0.22fr]">
-          <article className="rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
+          <article className="rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
             <div className="space-y-6">
               <PortableText value={post.body} components={portableTextComponents} />
             </div>
           </article>
 
-          <aside className="h-fit rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 lg:sticky lg:top-24">
+          <aside className="h-fit rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 lg:sticky lg:top-24">
             <p className="eyebrow text-xs text-brass">Article summary</p>
 
             <p className="mt-4 text-sm leading-7 text-silver">

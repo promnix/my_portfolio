@@ -115,6 +115,13 @@ html[data-theme="light"] .site-shell {
   padding-inline: 1.25rem;
 }
 
+@media screen and (max-width: 768px) {
+  .section-shell {
+    width: 95%;
+    padding-inline: 0;
+  }
+}
+
 .section-card {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
