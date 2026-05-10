@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, MapPin, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, Gauge, Layers3, MapPin, Rocket, Sparkles } from "lucide-react";
 import { InteractiveArticle, InteractiveDiv, Reveal } from "@/components/micro-interactions";
 import { siteConfig, skillGroups, workPattern } from "@/lib/site-data";
 import PillLabel from "./pill-label";
@@ -69,31 +69,56 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
           </Reveal>
 
           <Reveal delay={0.12} className="relative mx-auto w-full max-w-[34rem]">
-            <div className="hero-orb aspect-[0.9] rounded-[2.5rem] p-6 md:p-8">
-              <div className="flex h-full flex-col justify-between rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-6">
-                <div className="flex items-center justify-between text-xs text-silver">
-                  <span className="eyebrow">Portfolio</span>
-                  <span>2026 Edition</span>
-                </div>
-
-                <div className="relative mx-auto flex h-[18rem] w-[18rem] items-center justify-center rounded-full border border-white/10 bg-[radial-gradient(circle_at_30%_25%,rgba(214,161,74,0.32),transparent_36%),linear-gradient(180deg,rgba(255,255,255,0.09),rgba(255,255,255,0.03))] shadow-[0_30px_60px_rgba(0,0,0,0.3)] md:h-[22rem] md:w-[22rem]">
-                  <div className="absolute inset-4 rounded-full border border-dashed border-brass/30" />
-                  <div className="absolute inset-10 rounded-full border border-white/10" />
-                  <div className="text-center">
-                    <p className="font-display text-[clamp(4rem,12vw,7rem)] leading-none">{siteConfig.shortName}</p>
-                    <p className="mt-2 text-xs tracking-[0.35em] text-silver uppercase">Personal Brand</p>
+            <div className="hero-orb rounded-[2.5rem] p-5 md:p-7">
+              <div className="relative z-10 rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.04)] p-5 md:p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="eyebrow text-xs text-brass">Launch Support</p>
+                    <h2 className="mt-3 max-w-sm font-display text-2xl sm:text-4xl leading-none text-cream md:text-5xl">
+                      From idea to polished product.
+                    </h2>
+                  </div>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brass/30 bg-brass/15 text-brass">
+                    <Rocket size={22} />
                   </div>
                 </div>
 
-                <div className="grid gap-3 text-sm text-silver md:grid-cols-2">
-                  <div className="rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
-                    <p className="text-xs text-silver/70">Focus</p>
-                    <p className="mt-2 text-cream">Cross-platform products with editorial polish.</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
-                    <p className="text-xs text-silver/70">Build style</p>
-                    <p className="mt-2 text-cream">Fast delivery, clean motion, consistent finish.</p>
-                  </div>
+                <p className="mt-5 max-w-sm text-sm leading-7 text-silver">
+                  Clean websites and MVPs for founders who need to launch with confidence.
+                </p>
+
+                <div className="mt-6 grid gap-3 grid-cols-3">
+                  {[
+                    { label: "Design", icon: Layers3 },
+                    { label: "Build", icon: Gauge },
+                    { label: "Launch", icon: CheckCircle2 },
+                  ].map((item) => {
+                    const Icon = item.icon;
+
+                    return (
+                      <div key={item.label} className="rounded-[1.25rem] border border-white/10 bg-[rgba(255,255,255,0.035)] p-4">
+                        <Icon size={18} className="text-brass" />
+                        <p className="mt-3 text-sm font-semibold text-cream">{item.label}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a
+                    href={siteConfig.contactHref}
+                    className="micro-link micro-press inline-flex items-center gap-2 rounded-full bg-cream px-5 py-2.5 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5"
+                  >
+                    Start a build
+                    <ArrowUpRight size={14} />
+                  </a>
+                  <Link
+                    href="/project"
+                    className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm text-cream transition hover:border-brass hover:text-brass"
+                  >
+                    See proof
+                    <ArrowRight size={14} />
+                  </Link>
                 </div>
               </div>
             </div>

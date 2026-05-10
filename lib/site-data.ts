@@ -28,13 +28,13 @@ export type BlogPost = {
 export const siteConfig = {
   name: "Promnix",
   shortName: "PX",
-  role: "Modern Websites & Digital Products for Startups and Small Businesses",
+  role: "Fast, modern websites for businesses that want to look credible and convert visitors.",
   url: "http://localhost:3000",
   description:
     "Edwin Promise helps founders, startups, and small businesses turn ideas into modern websites, MVPs, and digital products that are polished, reliable, and ready to launch.",
   tagline: "Web • Product",
   heroLead:
-    "I help founders and businesses turn ideas into polished websites, MVPs, and digital products.",
+    "I design and build fast, responsive, SEO-ready websites that make your business easier to trust, find, and contact.",
   heroBody:
     "I combine product thinking, clean interface design, and reliable engineering to build digital experiences that help teams launch faster, improve their online presence, and serve customers better.",
   email: "contact@promnix.dev",
@@ -43,7 +43,7 @@ export const siteConfig = {
   whatsappHref:
     "https://wa.me/2340000000000?text=Hi%20Promnix%2C%20I%27d%20like%20to%20start%20a%20project.",
   location: "Lagos, Nigeria",
-  availability: "Available for websites, MVP builds, and launch support",
+  availability: "Available for website projects, MVP builds, and collaborations",
 };
 
 export const navItems = [
