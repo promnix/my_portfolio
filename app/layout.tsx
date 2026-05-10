@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { cookies } from "next/headers";
 import { AppBoot } from "@/components/app-boot";
-import { IntroSplash } from "@/components/intro-splash";
 import { SiteShell } from "@/components/site-shell";
 import { siteConfig } from "@/lib/site-data";
 import "./globals.css";
@@ -70,7 +69,6 @@ export default async function RootLayout({
     >
       <body className="min-h-full">
         <AppBoot initialTheme={initialTheme} />
-        <IntroSplash />
         <div id="app-shell" className="app-shell">
           <SiteShell>{children}</SiteShell>
         </div>
