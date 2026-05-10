@@ -38,7 +38,7 @@ function resolveInternalHref(value?: InternalLinkMark) {
   if (!value?.slug) return null;
 
   if (value.type === "project") {
-    return `/project#${value.slug}`;
+    return `/project/${value.slug}`;
   }
 
   return `/blog/${value.slug}`;

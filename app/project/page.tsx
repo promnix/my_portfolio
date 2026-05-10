@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { featuredProjects } from "@/lib/site-data";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import { allProjectsQuery } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Projects",
 };
 
-export default function ProjectPage() {
+function getProjectYear(project: IProject) {
+  return project._createdAt ? new Date(project._createdAt).getFullYear().toString() : "";
+}
+
+export default async function ProjectPage() {
+  const projects: IProject[] = await client.fetch(allProjectsQuery);
+
   return (
     <div id="projects" className="section-shell py-10 md:py-14">
       <div className="max-w-3xl">
@@ -21,48 +30,73 @@ export default function ProjectPage() {
       </div>
 
       <div className="mt-10 space-y-5">
-        {featuredProjects.map((project, index) => (
+        {projects.map((project, index) => (
           <article
             id={project.slug}
             key={project.slug}
             className="rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8"
           >
-            <div className="grid gap-6 md:grid-cols-[0.14fr_0.86fr]">
-              <div className="text-sm text-silver">
-                <p>{String(index + 1).padStart(2, "0")}</p>
-                <p className="mt-2">{project.year}</p>
-              </div>
-              <div>
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="eyebrow text-[0.68rem] text-brass">{project.accent}</span>
-                  <span className="text-xs text-silver">{project.kind}</span>
+            <div className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-stretch">
+              <div className="min-w-0">
+                <div className="flex flex-col gap-x-5 gap-y-3 text-sm text-silver">
+                  <span className="text-5xl text-brass">{String(index + 1).padStart(2, "0")}</span>
+                  {getProjectYear(project) ? <span>{getProjectYear(project)}</span> : null}
                 </div>
-                <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
-                  <div>
-                    <h2 className="font-display text-4xl md:text-5xl">{project.title}</h2>
-                    <p className="mt-4 max-w-2xl text-sm leading-8 text-silver md:text-base">
-                      {project.summary}
-                    </p>
-                  </div>
 
-                  <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-5">
+                <div className="mt-5">
+                  {project.projectType ? (
+                    <span className="eyebrow text-[0.68rem] text-brass">{project.projectType}</span>
+                  ) : null}
+                  {project.projectLabel ? <span className="ml-2 text-xs text-silver">{project.projectLabel}</span> : null}
+                  <h2 className="max-w-3xl font-display text-4xl md:text-5xl">{project.title}</h2>
+                  <p className="hyphens-auto mt-4 max-w-2xl text-sm leading-8 text-silver md:text-base">
+                    {project.summary}
+                  </p>
+
+                  <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-5">
                     <p className="text-xs text-silver">Stack</p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {project.stack.map((item) => (
+                      {project.stack?.map((item) => (
                         <span key={item} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
                           {item}
                         </span>
                       ))}
                     </div>
-                    <Link
-                      href="/#contact"
-                      className="mt-6 inline-flex items-center gap-2 text-sm text-brass transition hover:text-cream"
-                    >
-                      Discuss a similar build
-                      <ArrowUpRight size={14} />
-                    </Link>
+                    <div className="mt-6 flex flex-wrap items-center gap-4">
+                      <Link
+                        href={`/project/${project.slug}`}
+                        className="inline-flex items-center gap-2 rounded-full border border-brass/40!important bg-brass!important px-4 py-2 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-cream hover:text-charcoal! focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brass"
+                      >
+                        View project
+                        <ArrowUpRight size={14} />
+                      </Link>
+                      <Link
+                        href="/#contact"
+                        className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-silver transition hover:-translate-y-0.5 hover:border-brass/50 hover:bg-white/[0.04] hover:text-cream focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brass"
+                      >
+                        Discuss a similar build
+                        <ArrowUpRight size={14} />
+                      </Link>
+                    </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="relative min-h-64 overflow-hidden rounded-[1.7rem] border border-white/10 bg-[rgba(255,255,255,0.04)] lg:min-h-full">
+                {project.coverImage?.asset ? (
+                  <Image
+                    src={urlFor(project.coverImage).width(880).height(1040).fit("crop").url()}
+                    alt={project.coverImage.alt || project.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 384px"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full min-h-64 flex-col justify-between bg-[linear-gradient(145deg,rgba(214,161,74,0.22),rgba(102,169,255,0.12)_48%,rgba(255,255,255,0.04))] p-6">
+                    <span className="text-xs uppercase tracking-[0.24em] text-brass">Project</span>
+                    <span className="font-display text-5xl text-cream">{project.title.slice(0, 1)}</span>
+                  </div>
+                )}
               </div>
             </div>
           </article>

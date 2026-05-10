@@ -35,4 +35,21 @@ declare global {
     seo?: SEO;
     body?: PortableTextBlock[];
   }
+
+  interface IProject {
+    _id: string;
+    _createdAt?: string;
+    title: string;
+    slug: string;
+    projectType?: string | null;
+    projectLabel?: string | null;
+    summary?: string | null;
+    stack?: string[];
+    contribution?: PortableTextBlock[];
+    coverImage?: SanityImage | null;
+    liveUrl?: string | null;
+    githubUrl?: string | null;
+    isFeatured?: boolean;
+    seo?: SEO;
+  }
 }

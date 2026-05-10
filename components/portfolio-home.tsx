@@ -1,10 +1,31 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, MapPin, Sparkles } from "lucide-react";
 import { InteractiveArticle, InteractiveDiv, Reveal } from "@/components/micro-interactions";
-import { blogPosts, featuredProjects, siteConfig, skillGroups, workPattern } from "@/lib/site-data";
+import { siteConfig, skillGroups, workPattern } from "@/lib/site-data";
 import PillLabel from "./pill-label";
 
-export function PortfolioHome() {
+type PortfolioHomeProps = {
+  projects: IProject[];
+  posts: IPost[];
+};
+
+function getProjectYear(project: IProject) {
+  return project._createdAt ? new Date(project._createdAt).getFullYear().toString() : "";
+}
+
+function formatPostDate(date?: string | null) {
+  if (!date) return null;
+
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    year: "numeric",
+  }).format(new Date(date));
+}
+
+export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
+  const homeProjects = projects.slice(0, 4);
+  const homePosts = posts.slice(0, 3);
+
   return (
     <div>
       <section className="relative overflow-hidden">
@@ -142,28 +163,37 @@ export function PortfolioHome() {
         </Reveal>
 
         <div className="mt-8 space-y-4">
-          {featuredProjects.slice(0, 4).map((project, index) => (
+          {homeProjects.map((project, index) => (
             <Reveal key={project.slug} delay={index * 0.05}>
               <InteractiveArticle className="micro-card project-row rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-5 md:p-7">
                 <div className="grid gap-5 md:grid-cols-[0.18fr_0.82fr]">
                   <div className="text-sm text-silver">
                     <p>{String(index + 1).padStart(2, "0")}</p>
-                    <p className="mt-2">{project.year}</p>
+                    {getProjectYear(project) ? <p className="mt-2">{getProjectYear(project)}</p> : null}
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center gap-3">
-                      <p className="eyebrow text-[0.68rem] text-brass">{project.accent}</p>
-                      <span className="text-xs text-silver">{project.kind}</span>
+                      {project.projectType ? (
+                        <p className="eyebrow text-[0.68rem] text-brass">{project.projectType}</p>
+                      ) : null}
+                      {project.projectLabel ? <span className="text-xs text-silver">{project.projectLabel}</span> : null}
                     </div>
                     <h3 className="mt-3 font-display text-3xl md:text-4xl">{project.title}</h3>
                     <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">{project.summary}</p>
                     <div className="mt-5 flex flex-wrap gap-2">
-                      {project.stack.map((item) => (
+                      {project.stack?.map((item) => (
                         <span key={item} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
                           {item}
                         </span>
                       ))}
                     </div>
+                    <Link
+                      href={`/project/${project.slug}`}
+                      className="micro-link mt-5 inline-flex items-center gap-2 text-sm text-brass transition hover:text-cream"
+                    >
+                      View project
+                      <ArrowUpRight size={14} />
+                    </Link>
                   </div>
                 </div>
               </InteractiveArticle>
@@ -238,18 +268,18 @@ export function PortfolioHome() {
         </Reveal>
 
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
-          {blogPosts.slice(0, 3).map((post, index) => (
+          {homePosts.map((post, index) => (
             <Reveal key={post.slug} delay={index * 0.05}>
               <InteractiveDiv className="micro-card hover:border section-card h-full rounded-[1.85rem] transition hover:border-brass! hover:bg-[rgba(255,255,255,0.05)]">
                 <Link href={`/blog/${post.slug}`} className="micro-link block p-6">
                   <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
                     <span className="eyebrow text-[0.68rem] text-brass">{post.category}</span>
-                    <span>{post.publishedAt}</span>
+                    {formatPostDate(post.publishedAt) ? <span>{formatPostDate(post.publishedAt)}</span> : null}
                   </div>
                   <h3 className="mt-4 font-display text-3xl text-balance">{post.title}</h3>
                   <p className="mt-4 text-sm leading-7 text-silver">{post.excerpt}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {post.topics.slice(0, 2).map((topic) => (
+                    {post.topics?.slice(0, 2).map((topic) => (
                       <span key={topic} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
                         {topic}
                       </span>

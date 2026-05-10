@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
     "10.*.*.*",
     "172.*.*.*",
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        port: "",
+        pathname: "/images/2p3gvv56/production/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

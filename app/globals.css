@@ -220,7 +220,7 @@ html[data-theme="light"] .hero-orb::after {
 }
 
 .micro-link:hover svg {
-  transform: translate(5px, 0px);
+  transform: translate(5px, 0px) !important;
 }
 
 .micro-press {
