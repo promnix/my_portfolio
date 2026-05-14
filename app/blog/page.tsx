@@ -253,15 +253,15 @@ export default async function BlogPage() {
         <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Newsletter-style CTA</p>
           <h2 className="mt-4 max-w-xl font-display text-4xl text-balance md:text-5xl">
-            Get product notes from the Promnix desk.
+            Get product notes from the promise desk.
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-7 text-silver md:text-base">
-            For now, reach out directly for product thinking, build notes, or a closer look at how Promnix approaches launch-ready interfaces.
+            For now, reach out directly for product thinking, build notes, or a closer look at how Promise approaches launch-ready interfaces.
           </p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-[1fr_auto]">
             <div className="rounded-full border border-white/10 bg-[rgba(0,0,0,0.22)] px-5 py-3 text-sm text-silver">
-              contact@promnix.dev
+              promnix10@gmail.com
             </div>
             <a
               href="mailto:contact@promnix.dev?subject=Promnix%20product%20notes"

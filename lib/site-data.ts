@@ -37,9 +37,9 @@ export const siteConfig = {
     "I design and build fast, responsive, SEO-ready websites that make your business easier to trust, find, and contact.",
   heroBody:
     "I combine product thinking, clean interface design, and reliable engineering to build digital experiences that help teams launch faster, improve their online presence, and serve customers better.",
-  email: "promiseedwin242@gmail.com",
+  email: "promnix10@gmail.com",
   contactHref:
-    "mailto:promiseedwin242@gmail.com?subject=Project%20Inquiry",
+    "mailto:promnix10@gmail.com?subject=Project%20Inquiry",
   whatsappHref:
     "https://wa.me/2347058149298?text=Hi%20Promise%2C%20I%27d%20like%20to%20start%20a%20project.",
   location: "Lagos, Nigeria",

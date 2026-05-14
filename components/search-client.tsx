@@ -37,7 +37,7 @@ export function SearchClient({
         <p className="eyebrow text-xs text-brass">Search</p>
         <h1 className="mt-4 font-display text-5xl md:text-6xl">Find pages, sections, projects, and articles.</h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">
-          Search across Promnix pages, project summaries, capability areas, and editorial notes from one focused route.
+          Search across Promise pages, project summaries, capability areas, and editorial notes from one focused route.
         </p>
       </div>
 
