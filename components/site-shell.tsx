@@ -179,7 +179,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
               <a
                 href={siteConfig.contactHref}
-                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-5 py-2.5 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-5 py-2.5 text-sm font-semibold text-[#0b0b0b]! transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
               >
                 <Mail size={15} />
                 Contact me
@@ -279,7 +279,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                     href={siteConfig.contactHref}
                     {...mobileMenuItemMotion(navItems.length + 2)}
                     onClick={() => setMenuOpen(false)}
-                    className="micro-press rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal"
+                    className="micro-press rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal!"
                   >
                     Contact me
                   </motion.a>

@@ -42,7 +42,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={siteConfig.contactHref}
-                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-6 py-3 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-6 py-3 text-sm font-semibold text-[#0b0b0b]! transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
               >
                 Contact me
                 <ArrowUpRight size={15} />
