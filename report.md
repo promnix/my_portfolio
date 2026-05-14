@@ -10,7 +10,7 @@ The result includes:
 - a large editorial hero section
 - skills and selected work sections
 - testimonial and final CTA sections
-- dedicated `/about`, `/project`, and `/search` routes
+- dedicated `/about`, `/projects`, and `/search` routes
 - centralized placeholder content for easy replacement
 
 ## Stack Used
@@ -76,7 +76,7 @@ Replaced the default starter page with a custom portfolio homepage that includes
 Built dedicated routes to match the reference site structure more closely:
 
 - `/about`
-- `/project`
+- `/projects`
 - `/search`
 
 The search page includes a client-side searchable list of pages, sections, and projects using a local dataset and URL query syncing.
@@ -107,7 +107,7 @@ This file controls:
 
 - `app/page.tsx`
 - `app/about/page.tsx`
-- `app/project/page.tsx`
+- `app/projects/page.tsx`
 - `app/search/page.tsx`
 - `app/layout.tsx`
 - `app/globals.css`

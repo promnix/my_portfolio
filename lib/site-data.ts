@@ -26,38 +26,39 @@ export type BlogPost = {
 };
 
 export const siteConfig = {
-  name: "Promnix",
+  name: "Edwin Promise",
   shortName: "PX",
-  role: "Modern Websites & Digital Products for Startups and Small Businesses",
-  url: "https://promnix.dev",
+  role: "Fast, modern websites for businesses that want to look credible and convert visitors.",
+  url: "http://localhost:3000",
   description:
     "Edwin Promise helps founders, startups, and small businesses turn ideas into modern websites, MVPs, and digital products that are polished, reliable, and ready to launch.",
   tagline: "Web • Product",
   heroLead:
-    "I help founders and businesses turn ideas into polished websites, MVPs, and digital products.",
+    "I design and build fast, responsive, SEO-ready websites that make your business easier to trust, find, and contact.",
   heroBody:
     "I combine product thinking, clean interface design, and reliable engineering to build digital experiences that help teams launch faster, improve their online presence, and serve customers better.",
-  email: "contact@promnix.dev",
+  email: "promiseedwin242@gmail.com",
   contactHref:
-    "mailto:contact@promnix.dev?subject=Project%20Inquiry",
+    "mailto:promiseedwin242@gmail.com?subject=Project%20Inquiry",
   whatsappHref:
-    "https://wa.me/2340000000000?text=Hi%20Promnix%2C%20I%27d%20like%20to%20start%20a%20project.",
+    "https://wa.me/2347058149298?text=Hi%20Promise%2C%20I%27d%20like%20to%20start%20a%20project.",
   location: "Lagos, Nigeria",
-  availability: "Available for websites, MVP builds, and launch support",
+  availability: "Available for website projects, MVP builds, and collaborations",
 };
 
 export const navItems = [
   { href: "/about", label: "About me" },
   { href: "/#skills", label: "Skills" },
-  { href: "/project", label: "Projects" },
+  { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
 ] as const;
 
 export const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/promnix" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/edwin-promise-a73b822b6" },
   { label: "GitHub", href: "https://github.com/promnix" },
   { label: "X", href: "https://x.com/promnix" },
-  { label: "Instagram", href: "https://www.instagram.com/promnix" },
+  { label: "Instagram", href: "https://www.instagram.com/promnix10" },
+  { label: "TikTok", href: "https://www.tiktok.com/@promnix" },
 ];
 
 export const skillGroups = [
@@ -383,13 +384,13 @@ export const timeline = [
 export const searchEntries = [
   { title: "Home", href: "/", category: "Page", body: "Hero, reviews, and contact section." },
   { title: "About", href: "/about#about", category: "Page", body: "Bio, process, and work approach." },
-  { title: "Projects", href: "/project", category: "Page", body: "Selected portfolio work and case study summaries." },
+  { title: "Projects", href: "/projects", category: "Page", body: "Selected portfolio work and case study summaries." },
   { title: "Blog", href: "/blog", category: "Page", body: "Writing on product craft, delivery, and interface thinking." },
   { title: "Skills", href: "/#skills", category: "Section", body: "Mobile, frontend, backend, and workflow tools." },
   { title: "Contact", href: "/#contact", category: "Section", body: "Email and WhatsApp call to action." },
   ...featuredProjects.map((project) => ({
     title: project.title,
-    href: `/project#${project.slug}`,
+    href: `/projects#${project.slug}`,
     category: project.accent,
     body: project.summary,
   })),
