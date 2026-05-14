@@ -136,7 +136,7 @@ export default async function ProjectPage() {
                       className="object-cover"
                     />
                   ) : (
-                    <div className="flex h-full min-h-64 flex-col justify-between bg-[linear-gradient(145deg,rgba(214,161,74,0.22),rgba(102,169,255,0.12)_48%,rgba(255,255,255,0.04))] p-6">
+                    <div className="flex h-full min-h-64 flex-col justify-between bg-[rgba(255,255,255,0.03)] p-6">
                       <span className="text-xs uppercase tracking-[0.24em] text-brass">Project</span>
                       <span className="font-display text-5xl text-cream">{project.title.slice(0, 1)}</span>
                     </div>

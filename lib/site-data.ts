@@ -41,7 +41,7 @@ export const siteConfig = {
   contactHref:
     "mailto:promiseedwin242@gmail.com?subject=Project%20Inquiry",
   whatsappHref:
-    "https://wa.me/2347058149298?text=Hi%20Promnix%2C%20I%27d%20like%20to%20start%20a%20project.",
+    "https://wa.me/2347058149298?text=Hi%20Promise%2C%20I%27d%20like%20to%20start%20a%20project.",
   location: "Lagos, Nigeria",
   availability: "Available for website projects, MVP builds, and collaborations",
 };
@@ -54,10 +54,11 @@ export const navItems = [
 ] as const;
 
 export const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/promnix" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/edwin-promise-a73b822b6" },
   { label: "GitHub", href: "https://github.com/promnix" },
   { label: "X", href: "https://x.com/promnix" },
-  { label: "Instagram", href: "https://www.instagram.com/promnix" },
+  { label: "Instagram", href: "https://www.instagram.com/promnix10" },
+  { label: "TikTok", href: "https://www.tiktok.com/@promnix" },
 ];
 
 export const skillGroups = [

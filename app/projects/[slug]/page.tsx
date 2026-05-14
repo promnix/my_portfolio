@@ -37,10 +37,18 @@ export async function generateMetadata({
   const title = project.seo?.seoTitle || project.title;
   const description = project.seo?.seoDescription || project.summary || undefined;
   const image = project.seo?.ogImage || project.coverImage;
+  const keywords = [
+    project.seo?.focusKeyphrase,
+    ...(project.seo?.relatedKeyphrases || []),
+    ...(project.stack || []),
+    project.projectType,
+    project.projectLabel,
+  ].filter((keyword): keyword is string => Boolean(keyword));
 
   return {
     title: `${title}`,
     description,
+    keywords,
     alternates: {
       canonical: project.seo?.canonicalUrl || `/projects/${project.slug}`,
     },
@@ -106,7 +114,7 @@ export default async function ProjectDetailPage({
         </Link>
 
         <section className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.34fr]">
-          <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[linear-gradient(140deg,rgba(214,161,74,0.15),rgba(255,255,255,0.04),rgba(102,169,255,0.12))] p-6 md:p-8">
+          <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
             <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
               {project.projectType ? (
                 <span className="eyebrow text-[0.68rem] text-brass">

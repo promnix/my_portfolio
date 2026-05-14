@@ -51,10 +51,15 @@ export async function generateMetadata({
   const title = post.seo?.seoTitle || post.title;
   const description = post.seo?.seoDescription || post.excerpt;
   const image = post.seo?.ogImage || post.coverImage;
+  const keywords = [
+    post.seo?.focusKeyphrase,
+    ...(post.seo?.relatedKeyphrases || [])
+  ].filter((keyword): keyword is string => Boolean(keyword));
 
   return {
     title: `${title}`,
     description,
+    keywords,
     alternates: {
       canonical: post.seo?.canonicalUrl || `/blog/${post.slug}`,
     },
@@ -142,7 +147,7 @@ export default async function BlogPostPage({
         </Link>
 
         <section className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.34fr]">
-          <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[linear-gradient(140deg,rgba(214,161,74,0.15),rgba(255,255,255,0.04),rgba(102,169,255,0.12))] p-6 md:p-8">
+          <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
             <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
               <span className="eyebrow text-[0.68rem] text-brass">
                 {post.category}

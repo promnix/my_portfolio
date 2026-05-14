@@ -124,9 +124,7 @@ html[data-theme="light"] .site-shell {
 
 .section-card {
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
-    rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(16px);
 }
 
@@ -204,9 +202,6 @@ html[data-theme="light"] .hero-orb::after {
   inset: 0;
   pointer-events: none;
   opacity: 0;
-  /* background:
-    radial-gradient(circle at 18% 0%, rgba(214, 161, 74, 0.16), transparent 34%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 42%); */
   transition: opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -337,19 +332,6 @@ html[data-theme="light"] .bg-\[rgba\(18\,18\,18\,0\.78\)\],
 html[data-theme="light"] .bg-\[rgba\(18\,18\,18\,0\.82\)\],
 html[data-theme="light"] .bg-\[rgba\(10\,10\,10\,0\.94\)\] {
   background: rgba(255, 255, 255, 0.94) !important;
-}
-
-html[data-theme="light"] .bg-\[linear-gradient\(180deg\,rgba\(255\,255\,255\,0\.07\)\,rgba\(255\,255\,255\,0\.02\)\)\],
-html[data-theme="light"] .bg-\[linear-gradient\(180deg\,rgba\(255\,255\,255\,0\.05\)\,rgba\(255\,255\,255\,0\.02\)\)\],
-html[data-theme="light"] .bg-\[linear-gradient\(135deg\,rgba\(214\,161\,74\,0\.18\)\,rgba\(255\,255\,255\,0\.04\)\,rgba\(102\,169\,255\,0\.14\)\)\],
-html[data-theme="light"] .bg-\[linear-gradient\(135deg\,rgba\(214\,161\,74\,0\.15\)\,rgba\(255\,255\,255\,0\.04\)\,rgba\(102\,169\,255\,0\.13\)\)\],
-html[data-theme="light"] .bg-\[linear-gradient\(140deg\,rgba\(214\,161\,74\,0\.16\)\,rgba\(255\,255\,255\,0\.03\)\,rgba\(102\,169\,255\,0\.12\)\)\],
-html[data-theme="light"] .bg-\[linear-gradient\(140deg\,rgba\(214\,161\,74\,0\.15\)\,rgba\(255\,255\,255\,0\.04\)\,rgba\(102\,169\,255\,0\.12\)\)\] {
-  background: rgba(255, 255, 255, 0.92) !important;
-}
-
-html[data-theme="light"] .bg-\[radial-gradient\(circle_at_30\%_25\%\,rgba\(214\,161\,74\,0\.32\)\,transparent_36\%\)\,linear-gradient\(180deg\,rgba\(255\,255\,255\,0\.09\)\,rgba\(255\,255\,255\,0\.03\)\)\] {
-  background: rgba(255, 255, 255, 0.92) !important;
 }
 
 html[data-theme="light"] .bg-cream.text-charcoal {

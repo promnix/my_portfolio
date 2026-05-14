@@ -68,7 +68,7 @@ export default async function BlogPage() {
   return (
     <div id="blog" className="section-shell py-10 md:py-14">
       <section className="grid gap-6 lg:grid-cols-[1fr_0.62fr]">
-        <div className="overflow-hidden rounded-3xl sm:rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[linear-gradient(140deg,rgba(214,161,74,0.16),rgba(255,255,255,0.03),rgba(102,169,255,0.12))] p-6 md:p-8">
+        <div className="overflow-hidden rounded-3xl sm:rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Blog</p>
           <h1 className="mt-4 max-w-3xl font-display text-5xl text-balance md:text-6xl">
             Writing that shows how I think, build, and solve problems.
@@ -162,7 +162,7 @@ export default async function BlogPage() {
                 <PillLabel href={`/blog/${featuredPost.slug}`} text="Read article" style="mt-5 py-1" />
               </div>
 
-              <div className="border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-6 md:p-8 lg:border-l lg:border-t-0">
+              <div className="border-t border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8 lg:border-l lg:border-t-0">
                 <p className="text-xs text-silver">Highlighted line</p>
                 <blockquote className="mt-5 font-display text-3xl leading-tight text-cream md:text-4xl">
                   &ldquo;{featuredPost.excerpt}&rdquo;
@@ -250,7 +250,7 @@ export default async function BlogPage() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(214,161,74,0.15),rgba(255,255,255,0.04),rgba(102,169,255,0.13))] p-6 md:p-8">
+        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Newsletter-style CTA</p>
           <h2 className="mt-4 max-w-xl font-display text-4xl text-balance md:text-5xl">
             Get product notes from the Promnix desk.

@@ -318,7 +318,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
       </section>
 
       <section id="contact" className="section-shell pb-20 pt-10 md:pb-24 md:pt-14">
-        <Reveal className="overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(214,161,74,0.18),rgba(255,255,255,0.04),rgba(102,169,255,0.14))] p-6 md:p-8">
+        <Reveal className="overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(214,161,74,0.045),rgba(255,255,255,0.032)_48%,rgba(102,169,255,0.035))] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Start a project</p>
           <div className="mt-6 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
