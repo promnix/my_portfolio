@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/aboutpage.jpg",
         width: 1200,
         height: 630,
         alt: "About Edwin Promise - Full-Stack Web Developer",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: "About Edwin Promise | Full-Stack Web Developer",
     description:
       "Full-stack developer building fast websites, MVPs, and digital products for founders, startups, and businesses.",
-    images: ["/og-image.jpg"],
+    images: ["/images/aboutpage.jpg"],
   },
   robots: {
     index: true,

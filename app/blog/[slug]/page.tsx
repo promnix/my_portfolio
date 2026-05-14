@@ -53,7 +53,7 @@ export async function generateMetadata({
   const image = post.seo?.ogImage || post.coverImage;
 
   return {
-    title: `${title} | Edwin Promise`,
+    title: `${title}`,
     description,
     alternates: {
       canonical: post.seo?.canonicalUrl || `/blog/${post.slug}`,

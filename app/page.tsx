@@ -5,6 +5,9 @@ import { client } from "@/sanity/lib/client";
 import { allPostsQuery, allProjectsQuery } from "@/sanity/lib/queries";
 import { Metadata } from "next";
 
+
+export const revalidate = 3600
+
 // home page metadata
 export const metadata: Metadata = {
   title: "Edwin Promise | Web Developer for Business Websites & MVPs",
@@ -40,7 +43,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/homepage.jpg",
         width: 1200,
         height: 630,
         alt: "Edwin Promise - Web Developer for Business Websites and MVPs",
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
     title: "Edwin Promise | Web Developer for Business Websites & MVPs",
     description:
       "Fast, responsive, SEO-ready websites and MVPs for businesses, founders, and startups.",
-    images: ["/og-image.jpg"],
+    images: ["/images/homepage.jpg"],
   },
   robots: {
     index: true,
@@ -60,13 +63,34 @@ export const metadata: Metadata = {
   },
 } 
 
+
 // get the home page schema
 const jsonLd = getHomeschema()
 
 export default async function Home() {
+  // const [projects, posts] = await Promise.all([
+  //   client.fetch<IProject[]>(allProjectsQuery),
+  //   client.fetch<IPost[]>(allPostsQuery),
+  // ]);
+
   const [projects, posts] = await Promise.all([
-    client.fetch<IProject[]>(allProjectsQuery),
-    client.fetch<IPost[]>(allPostsQuery),
+    client.fetch<IProject[]>(allProjectsQuery,{},
+      {
+        next: {
+          revalidate: 3600,
+          tags: ["projects"],
+        },
+      }
+    ),
+  
+    client.fetch<IPost[]>(allPostsQuery,{},
+      {
+        next: {
+          revalidate: 3600,
+          tags: ["posts"],
+        },
+      }
+    ),
   ]);
 
   return(

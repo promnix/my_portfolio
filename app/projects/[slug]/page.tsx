@@ -39,7 +39,7 @@ export async function generateMetadata({
   const image = project.seo?.ogImage || project.coverImage;
 
   return {
-    title: `${title} | Edwin Promise`,
+    title: `${title}`,
     description,
     alternates: {
       canonical: project.seo?.canonicalUrl || `/projects/${project.slug}`,

@@ -8,7 +8,7 @@ import { allPostsQuery } from "@/sanity/lib/queries";
 
 // =============== Metadata ================ //
 export const metadata: Metadata = {
-  title: "Blog | Edwin Promise",
+  title: "Blog",
   description:
     "Read practical notes from Edwin Promise on web development, SEO, performance, product thinking, WordPress, Next.js, and building better digital products.",
   alternates: {

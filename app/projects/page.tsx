@@ -9,17 +9,17 @@ import { getProjectSchema } from "@/lib/json-ld/json-ld";
 
 // ======= Metadata ===================//
 export const metadata: Metadata = {
-  title: "Projects | Edwin Promise",
+  title: "Projects",
   description:
     "Explore selected websites, MVPs, and digital products built by Edwin Promise, focused on clarity, performance, SEO, and business results.",
   alternates: {
-    canonical: "/projectss",
+    canonical: "/projects",
   },
   openGraph: {
     title: "Projects | Edwin Promise",
     description:
       "Selected websites, MVPs, and digital products built with clean design, reliable development, and product thinking.",
-    url: "/projectss",
+    url: "/projects",
     siteName: "Edwin Promise",
     type: "website",
     images: [

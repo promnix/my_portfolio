@@ -42,16 +42,16 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={siteConfig.contactHref}
-                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-6 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
+                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-6 py-3 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
               >
                 Contact me
                 <ArrowUpRight size={15} />
               </a>
               <Link
-                href="/projects"
+                href={siteConfig.whatsappHref}
                 className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-6 py-3 text-sm text-cream transition hover:border-brass hover:text-brass"
               >
-                View projects
+                Start a project
                 <ArrowRight size={15} />
               </Link>
             </div>
@@ -116,7 +116,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
                     href="/projects"
                     className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm text-cream transition hover:border-brass hover:text-brass"
                   >
-                    See proof
+                    See Work
                     <ArrowRight size={14} />
                   </Link>
                 </div>
