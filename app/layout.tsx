@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { cookies } from "next/headers";
-import { AppBoot } from "@/components/app-boot";
 import { SiteShell } from "@/components/site-shell";
 import { siteConfig } from "@/lib/site-data";
 import "./globals.css";
@@ -60,23 +58,47 @@ export const metadata: Metadata = {
   description: siteConfig.description,
 };
 
-export default async function RootLayout({
+const themeBootScript = `
+(() => {
+  const fallbackTheme = "dark";
+
+  try {
+    const storedTheme = window.localStorage.getItem("theme");
+    const cookieTheme = document.cookie
+      .split("; ")
+      .find((cookie) => cookie.startsWith("theme="))
+      ?.split("=")[1];
+    const theme =
+      storedTheme === "light" || storedTheme === "dark"
+        ? storedTheme
+        : cookieTheme === "light" || cookieTheme === "dark"
+          ? cookieTheme
+          : fallbackTheme;
+
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("theme", theme);
+  } catch {
+    document.documentElement.dataset.theme = fallbackTheme;
+  }
+})();
+`;
+
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const initialTheme = cookieStore.get("theme")?.value === "light" ? "light" : "dark";
-
   return (
     <html
       lang="en"
       className={`${manrope.variable} ${cormorantGaramond.variable} h-full antialiased`}
-      data-theme={initialTheme}
+      data-theme="dark"
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+      </head>
       <body className="min-h-full">
-        <AppBoot initialTheme={initialTheme} />
         <div id="app-shell" className="app-shell">
           <SiteShell>{children}</SiteShell>
         </div>
