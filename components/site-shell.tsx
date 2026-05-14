@@ -140,7 +140,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <Link
               href="/"
               onClick={(event) => handleNavClick("/", event)}
-              className="relative z-10 font-display text-2xl text-cream md:text-3xl"
+              className="relative z-10 font-display text-2xl text-cream"
             >
               {siteConfig.name}
             </Link>

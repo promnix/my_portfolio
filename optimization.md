@@ -28,7 +28,7 @@ Route (app)
 ├ ƒ /about
 ├ ƒ /blog
 ├ ƒ /blog/[slug]
-├ ƒ /project
+├ ƒ /projects
 └ ƒ /search
 
 ƒ  Dynamic server-rendered on demand
@@ -49,7 +49,7 @@ largest client chunks: 221K, 146K, 131K, 110K, 53K, 48K CSS
 
 Location: `app/layout.tsx`
 
-`RootLayout` calls `cookies()` to read the theme cookie. In the installed Next.js production guidance, request-time APIs such as `cookies` opt routes into dynamic rendering, and when used in the root layout they can affect the whole application. The build confirms this: `/`, `/about`, `/blog`, `/blog/[slug]`, `/project`, and `/search` are all marked `ƒ Dynamic`.
+`RootLayout` calls `cookies()` to read the theme cookie. In the installed Next.js production guidance, request-time APIs such as `cookies` opt routes into dynamic rendering, and when used in the root layout they can affect the whole application. The build confirms this: `/`, `/about`, `/blog`, `/blog/[slug]`, `/projects`, and `/search` are all marked `ƒ Dynamic`.
 
 Impact:
 

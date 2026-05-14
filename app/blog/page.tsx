@@ -6,8 +6,41 @@ import PillLabel from "@/components/pill-label";
 import { client } from "@/sanity/lib/client";
 import { allPostsQuery } from "@/sanity/lib/queries";
 
+// =============== Metadata ================ //
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Blog | Edwin Promise",
+  description:
+    "Read practical notes from Edwin Promise on web development, SEO, performance, product thinking, WordPress, Next.js, and building better digital products.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog | Edwin Promise",
+    description:
+      "Practical notes on web development, SEO, performance, product thinking, and building better digital products.",
+    url: "/blog",
+    siteName: "Edwin Promise",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Blog by Edwin Promise",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Edwin Promise",
+    description:
+      "Practical notes on web development, SEO, performance, and product thinking.",
+    images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 function formatDate(date?: string | null) {

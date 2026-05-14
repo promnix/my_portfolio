@@ -32,7 +32,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
         <div className="hero-grid section-shell grid items-center gap-12 py-10 md:grid-cols-[1.05fr_0.95fr] md:py-16">
           <Reveal className="max-w-xl">
             <p className="eyebrow text-xs text-brass">{siteConfig.tagline}</p>
-            <h1 className="mt-5 font-display text-[clamp(.1rem,10vw,7.7rem)] leading-[0.9] text-balance">
+            <h1 className="mt-5 font-display text-[clamp(1rem,12vw,9rem)] lg:text-[clamp(.6rem,7.5vw,5rem)] leading-[0.9] text-balance">
               {siteConfig.name}
             </h1>
             <p className="mt-4 text-lg font-semibold text-cream/90 md:text-xl">{siteConfig.role}</p>
@@ -48,7 +48,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
                 <ArrowUpRight size={15} />
               </a>
               <Link
-                href="/project"
+                href="/projects"
                 className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-6 py-3 text-sm text-cream transition hover:border-brass hover:text-brass"
               >
                 View projects
@@ -113,7 +113,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
                     <ArrowUpRight size={14} />
                   </a>
                   <Link
-                    href="/project"
+                    href="/projects"
                     className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm text-cream transition hover:border-brass hover:text-brass"
                   >
                     See proof
@@ -184,7 +184,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
             <p className="eyebrow text-xs text-brass">Selected Work</p>
             <h2 className="mt-4 font-display text-4xl md:text-5xl">Projects with range and finish.</h2>
           </div>
-          <PillLabel href="/project" text="Browse the full project page" style="py-1" />
+          <PillLabel href="/projects" text="Browse the full project page" style="py-1" />
         </Reveal>
 
         <div className="mt-8 space-y-4">
@@ -213,7 +213,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
                       ))}
                     </div>
                     <Link
-                      href={`/project/${project.slug}`}
+                      href={`/projects/${project.slug}`}
                       className="micro-link mt-5 inline-flex items-center gap-2 text-sm text-brass transition hover:text-cream"
                     >
                       View project

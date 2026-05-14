@@ -44,7 +44,7 @@ Added custom mark renderers for:
 `internalLink` now resolves Sanity reference data from the GROQ query into app routes:
 
 - `blogPost` references become `/blog/[slug]`
-- `project` references become `/project#[slug]`
+- `project` references become `/projects#[slug]`
 
 Also added renderers for the custom Portable Text body block types already present in the schema:
 
