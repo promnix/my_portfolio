@@ -57,9 +57,6 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  verification: {
-    google: "tD_RSST89LyPafzi4G1EUAKxHYwFTAfsnUMfTr3DubI",
-  },
 };
 
 const themeBootScript = `
@@ -102,6 +99,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <meta name="google-site-verification" content="tD_RSST89LyPafzi4G1EUAKxHYwFTAfsnUMfTr3DubI" />
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
       <body className="min-h-full">
