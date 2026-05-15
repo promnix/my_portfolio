@@ -7,6 +7,8 @@ import { urlFor } from "@/sanity/lib/image";
 import { allProjectsQuery } from "@/sanity/lib/queries";
 import { getProjectSchema } from "@/lib/json-ld/json-ld";
 
+export const revalidate = 60
+
 // ======= Metadata ===================//
 export const metadata: Metadata = {
   title: "Projects",

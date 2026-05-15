@@ -6,6 +6,8 @@ import PillLabel from "@/components/pill-label";
 import { client } from "@/sanity/lib/client";
 import { allPostsQuery } from "@/sanity/lib/queries";
 
+export const revalidate = 60
+
 // =============== Metadata ================ //
 export const metadata: Metadata = {
   title: "Blog",
@@ -59,7 +61,13 @@ function formatReadingTime(readingTime?: string | null) {
 }
 
 export default async function BlogPage() {
-  const posts: IPost[] = await client.fetch(allPostsQuery);
+  const posts: IPost[] = await client.fetch(allPostsQuery, {}, 
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
   const featuredPost = posts.find((post) => post.isFeatured) ?? posts[0];
   const recentPosts = featuredPost
     ? posts.filter((post) => post._id !== featuredPost._id)

@@ -10,10 +10,16 @@ import { urlFor } from "@/sanity/lib/image";
 import { allProjectsQuery, projectBySlugQuery } from "@/sanity/lib/queries";
 import { generateProjectJsonLd } from "@/lib/json-ld/project-json-ld";
 
-export const dynamicParams = false;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const projects: IProject[] = await client.fetch(allProjectsQuery);
+  const projects: IProject[] = await client.fetch(allProjectsQuery, {}, 
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
 
   return projects.map((project) => ({
     slug: project.slug,
@@ -26,7 +32,13 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project: IProject | null = await client.fetch(projectBySlugQuery, { slug });
+  const project: IProject | null = await client.fetch(projectBySlugQuery, { slug }, 
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
 
   if (!project) {
     return {
@@ -87,7 +99,13 @@ export default async function ProjectDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project: IProject | null = await client.fetch(projectBySlugQuery, { slug });
+  const project: IProject | null = await client.fetch(projectBySlugQuery, { slug }, 
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
 
   if (!project) {
     notFound();

@@ -11,7 +11,7 @@ import { allPostsQuery, postBySlugQuery } from "@/sanity/lib/queries";
 import { ArrowLeft, ArrowUpRight, Clock3, CalendarDays } from "lucide-react";
 
 
-export const dynamicParams = false;
+export const revalidate = 60;
 
 // formats date
 function formatDate(date?: string | null) {
@@ -26,7 +26,13 @@ function formatDate(date?: string | null) {
 
 //generates dynamic routes
 export async function generateStaticParams() {
-  const posts = await client.fetch(allPostsQuery);
+  const posts = await client.fetch(allPostsQuery, {}, 
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
 
   return posts.map((post: { slug: string }) => ({
     slug: post.slug,
@@ -40,7 +46,13 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post: IPost | null = await client.fetch(postBySlugQuery, { slug });
+  const post: IPost | null = await client.fetch(postBySlugQuery, { slug }, 
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
 
   if (!post) {
     return {
@@ -103,7 +115,13 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post: IPost | null = await client.fetch(postBySlugQuery, { slug });
+  const post: IPost | null = await client.fetch(postBySlugQuery, { slug }, 
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
 
   if (!post) {
     notFound();
@@ -112,7 +130,13 @@ export default async function BlogPostPage({
   // Generates json/ld
   const jsonLd = generateBlogPostJsonLd({ post });
 
-  const posts: IPost[] = await client.fetch(allPostsQuery);
+  const posts: IPost[] = await client.fetch(allPostsQuery, {}, 
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
   const relatedPosts = posts
     .filter((item) => item.slug !== post.slug)
     .filter((item) => item.category === post.category)

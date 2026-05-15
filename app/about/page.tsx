@@ -5,6 +5,8 @@ import { skillGroups, siteConfig, timeline } from "@/lib/site-data";
 import PillLabel from "@/components/pill-label";
 import { getAboutSchema } from "@/lib/json-ld/json-ld";
 
+export const revalidate = 60
+
 // metadata
 export const metadata: Metadata = {
   title: "About Edwin Promise | Full-Stack Web Developer",

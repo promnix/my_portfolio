@@ -6,7 +6,7 @@ import { allPostsQuery, allProjectsQuery } from "@/sanity/lib/queries";
 import { Metadata } from "next";
 
 
-export const revalidate = 3600
+export const revalidate = 60
 
 // home page metadata
 export const metadata: Metadata = {
@@ -77,7 +77,7 @@ export default async function Home() {
     client.fetch<IProject[]>(allProjectsQuery,{},
       {
         next: {
-          revalidate: 3600,
+          revalidate: 60,
           tags: ["projects"],
         },
       }
@@ -86,7 +86,7 @@ export default async function Home() {
     client.fetch<IPost[]>(allPostsQuery,{},
       {
         next: {
-          revalidate: 3600,
+          revalidate: 60,
           tags: ["posts"],
         },
       }
