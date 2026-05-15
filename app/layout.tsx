@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { SiteShell } from "@/components/site-shell";
 import { siteConfig } from "@/lib/site-data";
 import "./globals.css";
@@ -83,6 +84,8 @@ const themeBootScript = `
 })();
 `;
 
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -103,6 +106,7 @@ export default function RootLayout({
           <SiteShell>{children}</SiteShell>
         </div>
       </body>
+      {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>
   );
 }

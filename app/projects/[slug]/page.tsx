@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import portableTextComponents from "@/components/portableText";
+import { TrackedLink } from "@/components/tracked-link";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { allProjectsQuery, projectBySlugQuery } from "@/sanity/lib/queries";
@@ -132,7 +133,7 @@ export default async function ProjectDetailPage({
         </Link>
 
         <section className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.34fr]">
-          <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
+          <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] px-4 py-6 sm:px-6 md:p-8">
             <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
               {project.projectType ? (
                 <span className="eyebrow text-[0.68rem] text-brass">
@@ -154,7 +155,7 @@ export default async function ProjectDetailPage({
             ) : null}
           </div>
 
-          <aside className="section-card rounded-[2.5rem] p-6">
+          <aside className="section-card rounded-[2.5rem] px-4 py-6 sm:px-6">
             <p className="eyebrow text-xs text-brass">Project details</p>
 
             <div className="mt-6 space-y-4">
@@ -167,12 +168,12 @@ export default async function ProjectDetailPage({
                 </div>
               ) : null}
 
-              {project.projectLabel ? (
+              {/* {project.projectLabel ? (
                 <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
                   <p className="text-xs text-silver">Category</p>
                   <p className="mt-2 text-sm font-semibold text-cream">{project.projectLabel}</p>
                 </div>
-              ) : null}
+              ) : null} */}
 
               {project.stack?.length ? (
                 <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
@@ -207,7 +208,7 @@ export default async function ProjectDetailPage({
         ) : null}
 
         <section className="mt-12 grid gap-6 lg:grid-cols-[0.78fr_0.22fr]">
-          <article className="rounded-3xl border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 sm:rounded-[2.4rem] md:p-8">
+          <article className="rounded-3xl border border-white/10 bg-[rgba(255,255,255,0.03)] px-4 py-6 sm:px-6 sm:rounded-[2.4rem] md:p-8">
             {project.contribution?.length ? (
               <div className="space-y-6">
                 <PortableText value={project.contribution} components={portableTextComponents} />
@@ -219,44 +220,47 @@ export default async function ProjectDetailPage({
             )}
           </article>
 
-          <aside className="h-fit rounded-3xl border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 sm:rounded-[2.4rem] lg:sticky lg:top-24">
+          <aside className="h-fit rounded-3xl border border-white/10 bg-[rgba(255,255,255,0.03)] px-4 py-6 sm:px-6 sm:rounded-[2.4rem] lg:sticky lg:top-24">
             <p className="eyebrow text-xs text-brass">Project links</p>
 
             <div className="mt-5 space-y-4">
               {project.liveUrl ? (
-                <a
+                <TrackedLink
                   href={project.liveUrl}
+                  tracking={{ type: "project_visit", location: "project_detail_links", projectTitle: project.title, url: project.liveUrl }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between gap-4 rounded-[1.3rem] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-silver transition hover:border-brass hover:text-brass"
                 >
                   View live
                   <ArrowUpRight size={14} />
-                </a>
+                </TrackedLink>
               ) : null}
 
               {project.githubUrl ? (
-                <a
+                <TrackedLink
                   href={project.githubUrl}
+                  tracking={{ type: "external_link_click", location: "project_detail_links", label: `${project.title} source`, url: project.githubUrl }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between gap-4 rounded-[1.3rem] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-silver transition hover:border-brass hover:text-brass"
                 >
                   View code
                   <ArrowUpRight size={14} />
-                </a>
+                </TrackedLink>
               ) : null}
 
-              <Link
+              <TrackedLink
                 href="/#contact"
+                tracking={{ type: "contact_click", location: "project_detail_links", label: "Discuss a similar build" }}
                 className="flex items-center justify-between gap-4 rounded-[1.3rem] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-silver transition hover:border-brass hover:text-brass"
               >
                 Discuss a similar build
                 <ArrowUpRight size={14} />
-              </Link>
+              </TrackedLink>
             </div>
 
-            {project.seo?.relatedKeyphrases?.length ? (
+            {/* {project.seo?.relatedKeyphrases?.length ? (
               <div className="mt-6">
                 <p className="text-xs text-silver">Related keyphrases</p>
 
@@ -271,7 +275,7 @@ export default async function ProjectDetailPage({
                   ))}
                 </div>
               </div>
-            ) : null}
+            ) : null} */}
           </aside>
         </section>
       </div>

@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { ArrowRight, ArrowUpRight, CheckCircle2, Gauge, Layers3, MapPin, Rocket, Sparkles } from "lucide-react";
 import { InteractiveArticle, InteractiveDiv, Reveal } from "@/components/micro-interactions";
+import { TrackedLink } from "@/components/tracked-link";
 import { siteConfig, skillGroups, workPattern } from "@/lib/site-data";
 import PillLabel from "./pill-label";
 
@@ -40,20 +40,22 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
             <p className="mt-4 max-w-xl text-sm leading-7 text-silver/80 md:text-base">{siteConfig.heroBody}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
+              <TrackedLink
                 href={siteConfig.contactHref}
+                tracking={{ type: "contact_click", location: "home_hero", label: "Contact me" }}
                 className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-6 py-3 text-sm font-semibold text-[#0b0b0b]! transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
               >
                 Contact me
                 <ArrowUpRight size={15} />
-              </a>
-              <Link
+              </TrackedLink>
+              <TrackedLink
                 href={siteConfig.whatsappHref}
+                tracking={{ type: "whatsapp_click", location: "home_hero", label: "Start a project" }}
                 className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-6 py-3 text-sm text-cream transition hover:border-brass hover:text-brass"
               >
                 Start a project
                 <ArrowRight size={15} />
-              </Link>
+              </TrackedLink>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3 text-xs text-silver md:text-sm">
@@ -105,20 +107,22 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <a
+                  <TrackedLink
                     href={siteConfig.contactHref}
+                    tracking={{ type: "contact_click", location: "home_launch_card", label: "Start a build" }}
                     className="micro-link micro-press inline-flex items-center gap-2 rounded-full bg-cream px-5 py-2.5 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5"
                   >
                     Start a build
                     <ArrowUpRight size={14} />
-                  </a>
-                  <Link
+                  </TrackedLink>
+                  <TrackedLink
                     href="/projects"
+                    tracking={{ type: "project_view", location: "home_launch_card", projectTitle: "Projects index" }}
                     className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm text-cream transition hover:border-brass hover:text-brass"
                   >
                     See Work
                     <ArrowRight size={14} />
-                  </Link>
+                  </TrackedLink>
                 </div>
               </div>
             </div>
@@ -212,13 +216,14 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
                         </span>
                       ))}
                     </div>
-                    <Link
+                    <TrackedLink
                       href={`/projects/${project.slug}`}
-                      className="micro-link mt-5 inline-flex items-center gap-2 text-sm text-brass transition hover:text-cream"
+                      tracking={{ type: "project_view", location: "home_project_card", projectTitle: project.title }}
+                      className="inline-flex mt-5 items-center gap-2 rounded-full border border-brass/40! bg-brass! px-4 py-2 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5 hover:bg-cream hover:text-charcoal! focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brass"
                     >
                       View project
                       <ArrowUpRight size={14} />
-                    </Link>
+                    </TrackedLink>
                   </div>
                 </div>
               </InteractiveArticle>
@@ -296,7 +301,11 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
           {homePosts.map((post, index) => (
             <Reveal key={post.slug} delay={index * 0.05}>
               <InteractiveDiv className="micro-card hover:border section-card h-full rounded-[1.85rem] transition hover:border-brass! hover:bg-[rgba(255,255,255,0.05)]">
-                <Link href={`/blog/${post.slug}`} className="micro-link block p-6">
+                <TrackedLink
+                  href={`/blog/${post.slug}`}
+                  tracking={{ type: "blog_view", location: "home_blog_card", postTitle: post.title }}
+                  className="micro-link block p-6"
+                >
                   <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
                     <span className="eyebrow text-[0.68rem] text-brass">{post.category}</span>
                     {formatPostDate(post.publishedAt) ? <span>{formatPostDate(post.publishedAt)}</span> : null}
@@ -310,7 +319,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
                       </span>
                     ))}
                   </div>
-                </Link>
+                </TrackedLink>
               </InteractiveDiv>
             </Reveal>
           ))}
@@ -330,22 +339,24 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <a
+              <TrackedLink
                 href={siteConfig.contactHref}
+                tracking={{ type: "email_click", location: "home_contact_section", label: "Email me" }}
                 className="micro-link micro-press inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5"
               >
                 Email me
                 <ArrowUpRight size={15} />
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
                 href={siteConfig.whatsappHref}
+                tracking={{ type: "whatsapp_click", location: "home_contact_section", label: "WhatsApp" }}
                 target="_blank"
                 rel="noreferrer"
                 className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm text-cream transition hover:border-cream hover:bg-white/5"
               >
                 WhatsApp
                 <ArrowUpRight size={15} />
-              </a>
+              </TrackedLink>
             </div>
           </div>
         </Reveal>

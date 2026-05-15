@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowUpRight, BookOpen, Clock3 } from "lucide-react";
 import { editorialPillars } from "@/lib/site-data";
-import PillLabel from "@/components/pill-label";
+import { TrackedLink } from "@/components/tracked-link";
 import { client } from "@/sanity/lib/client";
 import { allPostsQuery } from "@/sanity/lib/queries";
 
@@ -167,7 +166,14 @@ export default async function BlogPage() {
                   </div>
                 ) : null}
 
-                <PillLabel href={`/blog/${featuredPost.slug}`} text="Read article" style="mt-5 py-1" />
+                <TrackedLink
+                  href={`/blog/${featuredPost.slug}`}
+                  tracking={{ type: "blog_view", location: "blog_featured_card", postTitle: featuredPost.title }}
+                  className="group micro-link micro-press mt-5 inline-flex items-center gap-2 rounded-full border border-brass px-5 py-2.5 text-sm text-white! transition duration-150 hover:bg-brass!"
+                >
+                  Read article
+                  <ArrowUpRight size={14} />
+                </TrackedLink>
               </div>
 
               <div className="border-t border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8 lg:border-l lg:border-t-0">
@@ -205,10 +211,11 @@ export default async function BlogPage() {
 
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
           {recentPosts.map((post) => (
-            <Link
+            <TrackedLink
               id={post.slug}
               key={post.slug}
               href={`/blog/${post.slug}`}
+              tracking={{ type: "blog_view", location: "blog_recent_card", postTitle: post.title }}
               className="section-card rounded-[1.9rem] p-6 transition hover:border-brass! hover:bg-[rgba(255,255,255,0.05)]"
             >
               <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
@@ -239,7 +246,7 @@ export default async function BlogPage() {
               <p className="mt-6 border-l border-white/10 pl-4 text-sm leading-7 text-cream/85">
                 &ldquo;{post.excerpt}&rdquo;
               </p>
-            </Link>
+            </TrackedLink>
           ))}
         </div>
       </section>
@@ -271,13 +278,14 @@ export default async function BlogPage() {
             <div className="rounded-full border border-white/10 bg-[rgba(0,0,0,0.22)] px-5 py-3 text-sm text-silver">
               promnix10@gmail.com
             </div>
-            <a
+            <TrackedLink
               href="mailto:contact@promnix.dev?subject=Promnix%20product%20notes"
+              tracking={{ type: "email_click", location: "blog_newsletter_cta", label: "Contact the desk" }}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5"
             >
               Contact the desk
               <ArrowUpRight size={15} />
-            </a>
+            </TrackedLink>
           </div>
         </div>
       </section>
