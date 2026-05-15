@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { allProjectsQuery } from "@/sanity/lib/queries";
 import { getProjectSchema } from "@/lib/json-ld/json-ld";
+import { TrackedLink } from "@/components/tracked-link";
 
 export const revalidate = 60
 
@@ -109,20 +109,22 @@ export default async function ProjectPage() {
                         ))}
                       </div>
                       <div className="mt-6 flex flex-wrap items-center gap-4">
-                        <Link
+                        <TrackedLink
                           href={`/projects/${project.slug}`}
+                          tracking={{ type: "project_view", location: "projects_page_card", projectTitle: project.title }}
                           className="inline-flex items-center gap-2 rounded-full border border-brass/40!important bg-brass!important px-4 py-2 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-cream hover:text-charcoal! focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brass"
                         >
                           View project
                           <ArrowUpRight size={14} />
-                        </Link>
-                        <Link
+                        </TrackedLink>
+                        <TrackedLink
                           href="/#contact"
+                          tracking={{ type: "contact_click", location: "projects_page_card", label: "Discuss a similar build" }}
                           className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-silver transition hover:-translate-y-0.5 hover:border-brass/50 hover:bg-white/[0.04] hover:text-cream focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brass"
                         >
                           Discuss a similar build
                           <ArrowUpRight size={14} />
-                        </Link>
+                        </TrackedLink>
                       </div>
                     </div>
                   </div>

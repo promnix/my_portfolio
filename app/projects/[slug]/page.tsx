@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import portableTextComponents from "@/components/portableText";
+import { TrackedLink } from "@/components/tracked-link";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { allProjectsQuery, projectBySlugQuery } from "@/sanity/lib/queries";
@@ -224,36 +225,39 @@ export default async function ProjectDetailPage({
 
             <div className="mt-5 space-y-4">
               {project.liveUrl ? (
-                <a
+                <TrackedLink
                   href={project.liveUrl}
+                  tracking={{ type: "project_visit", location: "project_detail_links", projectTitle: project.title, url: project.liveUrl }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between gap-4 rounded-[1.3rem] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-silver transition hover:border-brass hover:text-brass"
                 >
                   View live
                   <ArrowUpRight size={14} />
-                </a>
+                </TrackedLink>
               ) : null}
 
               {project.githubUrl ? (
-                <a
+                <TrackedLink
                   href={project.githubUrl}
+                  tracking={{ type: "external_link_click", location: "project_detail_links", label: `${project.title} source`, url: project.githubUrl }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between gap-4 rounded-[1.3rem] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-silver transition hover:border-brass hover:text-brass"
                 >
                   View code
                   <ArrowUpRight size={14} />
-                </a>
+                </TrackedLink>
               ) : null}
 
-              <Link
+              <TrackedLink
                 href="/#contact"
+                tracking={{ type: "contact_click", location: "project_detail_links", label: "Discuss a similar build" }}
                 className="flex items-center justify-between gap-4 rounded-[1.3rem] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-silver transition hover:border-brass hover:text-brass"
               >
                 Discuss a similar build
                 <ArrowUpRight size={14} />
-              </Link>
+              </TrackedLink>
             </div>
 
             {project.seo?.relatedKeyphrases?.length ? (

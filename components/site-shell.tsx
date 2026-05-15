@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import type { Easing } from "motion/react";
 import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
+import { trackContactClick, trackExternalLinkClick, trackWhatsAppClick } from "@/lib/analytics";
 import { navItems, siteConfig, socials } from "@/lib/site-data";
 
 const MotionLink = motion.create(Link);
@@ -179,6 +180,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
               <a
                 href={siteConfig.contactHref}
+                onClick={() => trackContactClick("site_header", "Contact me")}
                 className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-5 py-2.5 text-sm font-semibold text-[#0b0b0b]! transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
               >
                 <Mail size={15} />
@@ -278,7 +280,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   <motion.a
                     href={siteConfig.contactHref}
                     {...mobileMenuItemMotion(navItems.length + 2)}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      trackContactClick("mobile_menu", "Contact me");
+                      setMenuOpen(false);
+                    }}
                     className="micro-press rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal!"
                   >
                     Contact me
@@ -310,6 +315,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => trackExternalLinkClick(social.label, social.href, "site_footer_socials")}
                   className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-4 py-2 text-sm text-silver transition hover:-translate-y-0.5 hover:border-brass hover:text-cream"
                 >
                   {social.label}
@@ -328,6 +334,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               href={siteConfig.whatsappHref}
               target="_blank"
               rel="noreferrer"
+              onClick={() => trackWhatsAppClick("site_footer_cta", "Start a project")}
               className="micro-link micro-press mt-8 inline-flex items-center gap-2 rounded-full border border-brass px-5 py-2.5 text-sm text-brass transition hover:bg-brass hover:text-charcoal"
             >
               Start a project

@@ -6,6 +6,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
 import portableTextComponents from "@/components/portableText";
+import { TrackedLink } from "@/components/tracked-link";
 import { generateBlogPostJsonLd } from "@/lib/json-ld/blog-json-ld";
 import { allPostsQuery, postBySlugQuery } from "@/sanity/lib/queries";
 import { ArrowLeft, ArrowUpRight, Clock3, CalendarDays } from "lucide-react";
@@ -323,9 +324,10 @@ export default async function BlogPostPage({
 
             <div className="mt-8 grid gap-4 lg:grid-cols-3">
               {displayedRelatedPosts.map((relatedPost) => (
-                <Link
+                <TrackedLink
                   key={relatedPost.slug}
                   href={`/blog/${relatedPost.slug}`}
+                  tracking={{ type: "blog_view", location: "blog_related_card", postTitle: relatedPost.title }}
                   className="section-card rounded-[1.85rem] p-6 transition hover:border-brass"
                 >
                   <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
@@ -343,7 +345,7 @@ export default async function BlogPostPage({
                   <p className="mt-4 text-sm leading-7 text-silver">
                     {relatedPost.excerpt}
                   </p>
-                </Link>
+                </TrackedLink>
               ))}
             </div>
           </section>
