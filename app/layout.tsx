@@ -57,6 +57,9 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  verification: {
+    google: "tD_RSST89LyPafzi4G1EUAKxHYwFTAfsnUMfTr3DubI",
+  },
 };
 
 const themeBootScript = `
@@ -105,8 +108,8 @@ export default function RootLayout({
         <div id="app-shell" className="app-shell">
           <SiteShell>{children}</SiteShell>
         </div>
+        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>
-      {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>
   );
 }
