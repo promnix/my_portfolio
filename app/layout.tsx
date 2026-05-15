@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { DeferredGoogleAnalytics } from "@/components/deferred-google-analytics";
 import { SiteShell } from "@/components/site-shell";
 import { siteConfig } from "@/lib/site-data";
 import "./globals.css";
@@ -106,7 +106,7 @@ export default function RootLayout({
         <div id="app-shell" className="app-shell">
           <SiteShell>{children}</SiteShell>
         </div>
-        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
+        {gaId ? <DeferredGoogleAnalytics gaId={gaId} /> : null}
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
-import { PortfolioHome } from "@/components/portfolio-home";
+import { Suspense } from "react";
+import { HomeBlogSection, HomeProjectSection, PortfolioHome } from "@/components/portfolio-home";
 import { getHomeschema } from "@/lib/json-ld/json-ld";
 import { siteConfig } from "@/lib/site-data";
 import { client } from "@/sanity/lib/client";
@@ -67,31 +68,40 @@ export const metadata: Metadata = {
 // get the home page schema
 const jsonLd = getHomeschema()
 
-export default async function Home() {
-  // const [projects, posts] = await Promise.all([
-  //   client.fetch<IProject[]>(allProjectsQuery),
-  //   client.fetch<IPost[]>(allPostsQuery),
-  // ]);
+async function DeferredProjectSection({ projectsPromise }: { projectsPromise: Promise<IProject[]> }) {
+  const projects = await projectsPromise;
 
-  const [projects, posts] = await Promise.all([
-    client.fetch<IProject[]>(allProjectsQuery,{},
-      {
-        next: {
-          revalidate: 60,
-          tags: ["projects"],
-        },
-      }
-    ),
-  
-    client.fetch<IPost[]>(allPostsQuery,{},
-      {
-        next: {
-          revalidate: 60,
-          tags: ["posts"],
-        },
-      }
-    ),
-  ]);
+  return <HomeProjectSection projects={projects} />;
+}
+
+async function DeferredBlogSection({ postsPromise }: { postsPromise: Promise<IPost[]> }) {
+  const posts = await postsPromise;
+
+  return <HomeBlogSection posts={posts} />;
+}
+
+function SectionFallback({ label }: { label: string }) {
+  return (
+    <section className="section-shell py-10 md:py-14" aria-label={label}>
+      <div className="h-40 rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)]" />
+    </section>
+  );
+}
+
+export default function Home() {
+  const projectsPromise = client.fetch<IProject[]>(allProjectsQuery, {}, {
+    next: {
+      revalidate: 60,
+      tags: ["projects"],
+    },
+  });
+
+  const postsPromise = client.fetch<IPost[]>(allPostsQuery, {}, {
+    next: {
+      revalidate: 60,
+      tags: ["posts"],
+    },
+  });
 
   return(
     <>
@@ -101,7 +111,18 @@ export default async function Home() {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }} 
       />
-      <PortfolioHome projects={projects} posts={posts} />
+      <PortfolioHome
+        projectSection={
+          <Suspense fallback={<SectionFallback label="Loading selected projects" />}>
+            <DeferredProjectSection projectsPromise={projectsPromise} />
+          </Suspense>
+        }
+        blogSection={
+          <Suspense fallback={<SectionFallback label="Loading latest articles" />}>
+            <DeferredBlogSection postsPromise={postsPromise} />
+          </Suspense>
+        }
+      />
     </>
   )
 }

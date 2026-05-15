@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, CheckCircle2, Gauge, Layers3, MapPin, Rocket, Sparkles } from "lucide-react";
 import { InteractiveArticle, InteractiveDiv, Reveal } from "@/components/micro-interactions";
 import { TrackedLink } from "@/components/tracked-link";
@@ -5,8 +6,8 @@ import { siteConfig, skillGroups, workPattern } from "@/lib/site-data";
 import PillLabel from "./pill-label";
 
 type PortfolioHomeProps = {
-  projects: IProject[];
-  posts: IPost[];
+  projectSection: ReactNode;
+  blogSection: ReactNode;
 };
 
 function getProjectYear(project: IProject) {
@@ -22,166 +23,190 @@ function formatPostDate(date?: string | null) {
   }).format(new Date(date));
 }
 
-export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
-  const homeProjects = projects.slice(0, 4);
-  const homePosts = posts.slice(0, 3);
-
+export function PortfolioHome({ projectSection, blogSection }: PortfolioHomeProps) {
   return (
     <div>
-      <section className="relative overflow-hidden">
-        <div className="hero-grid section-shell grid items-center gap-12 py-10 md:grid-cols-[1.05fr_0.95fr] md:py-16">
-          <Reveal className="max-w-xl">
-            <p className="eyebrow text-xs text-brass">{siteConfig.tagline}</p>
-            <h1 className="mt-5 font-display text-[clamp(1rem,12vw,9rem)] lg:text-[clamp(.6rem,7.5vw,5rem)] leading-[0.9] text-balance">
-              {siteConfig.name}
-            </h1>
-            <p className="mt-4 text-lg font-semibold text-cream/90 md:text-xl">{siteConfig.role}</p>
-            <p className="mt-6 max-w-xl text-base leading-8 text-silver md:text-lg">{siteConfig.heroLead}</p>
-            <p className="mt-4 max-w-xl text-sm leading-7 text-silver/80 md:text-base">{siteConfig.heroBody}</p>
+      <HomeHero />
+      <HomeAbout />
+      <HomeSkills />
+      {projectSection}
+      <HomeProcess />
+      {blogSection}
+      <HomeContact />
+    </div>
+  );
+}
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <TrackedLink
-                href={siteConfig.contactHref}
-                tracking={{ type: "contact_click", location: "home_hero", label: "Contact me" }}
-                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-6 py-3 text-sm font-semibold text-[#0b0b0b]! transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
-              >
-                Contact me
-                <ArrowUpRight size={15} />
-              </TrackedLink>
-              <TrackedLink
-                href={siteConfig.whatsappHref}
-                tracking={{ type: "whatsapp_click", location: "home_hero", label: "Start a project" }}
-                className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-6 py-3 text-sm text-cream transition hover:border-brass hover:text-brass"
-              >
-                Start a project
-                <ArrowRight size={15} />
-              </TrackedLink>
+function HomeHero() {
+  return (
+    <section className="relative overflow-hidden">
+      <div className="hero-grid section-shell grid items-center gap-12 py-10 md:grid-cols-[1.05fr_0.95fr] md:py-16">
+        <div className="max-w-xl">
+          <p className="eyebrow text-xs text-brass">{siteConfig.tagline}</p>
+          <h1 className="mt-5 font-display text-[clamp(1rem,12vw,9rem)] lg:text-[clamp(.6rem,7.5vw,5rem)] leading-[0.9] text-balance">
+            {siteConfig.name}
+          </h1>
+          <p className="mt-4 text-lg font-semibold text-cream/90 md:text-xl">{siteConfig.role}</p>
+          <p className="mt-6 max-w-xl text-base leading-8 text-silver md:text-lg">{siteConfig.heroLead}</p>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-silver/80 md:text-base">{siteConfig.heroBody}</p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <TrackedLink
+              href={siteConfig.contactHref}
+              tracking={{ type: "contact_click", location: "home_hero", label: "Contact me" }}
+              className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-6 py-3 text-sm font-semibold text-[#0b0b0b]! transition hover:-translate-y-0.5 hover:bg-[#e2b267]"
+            >
+              Contact me
+              <ArrowUpRight size={15} />
+            </TrackedLink>
+            <TrackedLink
+              href={siteConfig.whatsappHref}
+              tracking={{ type: "whatsapp_click", location: "home_hero", label: "Start a project" }}
+              className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-6 py-3 text-sm text-cream transition hover:border-brass hover:text-brass"
+            >
+              Start a project
+              <ArrowRight size={15} />
+            </TrackedLink>
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-3 text-xs text-silver md:text-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-4 py-2">
+              <MapPin size={14} className="text-brass" />
+              {siteConfig.location}
             </div>
-
-            <div className="mt-8 flex flex-wrap gap-3 text-xs text-silver md:text-sm">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-4 py-2">
-                <MapPin size={14} className="text-brass" />
-                {siteConfig.location}
-              </div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-4 py-2">
-                <Sparkles size={14} className="text-azure" />
-                {siteConfig.availability}
-              </div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-4 py-2">
+              <Sparkles size={14} className="text-azure" />
+              {siteConfig.availability}
             </div>
-          </Reveal>
-
-          <Reveal delay={0.12} className="relative mx-auto w-full max-w-[34rem]">
-            <div className="hero-orb rounded-[2.5rem] p-5 md:p-7">
-              <div className="relative z-10 rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.04)] p-5 md:p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="eyebrow text-xs text-brass">Launch Support</p>
-                    <h2 className="mt-3 max-w-sm font-display text-2xl sm:text-4xl leading-none text-cream md:text-5xl">
-                      From idea to polished product.
-                    </h2>
-                  </div>
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brass/30 bg-brass/15 text-brass">
-                    <Rocket size={22} />
-                  </div>
-                </div>
-
-                <p className="mt-5 max-w-sm text-sm leading-7 text-silver">
-                  Clean websites and MVPs for founders who need to launch with confidence.
-                </p>
-
-                <div className="mt-6 grid gap-3 grid-cols-3">
-                  {[
-                    { label: "Design", icon: Layers3 },
-                    { label: "Build", icon: Gauge },
-                    { label: "Launch", icon: CheckCircle2 },
-                  ].map((item) => {
-                    const Icon = item.icon;
-
-                    return (
-                      <div key={item.label} className="rounded-[1.25rem] border border-white/10 bg-[rgba(255,255,255,0.035)] p-4">
-                        <Icon size={18} className="text-brass" />
-                        <p className="mt-3 text-sm font-semibold text-cream">{item.label}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <TrackedLink
-                    href={siteConfig.contactHref}
-                    tracking={{ type: "contact_click", location: "home_launch_card", label: "Start a build" }}
-                    className="micro-link micro-press inline-flex items-center gap-2 rounded-full bg-cream px-5 py-2.5 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5"
-                  >
-                    Start a build
-                    <ArrowUpRight size={14} />
-                  </TrackedLink>
-                  <TrackedLink
-                    href="/projects"
-                    tracking={{ type: "project_view", location: "home_launch_card", projectTitle: "Projects index" }}
-                    className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm text-cream transition hover:border-brass hover:text-brass"
-                  >
-                    See Work
-                    <ArrowRight size={14} />
-                  </TrackedLink>
-                </div>
-              </div>
-            </div>
-          </Reveal>
+          </div>
         </div>
-      </section>
 
-      <section id="about" className="section-shell py-8 md:py-14">
-        <Reveal className="grid gap-8 rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:grid-cols-[0.9fr_1.1fr] md:p-8">
-          <div>
-            <p className="eyebrow text-xs text-brass">About</p>
-            <h2 className="mt-4 max-w-sm font-display text-4xl text-balance md:text-5xl">
-              Building digital products with clarity, purpose, and reliable execution.
-            </h2>
-          </div>
-          <div className="space-y-5 text-sm leading-8 text-silver md:text-base">
-            <p>
-              I’m Edwin Promise, a full-stack developer focused on helping founders, startups, and small businesses turn ideas into polished websites, MVPs, and digital products.
-            </p>
-            <p>
-              I enjoy solving real business problems with clean interfaces, reliable backend systems, and practical product thinking. My work blends frontend development, backend architecture, SEO awareness, and launch-focused execution so businesses can move from idea to something people can actually use.
-            </p>
-            <PillLabel href="/about#about" text="Read the full about page" />
-          </div>
-        </Reveal>
-      </section>
+        <div className="relative mx-auto w-full max-w-[34rem]">
+          <div className="hero-orb rounded-[2.5rem] p-5 md:p-7">
+            <div className="relative z-10 rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.04)] p-5 md:p-6">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="eyebrow text-xs text-brass">Launch Support</p>
+                  <h2 className="mt-3 max-w-sm font-display text-2xl sm:text-4xl leading-none text-cream md:text-5xl">
+                    From idea to polished product.
+                  </h2>
+                </div>
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brass/30 bg-brass/15 text-brass">
+                  <Rocket size={22} />
+                </div>
+              </div>
 
-      <section id="skills" className="section-shell py-10 md:py-14">
-        <Reveal className="flex items-end justify-between gap-6">
-          <div>
-            <p className="eyebrow text-xs text-brass">Skills</p>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">Core skills for building practical digital products.</h2>
+              <p className="mt-5 max-w-sm text-sm leading-7 text-silver">
+                Clean websites and MVPs for founders who need to launch with confidence.
+              </p>
+
+              <div className="mt-6 grid gap-3 grid-cols-3">
+                {[
+                  { label: "Design", icon: Layers3 },
+                  { label: "Build", icon: Gauge },
+                  { label: "Launch", icon: CheckCircle2 },
+                ].map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <div key={item.label} className="rounded-[1.25rem] border border-white/10 bg-[rgba(255,255,255,0.035)] p-4">
+                      <Icon size={18} className="text-brass" />
+                      <p className="mt-3 text-sm font-semibold text-cream">{item.label}</p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <TrackedLink
+                  href={siteConfig.contactHref}
+                  tracking={{ type: "contact_click", location: "home_launch_card", label: "Start a build" }}
+                  className="micro-link micro-press inline-flex items-center gap-2 rounded-full bg-cream px-5 py-2.5 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5"
+                >
+                  Start a build
+                  <ArrowUpRight size={14} />
+                </TrackedLink>
+                <TrackedLink
+                  href="/projects"
+                  tracking={{ type: "project_view", location: "home_launch_card", projectTitle: "Projects index" }}
+                  className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm text-cream transition hover:border-brass hover:text-brass"
+                >
+                  See Work
+                  <ArrowRight size={14} />
+                </TrackedLink>
+              </div>
+            </div>
           </div>
-          <p className="hidden max-w-md text-sm leading-7 text-silver md:block">
-            I combine frontend development, backend architecture, SEO awareness, and product-focused execution to build websites, MVPs, and digital experiences that help businesses launch with confidence.
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomeAbout() {
+  return (
+    <section id="about" className="section-shell py-8 md:py-14">
+      <Reveal className="grid gap-8 rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:grid-cols-[0.9fr_1.1fr] md:p-8">
+        <div>
+          <p className="eyebrow text-xs text-brass">About</p>
+          <h2 className="mt-4 max-w-sm font-display text-4xl text-balance md:text-5xl">
+            Building digital products with clarity, purpose, and reliable execution.
+          </h2>
+        </div>
+        <div className="space-y-5 text-sm leading-8 text-silver md:text-base">
+          <p>
+            I’m Edwin Promise, a full-stack developer focused on helping founders, startups, and small businesses turn ideas into polished websites, MVPs, and digital products.
           </p>
-        </Reveal>
-
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {skillGroups.map((group, index) => (
-            <Reveal key={group.title} delay={index * 0.05}>
-              <InteractiveDiv className="micro-card section-card h-full rounded-[1.75rem] p-5">
-                <p className="text-sm font-semibold text-cream">{group.title}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-white/10 bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-xs text-silver"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </InteractiveDiv>
-            </Reveal>
-          ))}
+          <p>
+            I enjoy solving real business problems with clean interfaces, reliable backend systems, and practical product thinking. My work blends frontend development, backend architecture, SEO awareness, and launch-focused execution so businesses can move from idea to something people can actually use.
+          </p>
+          <PillLabel href="/about#about" text="Read the full about page" />
         </div>
-      </section>
+      </Reveal>
+    </section>
+  );
+}
 
+function HomeSkills() {
+  return (
+    <section id="skills" className="section-shell py-10 md:py-14">
+      <Reveal className="flex items-end justify-between gap-6">
+        <div>
+          <p className="eyebrow text-xs text-brass">Skills</p>
+          <h2 className="mt-4 font-display text-4xl md:text-5xl">Core skills for building practical digital products.</h2>
+        </div>
+        <p className="hidden max-w-md text-sm leading-7 text-silver md:block">
+          I combine frontend development, backend architecture, SEO awareness, and product-focused execution to build websites, MVPs, and digital experiences that help businesses launch with confidence.
+        </p>
+      </Reveal>
+
+      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {skillGroups.map((group, index) => (
+          <Reveal key={group.title} delay={index * 0.05}>
+            <InteractiveDiv className="micro-card section-card h-full rounded-[1.75rem] p-5">
+              <p className="text-sm font-semibold text-cream">{group.title}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-white/10 bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-xs text-silver"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </InteractiveDiv>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function HomeProjectSection({ projects }: { projects: IProject[] }) {
+  const homeProjects = projects.slice(0, 4);
+
+  return (
       <section id="portfolio" className="section-shell py-10 md:py-14">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -231,63 +256,46 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
           ))}
         </div>
       </section>
+  );
+}
 
-      <section id="process" className="section-shell py-10 md:py-14">
-        <Reveal className="flex items-end justify-between gap-6">
-          <div>
-            <p className="eyebrow text-xs text-brass">How I work</p>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">A clear process from idea to launch.</h2>
-          </div>
-        </Reveal>
-
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {workPattern.map((group, index) => (
-            <Reveal key={group.title} delay={index * 0.05}>
-              <InteractiveDiv className="micro-card section-card h-full rounded-[1.75rem] p-5">
-                <p className="text-base font-semibold text-cream">{group.title}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {group.description.map((desc) => (
-                    <span
-                      key={desc}
-                      className="text-sm text-silver"
-                    >
-                      {desc}
-                    </span>
-                  ))}
-                </div>
-              </InteractiveDiv>
-            </Reveal>
-          ))}
+function HomeProcess() {
+  return (
+    <section id="process" className="section-shell py-10 md:py-14">
+      <Reveal className="flex items-end justify-between gap-6">
+        <div>
+          <p className="eyebrow text-xs text-brass">How I work</p>
+          <h2 className="mt-4 font-display text-4xl md:text-5xl">A clear process from idea to launch.</h2>
         </div>
-      </section>
+      </Reveal>
 
-      {/* <section className="section-shell py-10 md:py-14">
-        <Reveal className="flex items-end justify-between gap-6">
-          <div>
-            <p className="eyebrow text-xs text-brass">What people say</p>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">Delivery with polish.</h2>
-          </div>
-          <div className="hidden items-center gap-2 text-silver md:flex">
-            <BriefcaseBusiness size={16} className="text-brass" />
-            Trust grows in the details.
-          </div>
-        </Reveal>
+      <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {workPattern.map((group, index) => (
+          <Reveal key={group.title} delay={index * 0.05}>
+            <InteractiveDiv className="micro-card section-card h-full rounded-[1.75rem] p-5">
+              <p className="text-base font-semibold text-cream">{group.title}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {group.description.map((desc) => (
+                  <span
+                    key={desc}
+                    className="text-sm text-silver"
+                  >
+                    {desc}
+                  </span>
+                ))}
+              </div>
+            </InteractiveDiv>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
 
-        <div className="mt-8 grid gap-4 lg:grid-cols-3">
-          {testimonials.map((item, index) => (
-            <Reveal key={item.author} delay={index * 0.05}>
-              <InteractiveBlockquote className="micro-card section-card h-full rounded-[1.75rem] p-6">
-                <p className="text-sm leading-8 text-silver md:text-base">“{item.quote}”</p>
-                <footer className="mt-6">
-                  <p className="font-semibold text-cream">{item.author}</p>
-                  <p className="text-sm text-silver">{item.role}</p>
-                </footer>
-              </InteractiveBlockquote>
-            </Reveal>
-          ))}
-        </div>
-      </section> */}
+export function HomeBlogSection({ posts }: { posts: IPost[] }) {
+  const homePosts = posts.slice(0, 3);
 
+  return (
       <section id="blog" className="section-shell py-10 md:py-14">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -325,7 +333,11 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
           ))}
         </div>
       </section>
+  );
+}
 
+function HomeContact() {
+  return (
       <section id="contact" className="section-shell pb-20 pt-10 md:pb-24 md:pt-14">
         <Reveal className="overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(214,161,74,0.045),rgba(255,255,255,0.032)_48%,rgba(102,169,255,0.035))] p-6 md:p-8">
           <p className="eyebrow text-xs text-brass">Start a project</p>
@@ -361,6 +373,5 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
           </div>
         </Reveal>
       </section>
-    </div>
   );
 }
