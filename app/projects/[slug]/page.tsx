@@ -133,7 +133,7 @@ export default async function ProjectDetailPage({
         </Link>
 
         <section className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.34fr]">
-          <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
+          <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] px-4 py-6 sm:px-6 md:p-8">
             <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
               {project.projectType ? (
                 <span className="eyebrow text-[0.68rem] text-brass">
@@ -155,7 +155,7 @@ export default async function ProjectDetailPage({
             ) : null}
           </div>
 
-          <aside className="section-card rounded-[2.5rem] p-6">
+          <aside className="section-card rounded-[2.5rem] px-4 py-6 sm:px-6">
             <p className="eyebrow text-xs text-brass">Project details</p>
 
             <div className="mt-6 space-y-4">
@@ -168,12 +168,12 @@ export default async function ProjectDetailPage({
                 </div>
               ) : null}
 
-              {project.projectLabel ? (
+              {/* {project.projectLabel ? (
                 <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
                   <p className="text-xs text-silver">Category</p>
                   <p className="mt-2 text-sm font-semibold text-cream">{project.projectLabel}</p>
                 </div>
-              ) : null}
+              ) : null} */}
 
               {project.stack?.length ? (
                 <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
@@ -208,7 +208,7 @@ export default async function ProjectDetailPage({
         ) : null}
 
         <section className="mt-12 grid gap-6 lg:grid-cols-[0.78fr_0.22fr]">
-          <article className="rounded-3xl border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 sm:rounded-[2.4rem] md:p-8">
+          <article className="rounded-3xl border border-white/10 bg-[rgba(255,255,255,0.03)] px-4 py-6 sm:px-6 sm:rounded-[2.4rem] md:p-8">
             {project.contribution?.length ? (
               <div className="space-y-6">
                 <PortableText value={project.contribution} components={portableTextComponents} />
@@ -220,7 +220,7 @@ export default async function ProjectDetailPage({
             )}
           </article>
 
-          <aside className="h-fit rounded-3xl border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 sm:rounded-[2.4rem] lg:sticky lg:top-24">
+          <aside className="h-fit rounded-3xl border border-white/10 bg-[rgba(255,255,255,0.03)] px-4 py-6 sm:px-6 sm:rounded-[2.4rem] lg:sticky lg:top-24">
             <p className="eyebrow text-xs text-brass">Project links</p>
 
             <div className="mt-5 space-y-4">
@@ -260,7 +260,7 @@ export default async function ProjectDetailPage({
               </TrackedLink>
             </div>
 
-            {project.seo?.relatedKeyphrases?.length ? (
+            {/* {project.seo?.relatedKeyphrases?.length ? (
               <div className="mt-6">
                 <p className="text-xs text-silver">Related keyphrases</p>
 
@@ -275,7 +275,7 @@ export default async function ProjectDetailPage({
                   ))}
                 </div>
               </div>
-            ) : null}
+            ) : null} */}
           </aside>
         </section>
       </div>

@@ -219,7 +219,7 @@ export function PortfolioHome({ projects, posts }: PortfolioHomeProps) {
                     <TrackedLink
                       href={`/projects/${project.slug}`}
                       tracking={{ type: "project_view", location: "home_project_card", projectTitle: project.title }}
-                      className="micro-link mt-5 inline-flex items-center gap-2 text-sm text-brass transition hover:text-cream"
+                      className="inline-flex mt-5 items-center gap-2 rounded-full border border-brass/40! bg-brass! px-4 py-2 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5 hover:bg-cream hover:text-charcoal! focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brass"
                     >
                       View project
                       <ArrowUpRight size={14} />
