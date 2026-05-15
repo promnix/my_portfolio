@@ -29,7 +29,7 @@ export const siteConfig = {
   name: "Edwin Promise",
   shortName: "PX",
   role: "Fast, modern websites for businesses that want to look credible and convert visitors.",
-  url: "http://localhost:3000",
+  url: "https://buildwithpromise.vercel.app",
   description:
     "Edwin Promise helps founders, startups, and small businesses turn ideas into modern websites, MVPs, and digital products that are polished, reliable, and ready to launch.",
   tagline: "Web • Product",
