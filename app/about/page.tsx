@@ -164,7 +164,7 @@ export default function AboutPage() {
         </section>
 
         <div className="mt-12">
-          <Link href="/projectss" className="inline-flex items-center gap-2 text-brass transition hover:text-cream">
+          <Link href="/projects" className="inline-flex items-center gap-2 text-brass transition hover:text-cream">
             Continue to projects
             <ArrowUpRight size={15} />
           </Link>

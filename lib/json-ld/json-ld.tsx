@@ -215,7 +215,7 @@ export const getAboutSchema = () => {
 
 //projects main page schema
 export const getProjectSchema = () => {
-    const pageUrl = `${siteConfig.url}/projectss`;
+    const pageUrl = `${siteConfig.url}/projects`;
 
     return {
         "@context": "https://schema.org",
