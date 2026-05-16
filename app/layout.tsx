@@ -99,7 +99,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <meta name="google-site-verification" content="ALYfobeq9aRlOzWaKtp7n_1eUs-HbMbr_AdviG5_Jm8" />
+        <meta name="google-site-verification" content="tD_RSST89LyPafzi4G1EUAKxHYwFTAfsnUMfTr3DubI" />
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
       <body className="min-h-full">
