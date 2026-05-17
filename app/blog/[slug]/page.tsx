@@ -5,9 +5,11 @@ import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/lib/image";
 import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
+import { BlogShare } from "@/components/blog-share";
 import portableTextComponents from "@/components/portableText";
 import { TrackedLink } from "@/components/tracked-link";
 import { generateBlogPostJsonLd } from "@/lib/json-ld/blog-json-ld";
+import { siteConfig } from "@/lib/site-data";
 import { allPostsQuery, postBySlugQuery } from "@/sanity/lib/queries";
 import { ArrowLeft, ArrowUpRight, Clock3, CalendarDays } from "lucide-react";
 
@@ -150,6 +152,7 @@ export default async function BlogPostPage({
   const displayedRelatedPosts =
     relatedPosts.length > 0 ? relatedPosts : fallbackRelatedPosts;
 
+  const articleUrl = `${siteConfig.url}/blog/${post.slug}`;
   const publishedDate = formatDate(post.publishedAt);
   const updatedDate = formatDate(post.updatedAt);
 
@@ -247,6 +250,12 @@ export default async function BlogPostPage({
                   </p>
                 </div>
               ) : null} */}
+
+              <BlogShare
+                title={post.title}
+                excerpt={post.excerpt}
+                url={articleUrl}
+              />
             </div>
           </aside>
         </section>
