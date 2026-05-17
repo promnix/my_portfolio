@@ -56,6 +56,12 @@ export const postBySlugQuery = defineQuery(`
       caption
     },
     seo,
+    faqs[]{
+      _key,
+      question,
+      answer,
+      "answerText": pt::text(answer)
+    },
     body[]{
       ...,
       markDefs[]{

@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const blogPostSchema = defineType({
   name: "blogPost",
@@ -288,6 +288,16 @@ export const blogPostSchema = defineType({
           ],
         },
       ],
+    }),
+
+    defineField({
+      name: "faqs",
+      title: "FAQs",
+      description:
+        "Optional questions and answers shown below the article and included in FAQ structured data.",
+      type: "array",
+      of: [defineArrayMember({ type: "blogFaq" })],
+      validation: (Rule) => Rule.max(8),
     }),
   ],
 });

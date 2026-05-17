@@ -275,6 +275,42 @@ export default async function BlogPostPage({
             <div className="space-y-6">
               <PortableText value={post.body} components={portableTextComponents} />
             </div>
+
+            {post.faqs?.length ? (
+              <section className="mt-12 border-t border-white/10 pt-10">
+                <p className="eyebrow text-xs text-brass">FAQs</p>
+                <h2 className="mt-4 font-display text-4xl text-cream md:text-5xl">
+                  Common questions
+                </h2>
+
+                <div className="mt-6 space-y-3">
+                  {post.faqs.map((faq) => (
+                    <details
+                      key={faq._key}
+                      className="group rounded-3xl border border-white/10 bg-white/[0.03] p-5"
+                    >
+                      <summary className="cursor-pointer list-none text-base font-semibold text-cream marker:hidden">
+                        <span className="flex items-start justify-between gap-4">
+                          {faq.question}
+                          <span className="text-brass transition group-open:rotate-45">
+                            +
+                          </span>
+                        </span>
+                      </summary>
+
+                      {faq.answer?.length ? (
+                        <div className="mt-4 space-y-4">
+                          <PortableText
+                            value={faq.answer}
+                            components={portableTextComponents}
+                          />
+                        </div>
+                      ) : null}
+                    </details>
+                  ))}
+                </div>
+              </section>
+            ) : null}
           </article>
 
           <aside className="h-fit rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 lg:sticky lg:top-24">

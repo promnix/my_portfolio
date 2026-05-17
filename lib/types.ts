@@ -20,6 +20,13 @@ declare global {
     ogImage?: SanityImage;
   }
 
+  interface BlogFaq {
+    _key: string;
+    question?: string;
+    answer?: PortableTextBlock[];
+    answerText?: string;
+  }
+
   interface IPost {
     _id: string;
     title: string;
@@ -33,6 +40,7 @@ declare global {
     topics: string[];
     coverImage?: SanityImage | null;
     seo?: SEO;
+    faqs?: BlogFaq[];
     body?: PortableTextBlock[];
   }
 

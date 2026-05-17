@@ -31,7 +31,7 @@ type CodeBlockValue = {
 };
 
 function linkClassName() {
-  return "font-medium text-brass underline decoration-brass/40 underline-offset-4 transition hover:text-cream hover:decoration-cream";
+  return "rounded-sm bg-brass/10 px-1 font-semibold text-brass underline! decoration-brass! decoration-2! underline-offset-4! transition! duration-200! hover:bg-brass! hover:text-charcoal! hover:decoration-brass! focus-visible:outline! focus-visible:outline-2! focus-visible:outline-offset-3 focus-visible:outline-brass";
 }
 
 function resolveInternalHref(value?: InternalLinkMark) {
