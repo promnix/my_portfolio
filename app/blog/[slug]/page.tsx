@@ -239,14 +239,14 @@ export default async function BlogPostPage({
                 </div>
               ) : null}
 
-              {post.seo?.focusKeyphrase ? (
+              {/* {post.seo?.focusKeyphrase ? (
                 <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
                   <p className="text-xs text-silver">Focus keyphrase</p>
                   <p className="mt-2 text-sm font-semibold text-cream">
                     {post.seo.focusKeyphrase}
                   </p>
                 </div>
-              ) : null}
+              ) : null} */}
             </div>
           </aside>
         </section>
@@ -285,18 +285,13 @@ export default async function BlogPostPage({
 
                 <div className="mt-6 space-y-3">
                   {post.faqs.map((faq) => (
-                    <details
+                    <section
                       key={faq._key}
-                      className="group rounded-3xl border border-white/10 bg-white/[0.03] p-5"
+                      className="rounded-3xl border border-white/10 bg-white/[0.03] p-5"
                     >
-                      <summary className="cursor-pointer list-none text-base font-semibold text-cream marker:hidden">
-                        <span className="flex items-start justify-between gap-4">
-                          {faq.question}
-                          <span className="text-brass transition group-open:rotate-45">
-                            +
-                          </span>
-                        </span>
-                      </summary>
+                      <h3 className="text-base font-semibold leading-7 text-cream">
+                        {faq.question}
+                      </h3>
 
                       {faq.answer?.length ? (
                         <div className="mt-4 space-y-4">
@@ -306,7 +301,7 @@ export default async function BlogPostPage({
                           />
                         </div>
                       ) : null}
-                    </details>
+                    </section>
                   ))}
                 </div>
               </section>
@@ -320,7 +315,7 @@ export default async function BlogPostPage({
               {post.excerpt}
             </p>
 
-            {post.seo?.relatedKeyphrases?.length ? (
+            {/* {post.seo?.relatedKeyphrases?.length ? (
               <div className="mt-6">
                 <p className="text-xs text-silver">Related keyphrases</p>
 
@@ -335,7 +330,7 @@ export default async function BlogPostPage({
                   ))}
                 </div>
               </div>
-            ) : null}
+            ) : null} */}
           </aside>
         </section>
 

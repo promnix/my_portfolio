@@ -35,6 +35,7 @@ export const blogPostSchema = defineType({
           { title: "Product Thinking", value: "Product Thinking" },
           { title: "Backend Notes", value: "Backend Notes" },
           { title: "WordPress & CMS", value: "WordPress & CMS" },
+          { title: "Business Websites", value: "Business Websites" },
         ],
       },
       validation: (Rule) => Rule.required(),
