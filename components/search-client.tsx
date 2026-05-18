@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { useDeferredValue, useOptimistic, useTransition } from "react";
+import { useDeferredValue, useMemo, useState, useTransition } from "react";
 
 type SearchEntry = {
   title: string;
@@ -20,16 +20,21 @@ export function SearchClient({
   initialQuery: string;
 }) {
   const router = useRouter();
-  const [query, setOptimisticQuery] = useOptimistic(initialQuery);
+  const [query, setQuery] = useState(initialQuery);
   const deferredQuery = useDeferredValue(query);
   const [isPending, startTransition] = useTransition();
 
   const needle = deferredQuery.trim().toLowerCase();
-  const results = needle
-    ? entries.filter((entry) =>
-        `${entry.title} ${entry.category} ${entry.body}`.toLowerCase().includes(needle),
-      )
-    : entries;
+  const results = useMemo(() => {
+    if (!needle) return entries;
+
+    const terms = needle.split(/\s+/).filter(Boolean);
+
+    return entries.filter((entry) => {
+      const searchableText = `${entry.title} ${entry.category} ${entry.body}`.toLowerCase();
+      return terms.every((term) => searchableText.includes(term));
+    });
+  }, [entries, needle]);
 
   return (
     <div className="section-shell py-10 md:py-14">
@@ -49,13 +54,14 @@ export function SearchClient({
             onChange={(event) => {
               const nextQuery = event.target.value;
 
+              setQuery(nextQuery);
+
               const params = new URLSearchParams();
               if (nextQuery.trim()) {
                 params.set("q", nextQuery);
               }
 
               startTransition(() => {
-                setOptimisticQuery(nextQuery);
                 router.replace(params.size ? `/search?${params.toString()}` : "/search", {
                   scroll: false,
                 });
