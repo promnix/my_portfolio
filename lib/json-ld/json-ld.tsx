@@ -1,17 +1,18 @@
-import { siteConfig } from "../site-data"
+import { siteConfig, socials } from "../site-data"
 
 //Home page schema
 export const getHomeschema = () => {
+    const siteUrl = siteConfig.url.replace(/\/$/, "")
 
     return {
         "@context": "https://schema.org",
         "@graph": [
             {
                 "@type": "Person",
-                "@id": "https://your-domain.com/#person",
+                "@id": `${siteUrl}/#person`,
                 name: "Edwin Promise",
                 alternateName: "Promise",
-                url: "https://your-domain.com",
+                url: siteUrl,
                 jobTitle: "Web Developer",
                 description:
                     "Edwin Promise designs and builds fast, responsive, SEO-ready websites and MVPs for businesses, founders, and startups.",
@@ -31,35 +32,31 @@ export const getHomeschema = () => {
                     "MVP Development",
                     "Business Websites",
                 ],
-                sameAs: [
-                    "https://github.com/Promzy004",
-                    "https://www.linkedin.com/in/your-linkedin",
-                    "https://x.com/your-handle"
-                ],
+                sameAs: socials.map((social) => social.href),
             },
             {
                 "@type": "WebSite",
-                "@id": "https://your-domain.com/#website",
-                url: "https://your-domain.com",
+                "@id": `${siteUrl}/#website`,
+                url: siteUrl,
                 name: "Edwin Promise",
                 alternateName: "Promise Portfolio",
                 description:
                     "Portfolio of Edwin Promise, a web developer building fast, modern websites and MVPs for businesses.",
                 publisher: {
-                    "@id": "https://your-domain.com/#person",
+                    "@id": `${siteUrl}/#person`,
                 },
                 inLanguage: "en",
             },
             {
                 "@type": "ProfessionalService",
-                "@id": "https://your-domain.com/#service",
+                "@id": `${siteUrl}/#service`,
                 name: "Edwin Promise Web Development",
-                url: "https://your-domain.com",
-                image: "https://your-domain.com/og-image.jpg",
+                url: siteUrl,
+                image: `${siteUrl}/images/homepage.jpg`,
                 description:
                     "Fast, responsive, SEO-ready website design and development services for businesses, founders, and startups.",
                 founder: {
-                    "@id": "https://your-domain.com/#person",
+                    "@id": `${siteUrl}/#person`,
                 },
                 areaServed: [
                     {

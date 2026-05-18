@@ -19,7 +19,7 @@ type SitemapProject = {
 };
 
 const sitemapBlogPostsQuery = defineQuery(`
-    *[_type == "post" && defined(slug.current) && seo.noIndex != true] {
+    *[_type == "blogPost" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)] {
         "slug": slug.current,
         publishedAt,
         updatedAt,
@@ -28,7 +28,7 @@ const sitemapBlogPostsQuery = defineQuery(`
 `);
 
 const sitemapProjectsQuery = defineQuery(`
-    *[_type == "project" && defined(slug.current) && seo.noIndex != true] {
+    *[_type == "project" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)] {
         "slug": slug.current,
         _createdAt,
         _updatedAt
@@ -77,12 +77,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: today,
             changeFrequency: "weekly",
             priority: 0.8,
-        },
-        {
-            url: `${siteUrl}/contact`,
-            lastModified: today,
-            changeFrequency: "monthly",
-            priority: 0.7,
         },
     ];
 
