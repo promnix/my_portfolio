@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Edwin Promise" }],
   creator: "Edwin Promise",
   publisher: "Edwin Promise",
-  metadataBase: new URL("https://edwin-promise.vercel.app"),
+  metadataBase: new URL("https://buildwithpromise.vercel.app"),
   alternates: {
     canonical: "/about",
   },

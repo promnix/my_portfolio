@@ -93,14 +93,14 @@ export const getAboutSchema = () => {
         "@graph": [
             {
                 "@type": "Person",
-                "@id": "https://edwin-promise.vercel.app/#person",
+                "@id": "https://buildwithpromise.vercel.app/#person",
                 name: "Edwin Promise",
                 alternateName: "Promise",
-                url: "https://edwin-promise.vercel.app",
+                url: "https://buildwithpromise.vercel.app",
                 jobTitle: "Full-Stack Developer",
                 description:
                     "Edwin Promise is a full-stack developer focused on helping founders, startups, and small businesses turn ideas into polished websites, MVPs, and digital products.",
-                image: "https://edwin-promise.vercel.app/og-image.jpg",
+                image: "https://buildwithpromise.vercel.app/og-image.jpg",
                 address: {
                     "@type": "PostalAddress",
                     addressLocality: "Lagos",
@@ -161,50 +161,50 @@ export const getAboutSchema = () => {
             },
             {
                 "@type": "WebSite",
-                "@id": "https://edwin-promise.vercel.app/#website",
-                url: "https://edwin-promise.vercel.app",
+                "@id": "https://buildwithpromise.vercel.app/#website",
+                url: "https://buildwithpromise.vercel.app",
                 name: "Edwin Promise",
                 description:
                     "Portfolio website of Edwin Promise, a full-stack developer building websites, MVPs, and digital products with clarity and purpose.",
                 publisher: {
-                    "@id": "https://edwin-promise.vercel.app/#person",
+                    "@id": "https://buildwithpromise.vercel.app/#person",
                 },
                 inLanguage: "en",
             },
             {
                 "@type": "AboutPage",
-                "@id": "https://edwin-promise.vercel.app/about/#aboutpage",
-                url: "https://edwin-promise.vercel.app/about",
+                "@id": "https://buildwithpromise.vercel.app/about/#aboutpage",
+                url: "https://buildwithpromise.vercel.app/about",
                 name: "About Edwin Promise",
                 headline: "Building digital products with clarity, purpose, and reliable execution.",
                 description:
                     "Learn more about Edwin Promise, a full-stack developer helping founders, startups, and small businesses build polished websites, MVPs, and digital products.",
                 isPartOf: {
-                    "@id": "https://edwin-promise.vercel.app/#website",
+                    "@id": "https://buildwithpromise.vercel.app/#website",
                 },
                 about: {
-                    "@id": "https://edwin-promise.vercel.app/#person",
+                    "@id": "https://buildwithpromise.vercel.app/#person",
                 },
                 mainEntity: {
-                    "@id": "https://edwin-promise.vercel.app/#person",
+                    "@id": "https://buildwithpromise.vercel.app/#person",
                 },
                 inLanguage: "en",
             },
             {
                 "@type": "BreadcrumbList",
-                "@id": "https://edwin-promise.vercel.app/about/#breadcrumb",
+                "@id": "https://buildwithpromise.vercel.app/about/#breadcrumb",
                 itemListElement: [
                     {
                         "@type": "ListItem",
                         position: 1,
                         name: "Home",
-                        item: "https://edwin-promise.vercel.app",
+                        item: "https://buildwithpromise.vercel.app",
                     },
                     {
                         "@type": "ListItem",
                         position: 2,
                         name: "About",
-                        item: "https://edwin-promise.vercel.app/about",
+                        item: "https://buildwithpromise.vercel.app/about",
                     },
                 ],
             },
