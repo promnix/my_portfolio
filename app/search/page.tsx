@@ -47,7 +47,6 @@ export default async function SearchPage({
 
   return (
     <SearchClient
-      key={params.q ?? ""}
       entries={[...staticEntries, ...sanityEntries]}
       initialQuery={params.q ?? ""}
     />

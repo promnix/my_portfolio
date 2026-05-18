@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { useDeferredValue, useMemo, useState, useTransition } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 
 type SearchEntry = {
   title: string;
@@ -19,10 +18,8 @@ export function SearchClient({
   entries: SearchEntry[];
   initialQuery: string;
 }) {
-  const router = useRouter();
   const [query, setQuery] = useState(initialQuery);
   const deferredQuery = useDeferredValue(query);
-  const [isPending, startTransition] = useTransition();
 
   const needle = deferredQuery.trim().toLowerCase();
   const results = useMemo(() => {
@@ -61,18 +58,14 @@ export function SearchClient({
                 params.set("q", nextQuery);
               }
 
-              startTransition(() => {
-                router.replace(params.size ? `/search?${params.toString()}` : "/search", {
-                  scroll: false,
-                });
-              });
+              window.history.replaceState(null, "", params.size ? `/search?${params.toString()}` : "/search");
             }}
             placeholder="Search projects, skills, and pages"
             className="w-full bg-transparent text-sm text-cream outline-none placeholder:text-silver/70 md:text-base"
           />
         </label>
         <div className="mt-3 text-xs text-silver">
-          {isPending ? "Updating query..." : `${results.length} result${results.length === 1 ? "" : "s"}`}
+          {results.length} result{results.length === 1 ? "" : "s"}
         </div>
       </div>
 
