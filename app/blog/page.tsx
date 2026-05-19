@@ -176,7 +176,7 @@ export default async function BlogPage() {
                 </TrackedLink>
               </div>
 
-              <div className="border-t border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8 lg:border-l lg:border-t-0">
+              <div className="border-t hidden lg:block border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8 lg:border-l lg:border-t-0">
                 <p className="text-xs text-silver">Highlighted line</p>
                 <blockquote className="mt-5 font-display text-3xl leading-tight text-cream md:text-4xl">
                   &ldquo;{featuredPost.excerpt}&rdquo;
@@ -202,10 +202,10 @@ export default async function BlogPage() {
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
             <p className="eyebrow text-xs text-brass">Recent writing</p>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">A clean archive with strong summaries.</h2>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">Practical notes on websites, SEO, and digital products.</h2>
           </div>
           <p className="max-w-lg text-sm leading-7 text-silver">
-            These cards are structured to read well even before you add images, tags, or full CMS-backed post pages.
+            Clear, useful articles from my work building websites, improving performance, and helping businesses turn online presence into real trust and action.
           </p>
         </div>
 
@@ -243,9 +243,9 @@ export default async function BlogPage() {
                 </div>
               ) : null}
 
-              <p className="mt-6 border-l border-white/10 pl-4 text-sm leading-7 text-cream/85">
+              {/* <p className="mt-6 border-l border-white/10 pl-4 text-sm leading-7 text-cream/85">
                 &ldquo;{post.excerpt}&rdquo;
-              </p>
+              </p> */}
             </TrackedLink>
           ))}
         </div>

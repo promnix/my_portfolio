@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { DeferredGoogleAnalytics } from "@/components/deferred-google-analytics";
+import { ScrollToTopOnRouteChange } from "@/components/scroll-to-top-on-route-change";
 import { SiteShell } from "@/components/site-shell";
 import { siteConfig } from "@/lib/site-data";
 import "./globals.css";
@@ -103,6 +104,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
       <body className="min-h-full">
+        <ScrollToTopOnRouteChange />
         <div id="app-shell" className="app-shell">
           <SiteShell>{children}</SiteShell>
         </div>

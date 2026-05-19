@@ -155,7 +155,6 @@ export default async function BlogPostPage({
 
   const articleUrl = `${siteConfig.url}/blog/${post.slug}`;
   const publishedDate = formatDate(post.publishedAt);
-  const updatedDate = formatDate(post.updatedAt);
   const authorSocials = socials.filter((social) =>
     ["LinkedIn", "GitHub", "X"].includes(social.label),
   );
