@@ -10,7 +10,7 @@ type BlogShareProps = {
 };
 
 const shareLinkClassName =
-  "micro-press inline-flex h-10 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 text-xs font-medium text-silver transition hover:border-brass hover:text-brass";
+  "micro-press inline-flex min-h-11 flex-1 basis-[8.5rem] items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.045] px-4 text-xs font-medium text-silver transition hover:-translate-y-0.5 hover:border-brass hover:bg-white/[0.07] hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass";
 
 export function BlogShare({ title, excerpt, url }: BlogShareProps) {
   const [copied, setCopied] = useState(false);
@@ -60,14 +60,14 @@ export function BlogShare({ title, excerpt, url }: BlogShareProps) {
   };
 
   return (
-    <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
+    <div className="rounded-[1.35rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4 sm:p-5">
       <p className="text-xs text-silver">Share article</p>
 
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-3 flex flex-wrap gap-2.5">
         <button
           type="button"
           onClick={shareArticle}
-          className="micro-press inline-flex h-10 items-center justify-center gap-2 rounded-full border border-brass bg-brass px-4 text-xs font-semibold text-[#0b0b0b] transition hover:bg-[#e2b267]"
+          className="micro-press inline-flex min-h-11 flex-[1.15] basis-[8.5rem] items-center justify-center gap-2 rounded-full border border-[#f0c778] bg-[#e0ad57] px-4 text-xs font-bold text-[#090807] shadow-[0_12px_28px_rgba(214,161,74,0.18)] transition hover:-translate-y-0.5 hover:bg-[#efc36f] hover:shadow-[0_16px_34px_rgba(214,161,74,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
         >
           <Share2 size={14} />
           Share

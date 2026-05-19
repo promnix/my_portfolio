@@ -88,15 +88,15 @@ function InternalLink({
 const portableTextComponents = {
     block: {
         normal: ({ children }) => (
-            <p className="text-sm leading-8 text-silver md:text-base">{children}</p>
+            <p className="text-base leading-6 md:leading-8 text-silver md:text-lg">{children}</p>
         ),
         h2: ({ children }) => (
-            <h2 className="pt-4 font-display text-4xl text-cream md:text-5xl">
+            <h2 className="pt-4 font-display text-3xl text-cream md:text-4xl">
                 {children}
             </h2>
         ),
         h3: ({ children }) => (
-            <h3 className="pt-2 font-display text-3xl text-cream">{children}</h3>
+            <h3 className="pt-2 font-display text-[1.4rem] md:text-2xl text-cream">{children}</h3>
         ),
         blockquote: ({ children }) => (
             <blockquote className="border-l-2 border-brass pl-5 text-lg leading-8 text-cream">

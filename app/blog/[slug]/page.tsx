@@ -5,13 +5,14 @@ import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/lib/image";
 import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
+import { BlogReadingProgress } from "@/components/blog-reading-progress";
 import { BlogShare } from "@/components/blog-share";
 import portableTextComponents from "@/components/portableText";
 import { TrackedLink } from "@/components/tracked-link";
 import { generateBlogPostJsonLd } from "@/lib/json-ld/blog-json-ld";
-import { siteConfig } from "@/lib/site-data";
+import { siteConfig, socials } from "@/lib/site-data";
 import { allPostsQuery, postBySlugQuery } from "@/sanity/lib/queries";
-import { ArrowLeft, ArrowUpRight, Clock3, CalendarDays } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Clock3, CalendarDays, UserRound } from "lucide-react";
 
 
 export const revalidate = 60;
@@ -155,9 +156,14 @@ export default async function BlogPostPage({
   const articleUrl = `${siteConfig.url}/blog/${post.slug}`;
   const publishedDate = formatDate(post.publishedAt);
   const updatedDate = formatDate(post.updatedAt);
+  const authorSocials = socials.filter((social) =>
+    ["LinkedIn", "GitHub", "X"].includes(social.label),
+  );
 
   return (
     <>
+      <BlogReadingProgress />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -181,6 +187,9 @@ export default async function BlogPostPage({
                 {post.category}
               </span>
 
+              <Link href="/about" className="transition hover:text-brass">
+                By {siteConfig.name}
+              </Link>
               {publishedDate ? <span>{publishedDate}</span> : null}
               {post.readingTime ? <span>{post.readingTime} min read</span> : null}
             </div>
@@ -211,36 +220,56 @@ export default async function BlogPostPage({
             <p className="eyebrow text-xs text-brass">Article notes</p>
 
             <div className="mt-6 space-y-4">
-              {post.readingTime ? (
-                <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
-                  <p className="text-xs text-silver">Reading time</p>
-                  <div className="mt-2 flex items-center gap-2 text-cream">
-                    <Clock3 size={15} className="text-brass" />
-                    <span className="text-sm font-semibold">
-                      {post.readingTime} min read
-                    </span>
-                  </div>
-                </div>
-              ) : null}
+              <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
+                <p className="text-xs text-silver">Author</p>
+                <Link
+                  href="/about"
+                  className="micro-press mt-2 inline-flex min-h-11 items-center gap-2 rounded-full text-sm font-semibold text-cream transition hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
+                >
+                  <UserRound size={15} className="text-brass" />
+                  {siteConfig.name}
+                </Link>
 
-              {publishedDate ? (
-                <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
-                  <p className="text-xs text-silver">Published</p>
-                  <div className="mt-2 flex items-center gap-2 text-cream">
-                    <CalendarDays size={15} className="text-brass" />
-                    <span className="text-sm font-semibold">{publishedDate}</span>
+                {authorSocials.length ? (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {authorSocials.map((social) => (
+                      <a
+                        key={social.href}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="micro-press inline-flex min-h-11 flex-1 basis-[4.75rem] items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-3 text-xs font-medium text-silver transition hover:-translate-y-0.5 hover:border-brass hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
+                      >
+                        {social.label}
+                      </a>
+                    ))}
                   </div>
-                </div>
-              ) : null}
+                ) : null}
+              </div>
 
-              {updatedDate ? (
-                <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
-                  <p className="text-xs text-silver">Updated</p>
-                  <p className="mt-2 text-sm font-semibold text-cream">
-                    {updatedDate}
-                  </p>
-                </div>
-              ) : null}
+              <div className="flex justify-between md:flex-col gap-3">
+                {post.readingTime ? (
+                  <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
+                    <p className="text-xs text-silver">Reading time</p>
+                    <div className="mt-2 flex items-center gap-2 text-cream">
+                      <Clock3 size={15} className="text-brass" />
+                      <span className="text-sm font-semibold">
+                        {post.readingTime} min read
+                      </span>
+                    </div>
+                  </div>
+                ) : null}
+
+                {publishedDate ? (
+                  <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
+                    <p className="text-xs text-silver">Published</p>
+                    <div className="mt-2 flex items-center gap-2 text-cream">
+                      <CalendarDays size={15} className="text-brass" />
+                      <span className="text-sm font-semibold">{publishedDate}</span>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
 
               {/* {post.seo?.focusKeyphrase ? (
                 <div className="rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-4">
@@ -251,17 +280,12 @@ export default async function BlogPostPage({
                 </div>
               ) : null} */}
 
-              <BlogShare
-                title={post.title}
-                excerpt={post.excerpt}
-                url={articleUrl}
-              />
             </div>
           </aside>
         </section>
 
         {post.coverImage?.asset ? (
-          <figure className="mt-8 overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.03]">
+          <figure className="mt-8 overflow-hidden rounded-3xl md:rounded-[2.5rem] border border-white/10 bg-white/[0.03]">
             <Image
               src={urlFor(post.coverImage).width(1600).height(850).url()}
               alt={post.coverImage.alt || post.title}
@@ -279,7 +303,7 @@ export default async function BlogPostPage({
           </figure>
         ) : null}
 
-        <section className="mt-12 grid gap-6 lg:grid-cols-[0.78fr_0.22fr]">
+        <section className="mt-7 grid gap-6 md:mt-9 lg:grid-cols-[0.78fr_0.22fr]">
           <article className="rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
             <div className="space-y-6">
               <PortableText value={post.body} components={portableTextComponents} />
@@ -324,6 +348,14 @@ export default async function BlogPostPage({
               {post.excerpt}
             </p>
 
+            <div className="mt-6">
+              <BlogShare
+                title={post.title}
+                excerpt={post.excerpt}
+                url={articleUrl}
+              />
+            </div>
+
             {/* {post.seo?.relatedKeyphrases?.length ? (
               <div className="mt-6">
                 <p className="text-xs text-silver">Related keyphrases</p>
@@ -355,7 +387,7 @@ export default async function BlogPostPage({
 
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 text-sm text-silver transition hover:text-brass"
+                className="inline-flex items-center gap-2 text-sm text-silver! transition! hover:text-brass!"
               >
                 Browse all articles
                 <ArrowUpRight size={15} />
