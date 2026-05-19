@@ -8,6 +8,7 @@ import { PortableText } from "@portabletext/react";
 import { BlogReadingProgress } from "@/components/blog-reading-progress";
 import { BlogShare } from "@/components/blog-share";
 import portableTextComponents from "@/components/portableText";
+import { SocialIcon } from "@/components/social-icon";
 import { TrackedLink } from "@/components/tracked-link";
 import { generateBlogPostJsonLd } from "@/lib/json-ld/blog-json-ld";
 import { siteConfig, socials } from "@/lib/site-data";
@@ -249,9 +250,10 @@ export default async function BlogPostPage({
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="micro-press inline-flex min-h-11 flex-1 basis-[4.75rem] items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-3 text-xs font-medium text-silver transition hover:-translate-y-0.5 hover:border-brass hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
+                        aria-label={social.label}
+                        className="micro-press inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-silver transition hover:-translate-y-0.5 hover:border-brass hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
                       >
-                        {social.label}
+                        <SocialIcon label={social.label} />
                       </a>
                     ))}
                   </div>

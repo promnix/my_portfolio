@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import type { Easing } from "motion/react";
 import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
+import { SocialIcon } from "@/components/social-icon";
 import { trackContactClick, trackExternalLinkClick, trackWhatsAppClick } from "@/lib/analytics";
 import { navItems, siteConfig, socials } from "@/lib/site-data";
 
@@ -315,11 +316,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={social.label}
                   onClick={() => trackExternalLinkClick(social.label, social.href, "site_footer_socials")}
-                  className="micro-link micro-press inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel px-4 py-2 text-sm text-silver transition hover:-translate-y-0.5 hover:border-brass hover:text-cream"
+                  className="micro-press inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-panel text-silver transition hover:-translate-y-0.5 hover:border-brass hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
                 >
-                  {social.label}
-                  <ArrowUpRight size={14} />
+                  <SocialIcon label={social.label} />
                 </a>
               ))}
             </div>

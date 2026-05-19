@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Copy, Link2, MessageCircle, Send, Share2 } from "lucide-react";
+import { Check, Copy, Share2 } from "lucide-react";
+import { SocialIcon } from "@/components/social-icon";
 
 type BlogShareProps = {
   title: string;
@@ -10,7 +11,7 @@ type BlogShareProps = {
 };
 
 const shareLinkClassName =
-  "micro-press inline-flex min-h-11 flex-1 basis-[8.5rem] items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.045] px-4 text-xs font-medium text-silver transition hover:-translate-y-0.5 hover:border-brass hover:bg-white/[0.07] hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass";
+  "micro-press inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.045] text-silver transition hover:-translate-y-0.5 hover:border-brass hover:bg-white/[0.07] hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass";
 
 export function BlogShare({ title, excerpt, url }: BlogShareProps) {
   const [copied, setCopied] = useState(false);
@@ -67,45 +68,49 @@ export function BlogShare({ title, excerpt, url }: BlogShareProps) {
         <button
           type="button"
           onClick={shareArticle}
-          className="micro-press inline-flex min-h-11 flex-[1.15] basis-[8.5rem] items-center justify-center gap-2 rounded-full border border-[#f0c778] bg-[#e0ad57] px-4 text-xs font-bold text-[#090807] transition hover:-translate-y-0.5 hover:bg-[#efc36f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
+          aria-label="Share article"
+          className="micro-press inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#f0c778] bg-[#e0ad57] text-[#090807] transition hover:-translate-y-0.5 hover:bg-[#efc36f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
         >
-          <Share2 size={14} />
-          Share
+          <Share2 size={18} />
         </button>
 
-        <button type="button" onClick={copyLink} className={shareLinkClassName}>
-          <Copy size={14} />
-          {copied ? "Copied" : "Copy"}
+        <button
+          type="button"
+          onClick={copyLink}
+          aria-label={copied ? "Copied article link" : "Copy article link"}
+          className={shareLinkClassName}
+        >
+          {copied ? <Check size={18} /> : <Copy size={18} />}
         </button>
 
         <a
           href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share on LinkedIn"
           className={shareLinkClassName}
         >
-          <Link2 size={14} />
-          LinkedIn
+          <SocialIcon label="LinkedIn" />
         </a>
 
         <a
           href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share on X"
           className={shareLinkClassName}
         >
-          <Send size={14} />
-          X
+          <SocialIcon label="X" />
         </a>
 
         <a
           href={`https://wa.me/?text=${encodedText}%20${encodedUrl}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share on WhatsApp"
           className={shareLinkClassName}
         >
-          <MessageCircle size={14} />
-          WhatsApp
+          <SocialIcon label="WhatsApp" />
         </a>
       </div>
     </div>
