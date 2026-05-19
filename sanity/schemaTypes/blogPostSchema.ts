@@ -294,6 +294,82 @@ export const blogPostSchema = defineType({
     }),
 
     defineField({
+      name: "callToAction",
+      title: "Call to Action",
+      description:
+        "Optional CTA shown after the article body. Leave empty when this post should not show a CTA.",
+      type: "object",
+      fields: [
+        defineField({
+          name: "eyebrow",
+          title: "Eyebrow",
+          type: "string",
+          initialValue: "Next step",
+          validation: (Rule) => Rule.max(40),
+        }),
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+          validation: (Rule) => Rule.max(90),
+        }),
+        defineField({
+          name: "description",
+          title: "Description",
+          type: "text",
+          rows: 3,
+          validation: (Rule) => Rule.max(220),
+        }),
+        defineField({
+          name: "label",
+          title: "Button Label",
+          type: "string",
+          validation: (Rule) => Rule.max(40),
+        }),
+        defineField({
+          name: "href",
+          title: "Button Link",
+          type: "url",
+          description: "Use a relative path like /contact or a full URL.",
+          validation: (Rule) =>
+            Rule.uri({
+              allowRelative: true,
+              scheme: ["http", "https", "mailto", "tel"],
+            }),
+        }),
+        defineField({
+          name: "openInNewTab",
+          title: "Open in new tab",
+          type: "boolean",
+          initialValue: false,
+        }),
+      ],
+      validation: (Rule) =>
+        Rule.custom((value) => {
+          if (!value) {
+            return true;
+          }
+
+          const cta = value as {
+            title?: string;
+            label?: string;
+            href?: string;
+          };
+          const hasAnyValue = Boolean(cta.title || cta.label || cta.href);
+
+          if (!hasAnyValue) {
+            return true;
+          }
+
+          if (!cta.title || !cta.label || !cta.href) {
+            return "Add a title, button label, and button link, or leave the CTA empty.";
+          }
+
+          return true;
+        }),
+    }),
+
+    defineField({
       name: "faqs",
       title: "FAQs",
       description:

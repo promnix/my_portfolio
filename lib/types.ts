@@ -27,6 +27,15 @@ declare global {
     answerText?: string;
   }
 
+  interface BlogCallToAction {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    label?: string;
+    href?: string;
+    openInNewTab?: boolean;
+  }
+
   interface IPost {
     _id: string;
     title: string;
@@ -40,6 +49,7 @@ declare global {
     topics: string[];
     coverImage?: SanityImage | null;
     seo?: SEO;
+    callToAction?: BlogCallToAction | null;
     faqs?: BlogFaq[];
     body?: PortableTextBlock[];
   }

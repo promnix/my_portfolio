@@ -56,6 +56,14 @@ export const postBySlugQuery = defineQuery(`
       caption
     },
     seo,
+    callToAction {
+      eyebrow,
+      title,
+      description,
+      label,
+      href,
+      openInNewTab
+    },
     faqs[]{
       _key,
       question,

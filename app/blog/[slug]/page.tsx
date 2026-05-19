@@ -153,6 +153,18 @@ export default async function BlogPostPage({
   const displayedRelatedPosts =
     relatedPosts.length > 0 ? relatedPosts : fallbackRelatedPosts;
 
+  const callToAction = post.callToAction;
+  const hasCallToAction = Boolean(
+    callToAction?.title && callToAction.label && callToAction.href,
+  );
+  const callToActionHref = callToAction?.href ?? "";
+  const shouldOpenCallToActionInNewTab = Boolean(
+    callToAction?.openInNewTab &&
+      callToActionHref &&
+      !callToActionHref.startsWith("/") &&
+      !callToActionHref.startsWith("#"),
+  );
+
   const articleUrl = `${siteConfig.url}/blog/${post.slug}`;
   const publishedDate = formatDate(post.publishedAt);
   const authorSocials = socials.filter((social) =>
@@ -373,6 +385,46 @@ export default async function BlogPostPage({
             ) : null} */}
           </aside>
         </section>
+
+        {hasCallToAction ? (
+          <section className="mt-12 overflow-hidden rounded-3xl border border-brass/35 bg-[rgba(255,255,255,0.03)] p-6 text-center sm:rounded-[2.4rem] md:p-8 lg:p-10">
+            <div className="mx-auto flex max-w-4xl flex-col items-center gap-6">
+              <div className="flex flex-col items-center gap-2">
+                {callToAction?.eyebrow ? (
+                  <p className="eyebrow text-xs text-brass mb-3">
+                    {callToAction.eyebrow}
+                  </p>
+                ) : null}
+
+                <h2 className="mt-4 max-w-4xl font-display text-4xl text-balance text-cream md:text-5xl">
+                  {callToAction?.title}
+                </h2>
+
+                {callToAction?.description ? (
+                  <p className="mt-4 max-w-2xl text-sm leading-7 text-silver md:text-base">
+                    {callToAction.description}
+                  </p>
+                ) : null}
+              </div>
+
+              <TrackedLink
+                href={callToActionHref}
+                target={shouldOpenCallToActionInNewTab ? "_blank" : undefined}
+                rel={shouldOpenCallToActionInNewTab ? "noopener noreferrer" : undefined}
+                tracking={{
+                  type: "external_link_click",
+                  location: "blog_post_cta",
+                  label: callToAction?.label ?? "Blog post CTA",
+                  url: callToActionHref,
+                }}
+                className="micro-press inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-brass bg-brass px-5 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:bg-transparent hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass sm:w-fit"
+              >
+                {callToAction?.label}
+                <ArrowUpRight size={16} />
+              </TrackedLink>
+            </div>
+          </section>
+        ) : null}
 
         {displayedRelatedPosts.length ? (
           <section className="mt-12">
