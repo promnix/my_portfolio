@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, BookOpen, Clock3 } from "lucide-react";
+import { ArrowUpRight, BookOpen } from "lucide-react";
+import { BlogBrowser } from "@/components/blog-browser";
 import { editorialPillars } from "@/lib/site-data";
 import { TrackedLink } from "@/components/tracked-link";
 import { client } from "@/sanity/lib/client";
@@ -68,9 +69,6 @@ export default async function BlogPage() {
     }
   );
   const featuredPost = posts.find((post) => post.isFeatured) ?? posts[0];
-  const recentPosts = featuredPost
-    ? posts.filter((post) => post._id !== featuredPost._id)
-    : [];
 
   return (
     <div id="blog" className="section-shell py-10 md:py-14">
@@ -198,58 +196,7 @@ export default async function BlogPage() {
         )}
       </section>
 
-      <section className="mt-12">
-        <div className="flex flex-wrap items-end justify-between gap-5">
-          <div>
-            <p className="eyebrow text-xs text-brass">Recent writing</p>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">Practical notes on websites, SEO, and digital products.</h2>
-          </div>
-          <p className="max-w-lg text-sm leading-7 text-silver">
-            Clear, useful articles from my work building websites, improving performance, and helping businesses turn online presence into real trust and action.
-          </p>
-        </div>
-
-        <div className="mt-8 grid gap-4 lg:grid-cols-3">
-          {recentPosts.map((post) => (
-            <TrackedLink
-              id={post.slug}
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              tracking={{ type: "blog_view", location: "blog_recent_card", postTitle: post.title }}
-              className="section-card rounded-[1.9rem] p-6 transition hover:border-brass! hover:bg-[rgba(255,255,255,0.05)]"
-            >
-              <div className="flex flex-wrap items-center gap-3 text-xs text-silver">
-                <span className="eyebrow text-[0.68rem] text-brass">{post.category}</span>
-                {formatDate(post.publishedAt) ? <span>{formatDate(post.publishedAt)}</span> : null}
-              </div>
-
-              <h3 className="mt-4 font-display text-3xl text-balance">{post.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-silver">{post.excerpt}</p>
-
-              {formatReadingTime(post.readingTime) ? (
-                <div className="mt-5 flex items-center gap-2 text-xs text-silver">
-                  <Clock3 size={14} className="text-brass" />
-                  {formatReadingTime(post.readingTime)}
-                </div>
-              ) : null}
-
-              {post.topics?.length ? (
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {post.topics.map((topic) => (
-                    <span key={topic} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-silver">
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-              ) : null}
-
-              {/* <p className="mt-6 border-l border-white/10 pl-4 text-sm leading-7 text-cream/85">
-                &ldquo;{post.excerpt}&rdquo;
-              </p> */}
-            </TrackedLink>
-          ))}
-        </div>
-      </section>
+      <BlogBrowser posts={posts} />
 
       <section className="mt-12 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
