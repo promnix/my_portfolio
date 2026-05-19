@@ -142,17 +142,16 @@ export default async function BlogPostPage({
       },
     }
   );
-  const relatedPosts = posts
+  const postTopics = new Set(post.topics ?? []);
+  const displayedRelatedPosts = posts
     .filter((item) => item.slug !== post.slug)
-    .filter((item) => item.category === post.category)
-    .slice(0, 3);
+    .filter((item) => {
+      const matchesCategory = item.category === post.category;
+      const matchesTopic = (item.topics ?? []).some((topic) => postTopics.has(topic));
 
-  const fallbackRelatedPosts = posts
-    .filter((item) => item.slug !== post.slug)
+      return matchesCategory || matchesTopic;
+    })
     .slice(0, 3);
-
-  const displayedRelatedPosts =
-    relatedPosts.length > 0 ? relatedPosts : fallbackRelatedPosts;
 
   const callToAction = post.callToAction;
   const hasCallToAction = Boolean(
