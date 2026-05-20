@@ -301,8 +301,8 @@ export default async function BlogPostPage({
             <Image
               src={urlFor(post.coverImage).width(900).height(480).quality(75).format("webp").url()}
               alt={post.coverImage.alt || post.title}
-              width={1600}
-              height={850}
+              width={900}
+              height={480}
               priority
               className="h-auto w-full object-cover"
             />
