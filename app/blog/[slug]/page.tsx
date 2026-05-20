@@ -299,7 +299,7 @@ export default async function BlogPostPage({
         {post.coverImage?.asset ? (
           <figure className="mt-8 overflow-hidden rounded-3xl md:rounded-[2.5rem] border border-white/10 bg-white/[0.03]">
             <Image
-              src={urlFor(post.coverImage).width(1600).height(850).url()}
+              src={urlFor(post.coverImage).width(900).height(480).quality(75).format("webp").url()}
               alt={post.coverImage.alt || post.title}
               width={1600}
               height={850}
