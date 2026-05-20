@@ -38,9 +38,6 @@ export const blogPostSchema = defineType({
           { title: "Business Websites", value: "Business Websites" },
           { title: "Website Performance", value: "Website Performance" },
           { title: "Web Design", value: "Web Design" },
-          { title: "WordPress", value: "WordPress" },
-          { title: "Landing Pages", value: "Landing Pages" },
-          { title: "Website Credibility", value: "Website Credibility" },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -227,7 +224,7 @@ export const blogPostSchema = defineType({
                     initialValue: true,
                   },
                 ],
-              }
+              },
             ],
           },
         },
@@ -293,6 +290,92 @@ export const blogPostSchema = defineType({
             },
           ],
         },
+
+        defineArrayMember({
+          name: "table",
+          title: "Table",
+          type: "object",
+          fields: [
+            defineField({
+              name: "caption",
+              title: "Caption",
+              type: "string",
+              description: "Optional label shown below the table.",
+            }),
+            defineField({
+              name: "headers",
+              title: "Column Headers",
+              type: "array",
+              of: [defineArrayMember({ type: "string" })],
+              description: "One entry per column, in order (e.g. Score, Performance, SEO…).",
+              validation: (Rule) => Rule.min(1).warning("Add at least one column header."),
+            }),
+            defineField({
+              name: "rows",
+              title: "Rows",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  name: "tableRow",
+                  title: "Row",
+                  type: "object",
+                  fields: [
+                    defineField({
+                      name: "cells",
+                      title: "Cells",
+                      type: "array",
+                      of: [defineArrayMember({ type: "string" })],
+                      description: "One entry per cell, matching the column order above.",
+                    }),
+                  ],
+                  preview: {
+                    select: { cells: "cells" },
+                    prepare({ cells }: { cells?: string[] }) {
+                      return {
+                        title: cells?.join(" | ") ?? "Empty row",
+                      };
+                    },
+                  },
+                }),
+              ],
+              validation: (Rule) =>
+                Rule.min(1)
+                  .warning("Add at least one table row.")
+                  .custom((rows, context) => {
+                    const parent = context.parent as {
+                      headers?: string[];
+                    };
+                    const headerCount = parent.headers?.length ?? 0;
+
+                    if (!headerCount || !rows?.length) return true;
+
+                    const mismatchIndex = rows.findIndex((row) => {
+                      const tableRow = row as { cells?: string[] };
+                      return (tableRow.cells?.length ?? 0) !== headerCount;
+                    });
+
+                    if (mismatchIndex === -1) return true;
+
+                    return `Row ${mismatchIndex + 1} should have ${headerCount} cells to match the table headers.`;
+                  }),
+            }),
+          ],
+          preview: {
+            select: { caption: "caption", headers: "headers" },
+            prepare({
+              caption,
+              headers,
+            }: {
+              caption?: string;
+              headers?: string[];
+            }) {
+              return {
+                title: caption ?? "Table",
+                subtitle: headers?.join(", "),
+              };
+            },
+          },
+        }),
       ],
     }),
 
@@ -349,9 +432,7 @@ export const blogPostSchema = defineType({
       ],
       validation: (Rule) =>
         Rule.custom((value) => {
-          if (!value) {
-            return true;
-          }
+          if (!value) return true;
 
           const cta = value as {
             title?: string;
@@ -360,9 +441,7 @@ export const blogPostSchema = defineType({
           };
           const hasAnyValue = Boolean(cta.title || cta.label || cta.href);
 
-          if (!hasAnyValue) {
-            return true;
-          }
+          if (!hasAnyValue) return true;
 
           if (!cta.title || !cta.label || !cta.href) {
             return "Add a title, button label, and button link, or leave the CTA empty.";

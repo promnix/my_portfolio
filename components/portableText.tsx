@@ -30,6 +30,16 @@ type CodeBlockValue = {
   code?: string;
 };
 
+type PortableTableRowValue = {
+  cells?: string[];
+};
+
+type PortableTableValue = {
+  caption?: string;
+  headers?: string[];
+  rows?: PortableTableRowValue[];
+};
+
 function linkClassName() {
   return "rounded-sm bg-brass/10 px-1 font-semibold text-brass underline! decoration-brass! decoration-2! underline-offset-4! transition! duration-200! hover:bg-brass! hover:text-charcoal! hover:decoration-brass! focus-visible:outline! focus-visible:outline-2! focus-visible:outline-offset-3 focus-visible:outline-brass";
 }
@@ -178,6 +188,67 @@ const portableTextComponents = {
                 <pre className="overflow-x-auto rounded-3xl border border-white/10 bg-black/40 p-5 text-sm leading-7 text-silver">
                     <code>{block.code}</code>
                 </pre>
+            );
+        },
+        table: ({ value }) => {
+            const table = value as PortableTableValue;
+            const headers = table.headers?.filter(Boolean) ?? [];
+            const rows = table.rows ?? [];
+            const columnCount = Math.max(
+                headers.length,
+                ...rows.map((row) => row.cells?.length ?? 0),
+            );
+
+            if (!columnCount) return null;
+
+            return (
+                <figure className="max-w-full overflow-hidden rounded-3xl border border-white/10 bg-black/20">
+                    <div className="overflow-x-auto">
+                        <table className="w-full min-w-[38rem] border-collapse text-left text-sm text-silver">
+                            {headers.length ? (
+                                <thead className="bg-white/[0.04] text-xs uppercase tracking-[0.12em] text-cream">
+                                    <tr>
+                                        {Array.from({ length: columnCount }).map((_, index) => (
+                                            <th
+                                                key={`header-${index}`}
+                                                scope="col"
+                                                className="border-b border-white/10 px-4 py-3 font-semibold"
+                                            >
+                                                {headers[index] ?? ""}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                            ) : null}
+
+                            {rows.length ? (
+                                <tbody>
+                                    {rows.map((row, rowIndex) => (
+                                        <tr
+                                            key={`row-${rowIndex}-${row.cells?.join("-") ?? "empty"}`}
+                                            className="border-b border-white/10 last:border-b-0"
+                                        >
+                                            {Array.from({ length: columnCount }).map((_, cellIndex) => (
+                                                <td
+                                                    key={`cell-${cellIndex}`}
+                                                    className="min-w-40 px-4 py-3 align-top leading-7"
+                                                >
+                                                    {row.cells?.[cellIndex] ?? ""}
+                                                </td>
+                                            ))}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            ) : null}
+                        </table>
+                    </div>
+
+                    {table.caption ? (
+                        <figcaption className="border-t border-white/10 px-4 py-3 text-sm leading-6 text-silver">
+                            {table.caption}
+                        </figcaption>
+                    ) : null}
+                </figure>
             );
         },
     },
