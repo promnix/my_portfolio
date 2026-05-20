@@ -315,9 +315,9 @@ export default async function BlogPostPage({
           </figure>
         ) : null}
 
-        <section className="mt-7 grid gap-6 md:mt-9 lg:grid-cols-[0.78fr_0.22fr]">
-          <article className="rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
-            <div className="space-y-6">
+        <section className="mt-7 grid min-w-0 gap-6 md:mt-9 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,0.22fr)]">
+          <article className="min-w-0 rounded-3xl sm:rounded-[2.4rem] border border-white/10 bg-[rgba(255,255,255,0.03)] p-6 md:p-8">
+            <div className="min-w-0 space-y-6">
               <PortableText value={post.body} components={portableTextComponents} />
             </div>
 

@@ -15,7 +15,10 @@ type InternalLinkMark = {
 };
 
 type PortableImageValue = {
-  asset?: unknown;
+  asset?: {
+    _ref?: string;
+    _id?: string;
+  };
   alt?: string;
   caption?: string;
 };
@@ -52,6 +55,23 @@ function resolveInternalHref(value?: InternalLinkMark) {
   }
 
   return `/blog/${value.slug}`;
+}
+
+function getImageDimensions(image: PortableImageValue) {
+    const assetId = image.asset?._ref ?? image.asset?._id;
+    const match = assetId?.match(/-(\d+)x(\d+)-[^-]+$/);
+
+    if (!match) {
+        return {
+            width: 1200,
+            height: 760,
+        };
+    }
+
+    return {
+        width: Number(match[1]),
+        height: Number(match[2]),
+    };
 }
 
 function ExternalLink({
@@ -145,14 +165,17 @@ const portableTextComponents = {
 
             if (!image.asset) return null;
 
+            const dimensions = getImageDimensions(image);
+
             return (
-                <figure className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03]">
+                <figure className="min-w-0 max-w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03]">
                 <Image
-                    src={urlFor(image).width(1200).height(760).fit("max").url()}
+                    src={urlFor(image).width(1200).fit("max").url()}
                     alt={image.alt || ""}
-                    width={1200}
-                    height={760}
-                    className="h-auto w-full object-cover"
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1024px) calc(100vw - 64px), 760px"
+                    className="block h-auto w-full max-w-full"
                 />
                 {image.caption ? (
                     <figcaption className="px-5 py-4 text-sm text-silver">
@@ -202,9 +225,9 @@ const portableTextComponents = {
             if (!columnCount) return null;
 
             return (
-                <figure className="max-w-full overflow-hidden rounded-3xl border border-white/10 bg-black/20">
-                    <div className="overflow-x-auto">
-                        <table className="w-full min-w-[38rem] border-collapse text-left text-sm text-silver">
+                <figure className="min-w-0 max-w-full overflow-hidden rounded-3xl border border-white/10 bg-black/20">
+                    <div className="block w-full min-w-0 max-w-full overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
+                        <table className="min-w-[38rem] w-max border-collapse text-left text-sm text-silver">
                             {headers.length ? (
                                 <thead className="bg-white/[0.04] text-xs uppercase tracking-[0.12em] text-cream">
                                     <tr>
