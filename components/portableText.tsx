@@ -168,7 +168,7 @@ const portableTextComponents = {
             const dimensions = getImageDimensions(image);
 
             return (
-                <figure className="min-w-0 max-w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03]">
+                <figure className="min-w-0 max-w-full overflow-hidden rounded-2xl lg:rounded-[1.75rem] border border-white/10 bg-white/[0.03]">
                 <Image
                     src={urlFor(image).width(1200).fit("max").url()}
                     alt={image.alt || ""}
@@ -208,7 +208,7 @@ const portableTextComponents = {
             if (!block.code) return null;
 
             return (
-                <pre className="overflow-x-auto rounded-3xl border border-white/10 bg-black/40 p-5 text-sm leading-7 text-silver">
+                <pre className="overflow-x-auto rounded-2xl lg:rounded-3xl border border-white/10 bg-black/40 p-5 text-sm leading-7 text-silver">
                     <code>{block.code}</code>
                 </pre>
             );
@@ -225,7 +225,7 @@ const portableTextComponents = {
             if (!columnCount) return null;
 
             return (
-                <figure className="min-w-0 max-w-full overflow-hidden rounded-3xl border border-white/10 bg-black/20">
+                <figure className="min-w-0 max-w-full overflow-hidden rounded-2xl lg:rounded-3xl border border-white/10 bg-black/20">
                     <div className="block w-full min-w-0 max-w-full overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
                         <table className="min-w-[38rem] w-max border-collapse text-left text-sm text-silver">
                             {headers.length ? (
