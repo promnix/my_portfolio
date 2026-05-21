@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { HomeBlogSection, HomeProjectSection, PortfolioHome } from "@/components/portfolio-home";
-import { getHomeschema } from "@/lib/json-ld/json-ld";
+import { getHomeSchema } from "@/lib/json-ld/json-ld";
 import { siteConfig } from "@/lib/site-data";
 import { client } from "@/sanity/lib/client";
 import { allPostsQuery, allProjectsQuery } from "@/sanity/lib/queries";
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
 
 
 // get the home page schema
-const jsonLd = getHomeschema()
+const jsonLd = getHomeSchema()
 
 async function DeferredProjectSection({ projectsPromise }: { projectsPromise: Promise<IProject[]> }) {
   const projects = await projectsPromise;

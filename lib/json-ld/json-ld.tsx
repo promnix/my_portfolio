@@ -1,18 +1,12 @@
-// import { siteConfig, socials } from "../site-data"
+import { siteConfig, socials } from "../site-data"
 
-const BASE_URL = "https://buildwithpromise.vercel.app"
+const BASE_URL = siteConfig.url.replace(/\/$/, "")
 
 const PERSON_ID = `${BASE_URL}/#person`
 const WEBSITE_ID = `${BASE_URL}/#website`
 const SERVICE_ID = `${BASE_URL}/#service`
 
-const REAL_SOCIALS = [
-    "https://www.linkedin.com/in/edwin-promise-a73b822b6",
-    "https://github.com/promnix",
-    "https://x.com/promnix",
-    "https://www.instagram.com/promnix10",
-    "https://www.tiktok.com/@promnix",
-]
+const REAL_SOCIALS = socials.map((social) => social.href)
 
 // ─── Shared nodes reused across pages ────────────────────────────────────────
 
@@ -249,7 +243,7 @@ export const getAboutSchema = () => {
             websiteNode,
             {
                 "@type": "ProfilePage",
-                "@id": `${pageUrl}/#profilepage`,
+                "@id": `${pageUrl}#profilepage`,
                 url: pageUrl,
                 name: "About Edwin Promise | Full-Stack Web Developer",
                 headline:
@@ -268,7 +262,7 @@ export const getAboutSchema = () => {
                 inLanguage: "en",
                 breadcrumb: {
                     "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}/#breadcrumb`,
+                    "@id": `${pageUrl}#breadcrumb`,
                     itemListElement: [
                         {
                             "@type": "ListItem",
@@ -301,7 +295,7 @@ export const getProjectsSchema = () => {
             websiteNode,
             {
                 "@type": "CollectionPage",
-                "@id": `${pageUrl}/#collectionpage`,
+                "@id": `${pageUrl}#collectionpage`,
                 url: pageUrl,
                 name: "Projects | Edwin Promise",
                 headline: "Selected projects built around real business needs.",
@@ -320,7 +314,7 @@ export const getProjectsSchema = () => {
                 hasPart: [
                     {
                         "@type": "WebSite",
-                        "@id": `${pageUrl}/freshly-folded-laundry-website/#project`,
+                        "@id": `${pageUrl}/freshly-folded-laundry-website#project`,
                         url: `${pageUrl}/freshly-folded-laundry-website`,
                         name: "Freshly Folded",
                         description:
@@ -332,7 +326,7 @@ export const getProjectsSchema = () => {
                     },
                     {
                         "@type": "WebSite",
-                        "@id": `${pageUrl}/build-with-promise-portfolio/#project`,
+                        "@id": `${pageUrl}/build-with-promise-portfolio#project`,
                         url: `${pageUrl}/build-with-promise-portfolio`,
                         name: "Build With Promise",
                         description:
@@ -344,7 +338,7 @@ export const getProjectsSchema = () => {
                     },
                     {
                         "@type": "WebSite",
-                        "@id": `${pageUrl}/scarsdale-solicitors-website/#project`,
+                        "@id": `${pageUrl}/scarsdale-solicitors-website#project`,
                         url: `${pageUrl}/scarsdale-solicitors-website`,
                         name: "Scarsdale Solicitors",
                         description:
@@ -356,7 +350,7 @@ export const getProjectsSchema = () => {
                     },
                     {
                         "@type": "WebPage",
-                        "@id": `${pageUrl}/twist-design-agency-landing-page/#project`,
+                        "@id": `${pageUrl}/twist-design-agency-landing-page#project`,
                         url: `${pageUrl}/twist-design-agency-landing-page`,
                         name: "Twist",
                         description:
@@ -369,7 +363,7 @@ export const getProjectsSchema = () => {
                 ],
                 breadcrumb: {
                     "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}/#breadcrumb`,
+                    "@id": `${pageUrl}#breadcrumb`,
                     itemListElement: [
                         {
                             "@type": "ListItem",
@@ -402,7 +396,7 @@ export const getBlogSchema = () => {
             websiteNode,
             {
                 "@type": "Blog",
-                "@id": `${pageUrl}/#blog`,
+                "@id": `${pageUrl}#blog`,
                 url: pageUrl,
                 name: "Blog | Edwin Promise",
                 headline: "Writing that shows how I think, build, and solve problems.",
@@ -440,7 +434,7 @@ export const getBlogSchema = () => {
                         publisher: { "@id": PERSON_ID },
                         inLanguage: "en",
                         keywords: "landing pages, paid ads, small business, conversion",
-                        isPartOf: { "@id": `${pageUrl}/#blog` },
+                        isPartOf: { "@id": `${pageUrl}#blog` },
                     },
                     {
                         "@type": "BlogPosting",
@@ -456,7 +450,7 @@ export const getBlogSchema = () => {
                         inLanguage: "en",
                         keywords:
                             "affordable websites, website planning, small business, website cost",
-                        isPartOf: { "@id": `${pageUrl}/#blog` },
+                        isPartOf: { "@id": `${pageUrl}#blog` },
                     },
                     {
                         "@type": "BlogPosting",
@@ -472,12 +466,12 @@ export const getBlogSchema = () => {
                         inLanguage: "en",
                         keywords:
                             "PageSpeed, website performance, website optimization, Google tools",
-                        isPartOf: { "@id": `${pageUrl}/#blog` },
+                        isPartOf: { "@id": `${pageUrl}#blog` },
                     },
                 ],
                 breadcrumb: {
                     "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}/#breadcrumb`,
+                    "@id": `${pageUrl}#breadcrumb`,
                     itemListElement: [
                         {
                             "@type": "ListItem",

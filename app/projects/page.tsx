@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { allProjectsQuery } from "@/sanity/lib/queries";
-import { getProjectSchema } from "@/lib/json-ld/json-ld";
+import { getProjectsSchema } from "@/lib/json-ld/json-ld";
 import { TrackedLink } from "@/components/tracked-link";
 
 export const revalidate = 60
@@ -51,7 +51,7 @@ function getProjectYear(project: IProject) {
 }
 
 // ======= Get schema ===================//
-const jsonLd = getProjectSchema()
+const jsonLd = getProjectsSchema()
 
 export default async function ProjectPage() {
   const projects: IProject[] = await client.fetch(allProjectsQuery);
