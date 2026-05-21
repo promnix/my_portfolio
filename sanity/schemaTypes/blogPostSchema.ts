@@ -40,6 +40,7 @@ export const blogPostSchema = defineType({
           { title: "Web Design", value: "Web Design" },
           { title: "Website Planning", value: "Website Planning" },
           { title: "Online Presence", value: "Online Presence" },
+          { title: "Landing Pages", value: "Landing Pages" },
         ],
       },
       validation: (Rule) => Rule.required(),
