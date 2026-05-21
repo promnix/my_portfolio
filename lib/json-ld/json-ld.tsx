@@ -149,12 +149,7 @@ export const getAboutSchema = () => {
                         "DevOps",
                     ],
                 },
-                sameAs: [
-                    "https://github.com/Promzy004",
-                    "https://www.linkedin.com/in/your-linkedin",
-                    "https://x.com/your-handle",
-                    "https://www.instagram.com/your-instagram"
-                ],
+                sameAs: socials.map((social) => social.href),
             },
             {
                 "@type": "WebSite",
