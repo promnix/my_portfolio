@@ -3,6 +3,8 @@ import { client } from "@/sanity/lib/client";
 import { defineQuery } from "next-sanity";
 import { siteConfig } from "@/lib/site-data";
 
+export const revalidate = 86400;
+
 const siteUrl = siteConfig.url.replace(/\/$/, "");
 
 type SitemapPost = {
@@ -35,20 +37,24 @@ const sitemapProjectsQuery = defineQuery(`
     }
 `);
 
-function formatDate(date?: string | Date) {
+function formatDate(date?: string | Date): Date {
     const parsedDate = date ? new Date(date) : new Date();
 
     if (Number.isNaN(parsedDate.getTime())) {
-        return new Date().toISOString().split("T")[0];
+        return new Date();
     }
 
-    return parsedDate.toISOString().split("T")[0];
+    return parsedDate;
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const [posts, projects] = await Promise.all([
-        client.fetch<SitemapPost[]>(sitemapBlogPostsQuery),
-        client.fetch<SitemapProject[]>(sitemapProjectsQuery),
+        client.fetch<SitemapPost[]>(sitemapBlogPostsQuery, {}, {
+            next: { revalidate: 86400 },
+        }),
+        client.fetch<SitemapProject[]>(sitemapProjectsQuery, {}, {
+            next: { revalidate: 86400 },
+        }),
     ]);
 
     const today = formatDate();
