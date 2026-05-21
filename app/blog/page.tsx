@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/blogpage.jpg",
         width: 1200,
         height: 630,
         alt: "Blog by Edwin Promise",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Blog | Edwin Promise",
     description:
       "Practical notes on web development, SEO, performance, and product thinking.",
-    images: ["/og-image.jpg"],
+    images: ["/images/blogpage.jpg"],
   },
   robots: {
     index: true,
