@@ -69,7 +69,7 @@ export default function AboutPage() {
   return (
     <>
       <script
-        type="application/json+ld"
+        type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}

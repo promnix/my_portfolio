@@ -59,7 +59,7 @@ export default async function ProjectPage() {
   return (
     <>
       <script 
-        type="application/json+ld"
+        type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
