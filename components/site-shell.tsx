@@ -15,6 +15,14 @@ import { navItems, services, siteConfig, socials } from "@/lib/site-data";
 
 const MotionLink = motion.create(Link);
 const siteEase: Easing = [0.22, 1, 0.36, 1];
+const servicesMenuItems = [
+  "business-website-design-development",
+  "landing-pages-for-ads-and-campaigns",
+  "wordpress-website-development",
+  "mvp-development-for-founders",
+]
+  .map((slug) => services.find((service) => service.slug === slug))
+  .filter((service): service is (typeof services)[number] => Boolean(service));
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -199,7 +207,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                             <p className="eyebrow text-[0.65rem] text-brass">Services</p>
                           </div>
                           <div className="grid gap-1">
-                            {services.map((service) => (
+                            {servicesMenuItems.map((service) => (
                               <Link
                                 key={service.slug}
                                 href={`/services/${service.slug}`}
@@ -378,7 +386,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                                 >
                                   All services
                                 </MotionLink>
-                                {services.map((service) => (
+                                {servicesMenuItems.map((service) => (
                                   <MotionLink
                                     key={service.slug}
                                     href={`/services/${service.slug}`}
