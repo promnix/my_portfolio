@@ -148,6 +148,8 @@ const serviceNode = {
     hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Web Development Services",
+        telephone: "+2347058149298",
+        address: "1,Bankole street, off Johnson bus stop, Ijeshatedo.",
         itemListElement: [
             {
                 "@type": "Offer",
