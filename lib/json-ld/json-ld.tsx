@@ -1,4 +1,5 @@
 import { siteConfig, socials } from "../site-data"
+import { urlFor } from "@/sanity/lib/image"
 
 const BASE_URL = siteConfig.url.replace(/\/$/, "")
 
@@ -7,6 +8,14 @@ const WEBSITE_ID = `${BASE_URL}/#website`
 const SERVICE_ID = `${BASE_URL}/#service`
 
 const REAL_SOCIALS = socials.map((social) => social.href)
+const CONTACT_EMAIL = "promnix10@gmail.com"
+const CONTACT_TELEPHONE = "+2347058149298"
+const CONTACT_ADDRESS = {
+    "@type": "PostalAddress",
+    streetAddress: "1 Bankole Street, off Johnson Bus Stop, Ijeshatedo",
+    addressLocality: "Lagos",
+    addressCountry: "NG",
+}
 
 // ─── Shared nodes reused across pages ────────────────────────────────────────
 
@@ -16,7 +25,7 @@ const personNode = {
     name: "Edwin Promise",
     alternateName: "Promise",
     url: BASE_URL,
-    email: "promnix10@gmail.com",
+    email: CONTACT_EMAIL,
     image: {
         "@type": "ImageObject",
         url: `${BASE_URL}/images/aboutpage.jpg`,
@@ -26,11 +35,7 @@ const personNode = {
     jobTitle: "Full-Stack Developer",
     description:
         "Edwin Promise is a full-stack developer based in Lagos, Nigeria, focused on helping founders, startups, and small businesses turn ideas into fast, responsive, SEO-ready websites, MVPs, and digital products.",
-    address: {
-        "@type": "PostalAddress",
-        addressLocality: "Lagos",
-        addressCountry: "NG",
-    },
+    address: CONTACT_ADDRESS,
     knowsAbout: [
         "Web Development",
         "Full-Stack Development",
@@ -119,17 +124,19 @@ const serviceNode = {
     name: "Edwin Promise – Web Development Services",
     url: BASE_URL,
     image: `${BASE_URL}/images/homepage.jpg`,
+    email: CONTACT_EMAIL,
+    telephone: CONTACT_TELEPHONE,
+    address: CONTACT_ADDRESS,
     description:
         "Fast, responsive, SEO-ready website design and development for businesses, founders, and startups. Services include website design, full-stack development, WordPress builds, MVP development, and SEO optimization.",
     founder: { "@id": PERSON_ID },
     employee: { "@id": PERSON_ID },
     contactPoint: {
         "@type": "ContactPoint",
-        email: "promnix10@gmail.com",
+        email: CONTACT_EMAIL,
         contactType: "Customer Support",
         availableLanguage: "English",
-        telephone: "+2347058149298",
-        address: "1,Bankole street, off Johnson bus stop, Ijeshatedo."
+        telephone: CONTACT_TELEPHONE,
     },
     areaServed: [
         { "@type": "Country", name: "Nigeria" },
@@ -148,8 +155,6 @@ const serviceNode = {
     hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Web Development Services",
-        telephone: "+2347058149298",
-        address: "1,Bankole street, off Johnson bus stop, Ijeshatedo.",
         itemListElement: [
             {
                 "@type": "Offer",
@@ -391,21 +396,36 @@ export const getProjectsSchema = () => {
 // ─── Blog Page ────────────────────────────────────────────────────────────────
 
 function getBlogPostSchema(posts: IPost[], pageUrl: string) {
-    return posts.map((post) => ({
-        "@type": "BlogPosting",
-        url: `${BASE_URL}/blog/${post.slug}`,
-        name: post.title,
-        headline: post.title,
-        description: post.excerpt,
-        ...(post.publishedAt ? { datePublished: post.publishedAt } : {}),
-        ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
-        author: { "@id": PERSON_ID },
-        publisher: { "@id": PERSON_ID },
-        inLanguage: "en",
-        ...(post.topics?.length ? { keywords: post.topics.join(", ") } : {}),
-        ...(post.category ? { articleSection: post.category } : {}),
-        isPartOf: { "@id": `${pageUrl}#blog` },
-    }))
+    return posts.map((post) => {
+        const imageUrl = post.coverImage?.asset
+            ? urlFor(post.coverImage).width(1200).height(630).url()
+            : `${BASE_URL}/og-image.jpg`
+
+        return {
+            "@type": "BlogPosting",
+            url: `${BASE_URL}/blog/${post.slug}`,
+            name: post.title,
+            headline: post.title,
+            description: post.excerpt,
+            image: {
+                "@type": "ImageObject",
+                url: imageUrl,
+                width: 1200,
+                height: 630,
+            },
+            thumbnailUrl: post.coverImage?.asset
+                ? urlFor(post.coverImage).width(600).height(315).url()
+                : `${BASE_URL}/og-image.jpg`,
+            ...(post.publishedAt ? { datePublished: post.publishedAt } : {}),
+            ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
+            author: { "@id": PERSON_ID },
+            publisher: { "@id": PERSON_ID },
+            inLanguage: "en",
+            ...(post.topics?.length ? { keywords: post.topics.join(", ") } : {}),
+            ...(post.category ? { articleSection: post.category } : {}),
+            isPartOf: { "@id": `${pageUrl}#blog` },
+        }
+    })
 }
 
 export const getBlogSchema = (posts: IPost[] = []) => {
