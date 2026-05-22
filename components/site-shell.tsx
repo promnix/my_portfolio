@@ -309,7 +309,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               transition={{ duration: 0.32, ease: siteEase }}
             >
               <motion.div
-                className="section-card mx-auto max-w-lg rounded-[2rem] p-6"
+                className="section-card mx-auto rounded-[2rem] py-6 px-4"
                 initial={{ opacity: 0, y: 18, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.985 }}
