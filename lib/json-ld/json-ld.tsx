@@ -128,6 +128,8 @@ const serviceNode = {
         email: "promnix10@gmail.com",
         contactType: "Customer Support",
         availableLanguage: "English",
+        telephone: "+2347058149298",
+        address: "1,Bankole street, off Johnson bus stop, Ijeshatedo."
     },
     areaServed: [
         { "@type": "Country", name: "Nigeria" },
