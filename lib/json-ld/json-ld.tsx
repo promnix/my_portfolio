@@ -390,7 +390,25 @@ export const getProjectsSchema = () => {
 
 // ─── Blog Page ────────────────────────────────────────────────────────────────
 
-export const getBlogSchema = () => {
+function getBlogPostSchema(posts: IPost[], pageUrl: string) {
+    return posts.map((post) => ({
+        "@type": "BlogPosting",
+        url: `${BASE_URL}/blog/${post.slug}`,
+        name: post.title,
+        headline: post.title,
+        description: post.excerpt,
+        ...(post.publishedAt ? { datePublished: post.publishedAt } : {}),
+        ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
+        author: { "@id": PERSON_ID },
+        publisher: { "@id": PERSON_ID },
+        inLanguage: "en",
+        ...(post.topics?.length ? { keywords: post.topics.join(", ") } : {}),
+        ...(post.category ? { articleSection: post.category } : {}),
+        isPartOf: { "@id": `${pageUrl}#blog` },
+    }))
+}
+
+export const getBlogSchema = (posts: IPost[] = []) => {
     const pageUrl = `${BASE_URL}/blog`
 
     return {
@@ -423,56 +441,7 @@ export const getBlogSchema = () => {
                     { "@type": "Thing", name: "Website Performance" },
                     { "@type": "Thing", name: "MVP Development" },
                 ],
-                // Recent posts — expand this array as you publish more
-                blogPost: [
-                    {
-                        "@type": "BlogPosting",
-                        url: `${BASE_URL}/blog/landing-page-for-small-business-ads-how-to-stop-wasting-paid-traffic`,
-                        name: "Landing Page for Small Business Ads: How to Stop Wasting Paid Traffic",
-                        headline:
-                            "Landing Page for Small Business Ads: How to Stop Wasting Paid Traffic",
-                        description:
-                            "How to plan a landing page for small business ads so paid traffic has a clear offer, strong proof, and one practical next step.",
-                        datePublished: "2026-05",
-                        author: { "@id": PERSON_ID },
-                        publisher: { "@id": PERSON_ID },
-                        inLanguage: "en",
-                        keywords: "landing pages, paid ads, small business, conversion",
-                        isPartOf: { "@id": `${pageUrl}#blog` },
-                    },
-                    {
-                        "@type": "BlogPosting",
-                        url: `${BASE_URL}/blog/affordable-website-for-small-business-what-you-should-pay-for-and-what-can-wait`,
-                        name: "Affordable Website for Small Business: What You Should Pay For and What Can Wait",
-                        headline:
-                            "Affordable Website for Small Business: What You Should Pay For and What Can Wait",
-                        description:
-                            "A practical guide to planning an affordable website for small business needs without wasting money on features that do not support enquiries.",
-                        datePublished: "2026-05",
-                        author: { "@id": PERSON_ID },
-                        publisher: { "@id": PERSON_ID },
-                        inLanguage: "en",
-                        keywords:
-                            "affordable websites, website planning, small business, website cost",
-                        isPartOf: { "@id": `${pageUrl}#blog` },
-                    },
-                    {
-                        "@type": "BlogPosting",
-                        url: `${BASE_URL}/blog/how-to-check-if-your-website-is-optimized`,
-                        name: "Is Your Website Any Good? Here's the Simple Free Tool to Check",
-                        headline:
-                            "Is Your Website Any Good? Here's the Simple Free Tool to Check",
-                        description:
-                            "How to check if your website is optimized with a free Google tool. Learn what the four scores mean and what to fix first.",
-                        datePublished: "2026-05",
-                        author: { "@id": PERSON_ID },
-                        publisher: { "@id": PERSON_ID },
-                        inLanguage: "en",
-                        keywords:
-                            "PageSpeed, website performance, website optimization, Google tools",
-                        isPartOf: { "@id": `${pageUrl}#blog` },
-                    },
-                ],
+                blogPost: getBlogPostSchema(posts, pageUrl),
                 breadcrumb: {
                     "@type": "BreadcrumbList",
                     "@id": `${pageUrl}#breadcrumb`,

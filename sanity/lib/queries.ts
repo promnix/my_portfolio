@@ -9,6 +9,7 @@ export const allPostsQuery = defineQuery(`
     category,
     excerpt,
     publishedAt,
+    updatedAt,
     readingTime,
     isFeatured,
     topics,

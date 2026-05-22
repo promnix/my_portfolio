@@ -71,7 +71,7 @@ export default async function BlogPage() {
   );
   const featuredPost = posts.find((post) => post.isFeatured) ?? posts[0];
 
-  const jsonLd = getBlogSchema()
+  const jsonLd = getBlogSchema(posts)
 
   return (
     <>
