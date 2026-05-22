@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { client } from "@/sanity/lib/client";
 import { defineQuery } from "next-sanity";
-import { siteConfig } from "@/lib/site-data";
+import { services, siteConfig } from "@/lib/site-data";
 
 export const revalidate = 86400;
 
@@ -79,6 +79,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         {
+            url: `${siteUrl}/services`,
+            lastModified: today,
+            changeFrequency: "monthly",
+            priority: 0.9,
+        },
+        {
             url: `${siteUrl}/blog`,
             lastModified: today,
             changeFrequency: "weekly",
@@ -100,5 +106,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     }));
 
-    return [...staticRoutes, ...projectRoutes, ...blogRoutes];
+    const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
+        url: `${siteUrl}/services/${service.slug}`,
+        lastModified: today,
+        changeFrequency: "monthly",
+        priority: 0.8,
+    }));
+
+    return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...blogRoutes];
 }
