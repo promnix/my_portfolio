@@ -1,7 +1,8 @@
 import { siteConfig } from "@/lib/site-data";
+import { sitemapPath } from "@/lib/sitemap";
 import type { MetadataRoute } from "next";
 
-const siteUrl = siteConfig.url;
+const siteUrl = siteConfig.url.replace(/\/$/, "");
 
 export default function robots(): MetadataRoute.Robots {
   
@@ -11,6 +12,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/studio/", "/search/"],
     },
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: `${siteUrl}${sitemapPath}`,
   };
 }
