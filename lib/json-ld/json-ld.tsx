@@ -1,4 +1,4 @@
-import { services, siteConfig, socials, type Service } from "../site-data"
+import { siteConfig, socials } from "../site-data"
 import { urlFor } from "@/sanity/lib/image"
 
 const BASE_URL = siteConfig.url.replace(/\/$/, "")
@@ -155,28 +155,46 @@ const serviceNode = {
     hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Web Development Services",
-        itemListElement: services.map(getServiceOffer),
+        itemListElement: [
+            {
+                "@type": "Offer",
+                itemOffered: {
+                    "@type": "Service",
+                    name: "Business Website Design & Development",
+                    description:
+                        "Fast, responsive, SEO-ready websites for businesses that want to look credible and convert visitors.",
+                },
+            },
+            {
+                "@type": "Offer",
+                itemOffered: {
+                    "@type": "Service",
+                    name: "MVP Development",
+                    description:
+                        "Full-stack MVP builds for founders and startups ready to launch with confidence.",
+                },
+            },
+            {
+                "@type": "Offer",
+                itemOffered: {
+                    "@type": "Service",
+                    name: "WordPress Website Development",
+                    description:
+                        "Custom WordPress builds using Elementor, WooCommerce, and Yoast SEO for business-ready sites.",
+                },
+            },
+            {
+                "@type": "Offer",
+                itemOffered: {
+                    "@type": "Service",
+                    name: "SEO & Performance Optimization",
+                    description:
+                        "Improving page speed, structure, and SEO signals so your site ranks and converts.",
+                },
+            },
+        ],
     },
     sameAs: REAL_SOCIALS,
-}
-
-function getServiceOffer(service: Service) {
-    return {
-        "@type": "Offer",
-        url: `${BASE_URL}/services/${service.slug}`,
-        itemOffered: {
-            "@type": "Service",
-            "@id": `${BASE_URL}/services/${service.slug}#service`,
-            name: service.title,
-            description: service.summary,
-            provider: { "@id": PERSON_ID },
-            serviceType: service.shortTitle,
-            areaServed: [
-                { "@type": "Country", name: "Nigeria" },
-                { "@type": "Place", name: "Worldwide" },
-            ],
-        },
-    }
 }
 
 // ─── Home Page ────────────────────────────────────────────────────────────────
@@ -370,149 +388,6 @@ export const getProjectsSchema = () => {
                         },
                     ],
                 },
-            },
-        ],
-    }
-}
-
-// ─── Services Page ───────────────────────────────────────────────────────────
-
-export const getServicesSchema = () => {
-    const pageUrl = `${BASE_URL}/services`
-
-    return {
-        "@context": "https://schema.org",
-        "@graph": [
-            personNode,
-            websiteNode,
-            serviceNode,
-            {
-                "@type": "CollectionPage",
-                "@id": `${pageUrl}#collectionpage`,
-                url: pageUrl,
-                name: "Services | Edwin Promise",
-                headline: "Services for websites, landing pages, MVPs, and WordPress builds.",
-                description:
-                    "Explore web development services from Edwin Promise, including business websites, landing pages, MVP development, and WordPress website development.",
-                primaryImageOfPage: {
-                    "@type": "ImageObject",
-                    url: `${BASE_URL}/images/homepage.jpg`,
-                    width: 1200,
-                    height: 630,
-                },
-                isPartOf: { "@id": WEBSITE_ID },
-                about: { "@id": SERVICE_ID },
-                author: { "@id": PERSON_ID },
-                inLanguage: "en",
-                hasPart: services.map((service) => ({
-                    "@type": "Service",
-                    "@id": `${pageUrl}/${service.slug}#service`,
-                    url: `${pageUrl}/${service.slug}`,
-                    name: service.title,
-                    description: service.summary,
-                    provider: { "@id": PERSON_ID },
-                    serviceType: service.shortTitle,
-                    areaServed: [
-                        { "@type": "Country", name: "Nigeria" },
-                        { "@type": "Place", name: "Worldwide" },
-                    ],
-                    keywords: service.seoKeywords.join(", "),
-                })),
-                breadcrumb: {
-                    "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}#breadcrumb`,
-                    itemListElement: [
-                        {
-                            "@type": "ListItem",
-                            position: 1,
-                            name: "Home",
-                            item: BASE_URL,
-                        },
-                        {
-                            "@type": "ListItem",
-                            position: 2,
-                            name: "Services",
-                            item: pageUrl,
-                        },
-                    ],
-                },
-            },
-        ],
-    }
-}
-
-export const getServiceSchema = (service: Service) => {
-    const pageUrl = `${BASE_URL}/services/${service.slug}`
-
-    return {
-        "@context": "https://schema.org",
-        "@graph": [
-            personNode,
-            websiteNode,
-            serviceNode,
-            {
-                "@type": "WebPage",
-                "@id": `${pageUrl}#webpage`,
-                url: pageUrl,
-                name: `${service.title} | Edwin Promise`,
-                description: service.summary,
-                isPartOf: { "@id": WEBSITE_ID },
-                about: { "@id": `${pageUrl}#service` },
-                mainEntity: { "@id": `${pageUrl}#service` },
-                primaryImageOfPage: {
-                    "@type": "ImageObject",
-                    url: `${BASE_URL}/images/homepage.jpg`,
-                    width: 1200,
-                    height: 630,
-                },
-                inLanguage: "en",
-                breadcrumb: {
-                    "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}#breadcrumb`,
-                    itemListElement: [
-                        {
-                            "@type": "ListItem",
-                            position: 1,
-                            name: "Home",
-                            item: BASE_URL,
-                        },
-                        {
-                            "@type": "ListItem",
-                            position: 2,
-                            name: "Services",
-                            item: `${BASE_URL}/services`,
-                        },
-                        {
-                            "@type": "ListItem",
-                            position: 3,
-                            name: service.title,
-                            item: pageUrl,
-                        },
-                    ],
-                },
-            },
-            {
-                "@type": "Service",
-                "@id": `${pageUrl}#service`,
-                url: pageUrl,
-                name: service.title,
-                alternateName: service.shortTitle,
-                description: service.description,
-                provider: { "@id": PERSON_ID },
-                broker: { "@id": PERSON_ID },
-                serviceType: service.shortTitle,
-                keywords: service.seoKeywords.join(", "),
-                image: `${BASE_URL}/images/homepage.jpg`,
-                areaServed: [
-                    { "@type": "Country", name: "Nigeria" },
-                    { "@type": "Place", name: "Worldwide" },
-                ],
-                audience: {
-                    "@type": "Audience",
-                    audienceType: service.audience,
-                },
-                offers: getServiceOffer(service),
-                mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
             },
         ],
     }

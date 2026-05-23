@@ -25,25 +25,6 @@ export type BlogPost = {
   takeaway: string;
 };
 
-export type Service = {
-  slug: string;
-  title: string;
-  shortTitle: string;
-  summary: string;
-  description: string;
-  audience: string;
-  timeline: string;
-  startingPoint: string;
-  outcomes: string[];
-  deliverables: string[];
-  process: {
-    title: string;
-    body: string;
-  }[];
-  relatedSkills: string[];
-  seoKeywords: string[];
-};
-
 export const siteConfig = {
   name: "Edwin Promise",
   shortName: "PX",
@@ -67,7 +48,6 @@ export const siteConfig = {
 
 export const navItems = [
   { href: "/about", label: "About me" },
-  { href: "/services", label: "Services" },
   { href: "/#skills", label: "Skills" },
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
@@ -120,201 +100,6 @@ export const workPattern = [
     ]
   },
 ]
-
-export const services: Service[] = [
-  {
-    slug: "business-website-design-development",
-    title: "Business Website Design & Development",
-    shortTitle: "Business Websites",
-    summary:
-      "Fast, responsive, SEO-ready websites for small businesses that need to look credible and turn visitors into enquiries.",
-    description:
-      "A practical website build for businesses that need a stronger online presence, clearer messaging, and a site that makes it easy for customers to understand the offer and get in touch.",
-    audience:
-      "Best for service businesses, consultants, agencies, local companies, and founders who need a polished website that supports enquiries.",
-    timeline: "Usually 2-5 weeks depending on content, page count, and integrations.",
-    startingPoint: "Good for new builds, redesigns, and websites that need clearer structure.",
-    outcomes: [
-      "A polished website that explains the offer clearly",
-      "Responsive pages that work well across mobile and desktop",
-      "SEO-ready page structure, metadata, and performance-minded implementation",
-      "Clear enquiry paths through contact, WhatsApp, or booking links",
-    ],
-    deliverables: [
-      "Homepage and core service pages",
-      "Responsive interface design and development",
-      "Contact or lead enquiry flow",
-      "Basic technical SEO setup",
-      "Performance and launch checks",
-    ],
-    process: [
-      {
-        title: "Clarify the offer",
-        body: "We define the pages, messages, proof points, and calls to action the website needs before design starts.",
-      },
-      {
-        title: "Design the experience",
-        body: "I shape the layout, hierarchy, and content flow so visitors can understand the business quickly.",
-      },
-      {
-        title: "Build and launch",
-        body: "The site is developed, optimized, tested, and prepared for launch with the right technical basics in place.",
-      },
-    ],
-    relatedSkills: ["Next.js", "WordPress", "Tailwind CSS", "SEO", "Responsive Design"],
-    seoKeywords: [
-      "business website design",
-      "small business website development",
-      "SEO-ready website",
-      "responsive website design",
-    ],
-  },
-  {
-    slug: "landing-pages-for-ads-and-campaigns",
-    title: "Landing Pages for Ads & Campaigns",
-    shortTitle: "Landing Pages",
-    summary:
-      "Focused landing pages for paid ads, launches, and campaigns where every section supports one clear next action.",
-    description:
-      "A focused landing page service for businesses spending time or money on traffic and needing a page that explains the offer, builds trust, and gives visitors one practical next step.",
-    audience:
-      "Best for paid ad campaigns, service offers, lead magnets, product launches, waitlists, and seasonal promotions.",
-    timeline: "Usually 1-3 weeks depending on copy, proof, and tracking requirements.",
-    startingPoint: "Good when traffic is coming in but the current page is unclear or too general.",
-    outcomes: [
-      "A sharper campaign page built around one offer",
-      "Clear section flow for benefits, proof, objections, and action",
-      "Mobile-first layout for paid traffic",
-      "Tracking-ready structure for measuring enquiries or clicks",
-    ],
-    deliverables: [
-      "Campaign landing page",
-      "Offer and CTA structure",
-      "Responsive build",
-      "Lead capture or contact integration",
-      "Launch QA and performance checks",
-    ],
-    process: [
-      {
-        title: "Focus the campaign",
-        body: "We identify the audience, traffic source, promise, proof, and action the landing page must support.",
-      },
-      {
-        title: "Build the page flow",
-        body: "The page is structured to answer the visitor's key questions in the order they naturally appear.",
-      },
-      {
-        title: "Prepare for traffic",
-        body: "The final page is tested on mobile and desktop, then prepared for campaign launch and measurement.",
-      },
-    ],
-    relatedSkills: ["Conversion", "SEO", "Performance", "Responsive Design", "Analytics"],
-    seoKeywords: [
-      "landing page for small business ads",
-      "campaign landing page",
-      "paid ads landing page",
-      "conversion landing page",
-    ],
-  },
-  {
-    slug: "mvp-development-for-founders",
-    title: "MVP Development for Founders",
-    shortTitle: "MVP Development",
-    summary:
-      "Lean product builds for founders who need a usable first version with clear flows, reliable foundations, and launch momentum.",
-    description:
-      "A focused MVP build for founders and startups who need to turn an idea into a usable product without overbuilding before the first launch or validation cycle.",
-    audience:
-      "Best for founders, early startups, internal tools, portals, booking flows, dashboards, and product prototypes that need to become real software.",
-    timeline: "Usually 4-10 weeks depending on product scope, data model, and integrations.",
-    startingPoint: "Good when you have a clear product idea and need help shaping the first buildable version.",
-    outcomes: [
-      "A scoped first version that focuses on the core workflow",
-      "Clean frontend and backend foundations",
-      "Practical user flows for testing the product in the real world",
-      "A product base that can grow after launch",
-    ],
-    deliverables: [
-      "Product scope and flow planning",
-      "Responsive product interface",
-      "Backend/API implementation where needed",
-      "Database and integration setup",
-      "Deployment and launch support",
-    ],
-    process: [
-      {
-        title: "Define the first version",
-        body: "We reduce the idea to the core user journey and decide what must be built now versus what can wait.",
-      },
-      {
-        title: "Build the product base",
-        body: "I implement the main interface, data flow, and backend pieces needed for the product to work.",
-      },
-      {
-        title: "Launch and learn",
-        body: "The MVP is tested, deployed, and prepared for real usage so the next decisions can be based on feedback.",
-      },
-    ],
-    relatedSkills: ["Next.js", "React", "Laravel", "REST APIs", "MySQL", "Supabase"],
-    seoKeywords: [
-      "MVP development",
-      "startup MVP developer",
-      "founder product development",
-      "web app development",
-    ],
-  },
-  {
-    slug: "wordpress-website-development",
-    title: "WordPress Website Development",
-    shortTitle: "WordPress Websites",
-    summary:
-      "Business-ready WordPress websites using practical tools like Elementor, WooCommerce, and Yoast SEO where they fit the project.",
-    description:
-      "A WordPress build service for businesses that need a manageable website, CMS flexibility, SEO structure, and a clean front-end experience without unnecessary complexity.",
-    audience:
-      "Best for small businesses, service websites, content-heavy websites, simple ecommerce, and teams that prefer managing content in WordPress.",
-    timeline: "Usually 2-6 weeks depending on pages, ecommerce needs, and content readiness.",
-    startingPoint: "Good for new WordPress builds, redesigns, cleanup work, and performance improvements.",
-    outcomes: [
-      "A WordPress site that is easier to manage",
-      "Cleaner page structure and stronger visual hierarchy",
-      "Basic SEO and performance improvements",
-      "Practical plugin choices without bloating the site",
-    ],
-    deliverables: [
-      "WordPress setup or redesign",
-      "Elementor page building where appropriate",
-      "WooCommerce setup for simple stores",
-      "Yoast SEO basics",
-      "Speed, responsive, and launch checks",
-    ],
-    process: [
-      {
-        title: "Audit or plan the site",
-        body: "We review the existing setup or define the pages, plugins, and content model needed for the new site.",
-      },
-      {
-        title: "Build the WordPress experience",
-        body: "The pages are designed and built with a focus on clarity, speed, responsive behavior, and maintainability.",
-      },
-      {
-        title: "Clean up for launch",
-        body: "I check SEO basics, plugin load, mobile behavior, forms, and performance before the site goes live.",
-      },
-    ],
-    relatedSkills: ["WordPress", "Elementor", "WooCommerce", "Yoast SEO", "Performance"],
-    seoKeywords: [
-      "WordPress website developer",
-      "Elementor website design",
-      "WooCommerce setup",
-      "WordPress SEO",
-    ],
-  },
-];
-
-export function getServiceBySlug(slug: string) {
-  return services.find((service) => service.slug === slug);
-}
 
 export const featuredProjects: Project[] = [
   {
@@ -600,7 +385,6 @@ export const searchEntries = [
   { title: "Home", href: "/", category: "Page", body: "Hero, reviews, and contact section." },
   { title: "About", href: "/about#about", category: "Page", body: "Bio, process, and work approach." },
   { title: "Projects", href: "/projects", category: "Page", body: "Selected portfolio work and case study summaries." },
-  { title: "Services", href: "/services", category: "Page", body: "Website design, landing pages, MVP development, and WordPress builds." },
   { title: "Blog", href: "/blog", category: "Page", body: "Writing on product craft, delivery, and interface thinking." },
   { title: "Skills", href: "/#skills", category: "Section", body: "Mobile, frontend, backend, and workflow tools." },
   { title: "Contact", href: "/#contact", category: "Section", body: "Email and WhatsApp call to action." },
@@ -609,12 +393,6 @@ export const searchEntries = [
     href: `/projects#${project.slug}`,
     category: project.accent,
     body: project.summary,
-  })),
-  ...services.map((service) => ({
-    title: service.title,
-    href: `/services/${service.slug}`,
-    category: "Service",
-    body: service.summary,
   })),
   ...blogPosts.map((post) => ({
     title: post.title,
