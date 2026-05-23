@@ -1,7 +1,7 @@
-import { getSitemapEntries, sitemapRevalidate } from "@/lib/sitemap";
+import { getSitemapEntries } from "@/lib/sitemap";
 import type { MetadataRoute } from "next";
 
-export const revalidate = sitemapRevalidate;
+export const revalidate = 86400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return getSitemapEntries();

@@ -1,6 +1,6 @@
-import { getSitemapEntries, sitemapRevalidate } from "@/lib/sitemap";
+import { getSitemapEntries } from "@/lib/sitemap";
 
-export const revalidate = sitemapRevalidate;
+export const revalidate = 86400;
 
 function escapeXml(value: string): string {
   return value
