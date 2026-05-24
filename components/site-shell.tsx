@@ -4,22 +4,32 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUp, ArrowUpRight, Mail, Menu, MoonStar, Search, SunMedium, X } from "lucide-react";
+import { ArrowUp, ArrowUpRight, ChevronDown, Mail, Menu, MoonStar, Search, SunMedium, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { Easing } from "motion/react";
 import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 import { SocialIcon } from "@/components/social-icon";
 import { trackContactClick, trackExternalLinkClick, trackWhatsAppClick } from "@/lib/analytics";
-import { navItems, siteConfig, socials } from "@/lib/site-data";
+import { navItems, services, siteConfig, socials } from "@/lib/site-data";
 
 const MotionLink = motion.create(Link);
 const siteEase: Easing = [0.22, 1, 0.36, 1];
+const servicesMenuItems = [
+  "business-website-design-development",
+  "landing-pages-for-ads-and-campaigns",
+  "wordpress-website-development",
+  "mvp-development-for-founders",
+]
+  .map((slug) => services.find((service) => service.slug === slug))
+  .filter((service): service is (typeof services)[number] => Boolean(service));
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isStudioRoute = pathname === "/studio" || pathname.startsWith("/studio/");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
+  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
   const [showTop, setShowTop] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     if (typeof document === "undefined") {
@@ -158,14 +168,70 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
               <div className="hidden items-center gap-7 text-sm text-silver lg:flex">
                 {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={(event) => handleNavClick(item.href, event)}
-                    className="nav-micro-link border-b border-transparent pb-1 transition hover:border-brass/70 hover:text-brass"
-                  >
-                    {item.label}
-                  </Link>
+                  item.href === "/services" ? (
+                    <div
+                      key={item.href}
+                      className="relative py-2"
+                      onMouseEnter={() => setDesktopServicesOpen(true)}
+                      onMouseLeave={() => setDesktopServicesOpen(false)}
+                      onFocus={() => setDesktopServicesOpen(true)}
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={(event) => {
+                          setDesktopServicesOpen(false);
+                          handleNavClick(item.href, event);
+                        }}
+                        className={`nav-micro-link inline-flex items-center gap-1.5 border-b pb-1 transition hover:border-brass/70 hover:text-brass ${
+                          desktopServicesOpen ? "border-brass/70 text-brass" : "border-transparent"
+                        }`}
+                        aria-haspopup="true"
+                        aria-expanded={desktopServicesOpen}
+                      >
+                        {item.label}
+                        <ArrowUpRight
+                          size={12}
+                          className={`transition ${desktopServicesOpen ? "-translate-y-0.5 translate-x-0.5" : ""}`}
+                        />
+                      </Link>
+
+                      <div
+                        className={`absolute left-1/2 top-full w-[22rem] -translate-x-1/2 transition duration-200 ${
+                          desktopServicesOpen
+                            ? "pointer-events-auto translate-y-0 opacity-100"
+                            : "pointer-events-none translate-y-2 opacity-0"
+                        }`}
+                      >
+                        <div className="rounded-[1.6rem] border border-white/10 bg-[rgba(18,18,18,0.94)] p-3 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+                          <div className="px-3 py-2">
+                            <p className="eyebrow text-[0.65rem] text-brass">Services</p>
+                          </div>
+                          <div className="grid gap-1">
+                            {servicesMenuItems.map((service) => (
+                              <Link
+                                key={service.slug}
+                                href={`/services/${service.slug}`}
+                                onClick={() => setDesktopServicesOpen(false)}
+                                className="rounded-[1.15rem] px-3 py-3 transition hover:bg-white/[0.05] hover:text-brass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
+                              >
+                                <span className="block text-sm font-medium text-cream">{service.shortTitle}</span>
+                                <span className="mt-1 block text-xs leading-5 text-silver">{service.summary}</span>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={(event) => handleNavClick(item.href, event)}
+                      className="nav-micro-link border-b border-transparent pb-1 transition hover:border-brass/70 hover:text-brass"
+                    >
+                      {item.label}
+                    </Link>
+                  )
                 ))}
               </div>
 
@@ -208,7 +274,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               <button
                 type="button"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
-                onClick={() => setMenuOpen((open) => !open)}
+                onClick={() => {
+                  setMenuOpen((open) => {
+                    if (open) {
+                      setServicesMenuOpen(false);
+                    }
+
+                    return !open;
+                  });
+                }}
                 className="micro-press inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-panel text-cream transition hover:border-brass"
               >
                 {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -235,7 +309,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               transition={{ duration: 0.32, ease: siteEase }}
             >
               <motion.div
-                className="section-card mx-auto max-w-lg rounded-[2rem] p-6"
+                className="section-card mx-auto rounded-[2rem] py-6 px-4"
                 initial={{ opacity: 0, y: 18, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.985 }}
@@ -262,27 +336,95 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   <MotionLink
                     href="/"
                     {...mobileMenuItemMotion(1)}
-                    onClick={(event) => handleNavClick("/", event, true)}
+                    onClick={(event) => {
+                      setServicesMenuOpen(false);
+                      handleNavClick("/", event, true);
+                    }}
                     className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
                   >
                     Home
                   </MotionLink>
                   {navItems.map((item, index) => (
-                    <MotionLink
-                      key={item.href}
-                      href={item.href}
-                      {...mobileMenuItemMotion(index + 2)}
-                      onClick={(event) => handleNavClick(item.href, event, true)}
-                      className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
-                    >
-                      {item.label}
-                    </MotionLink>
+                    item.href === "/services" ? (
+                      <motion.div
+                        key={item.href}
+                        {...mobileMenuItemMotion(index + 2)}
+                        className="rounded-2xl border border-white/10 p-3"
+                      >
+                        <button
+                          type="button"
+                          aria-expanded={servicesMenuOpen}
+                          aria-controls="mobile-services-menu"
+                          onClick={() => setServicesMenuOpen((open) => !open)}
+                          className="micro-press flex w-full items-center justify-between gap-3 rounded-xl px-1 py-1 text-left transition hover:text-brass"
+                        >
+                          <span>{item.label}</span>
+                          <ChevronDown
+                            size={16}
+                            className={`transition ${servicesMenuOpen ? "rotate-180 text-brass" : "text-silver"}`}
+                          />
+                        </button>
+
+                        <AnimatePresence initial={false}>
+                          {servicesMenuOpen ? (
+                            <motion.div
+                              id="mobile-services-menu"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.22, ease: siteEase }}
+                              className="overflow-hidden"
+                            >
+                              <div className="mt-3 grid gap-2 border-t border-white/10 pt-3">
+                                <MotionLink
+                                  href="/services"
+                                  onClick={(event) => {
+                                    handleNavClick("/services", event, true);
+                                    setServicesMenuOpen(false);
+                                  }}
+                                  className="rounded-xl bg-white/[0.045] px-3 py-2 text-sm font-medium text-cream transition hover:text-brass"
+                                >
+                                  All services
+                                </MotionLink>
+                                {servicesMenuItems.map((service) => (
+                                  <MotionLink
+                                    key={service.slug}
+                                    href={`/services/${service.slug}`}
+                                    onClick={() => {
+                                      setServicesMenuOpen(false);
+                                      setMenuOpen(false);
+                                    }}
+                                    className="rounded-xl bg-white/[0.03] px-3 py-2 text-sm text-silver transition hover:text-brass"
+                                  >
+                                    {service.shortTitle}
+                                  </MotionLink>
+                                ))}
+                              </div>
+                            </motion.div>
+                          ) : null}
+                        </AnimatePresence>
+                      </motion.div>
+                    ) : (
+                      <MotionLink
+                        key={item.href}
+                        href={item.href}
+                        {...mobileMenuItemMotion(index + 2)}
+                        onClick={(event) => {
+                          setServicesMenuOpen(false);
+                          handleNavClick(item.href, event, true);
+                        }}
+                        className="micro-press rounded-2xl border border-white/10 px-4 py-3 transition hover:border-brass hover:text-brass"
+                      >
+                        {item.label}
+                      </MotionLink>
+                    )
                   ))}
                   <motion.a
                     href={siteConfig.contactHref}
                     {...mobileMenuItemMotion(navItems.length + 2)}
                     onClick={() => {
                       trackContactClick("mobile_menu", "Contact me");
+                      setServicesMenuOpen(false);
                       setMenuOpen(false);
                     }}
                     className="micro-press rounded-2xl border border-brass bg-brass px-4 py-3 font-semibold text-charcoal!"
