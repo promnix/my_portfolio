@@ -12,107 +12,6 @@ const CONTACT_HREF = "mailto:promnix10@gmail.com?subject=Project%20Inquiry";
 const WHATSAPP_HREF =
   "https://wa.me/2347058149298?text=Hi%20Promise%2C%20I%27d%20like%20to%20start%20a%20project.";
 
-const defaultProcess = [
-  {
-    number: "01",
-    title: "Clarify the offer",
-    body: "We define the pages, messages, proof points, and calls to action the website needs before design starts.",
-  },
-  {
-    number: "02",
-    title: "Design the experience",
-    body: "I shape the layout, hierarchy, and content flow so visitors can understand the business quickly.",
-  },
-  {
-    number: "03",
-    title: "Build and launch",
-    body: "The site is developed, optimized, tested, and launched with full repository access and handoff documentation.",
-  },
-];
-
-const serviceDetails = {
-  "business-website-design-development": {
-    subheading:
-      "A practical website build for businesses that need a stronger online presence, clearer messaging, and a site that makes it easy for customers to take action.",
-    fit: "Good for new builds, redesigns, and sites where visitors leave confused or don't know what to do next.",
-    timeline: "Usually 2-5 weeks depending on content, page count, and integrations.",
-    outcomes: [
-      "A polished website that explains the offer clearly",
-      "Clear enquiry paths through contact, WhatsApp, or booking links",
-      "Responsive pages that work well across mobile and desktop",
-      "SEO-ready page structure, metadata, and performance-minded implementation",
-    ],
-    deliverables: [
-      "Homepage and core service pages",
-      "Responsive interface design and development",
-      "Contact or lead enquiry flow",
-      "Basic technical SEO setup",
-      "Performance and launch checks",
-      "Repository handoff and documentation",
-    ],
-  },
-  "landing-pages-for-ads-and-campaigns": {
-    subheading:
-      "Focused landing pages built for paid ads, launches, and campaigns where every section is designed to support one clear next action.",
-    fit: "Good for ad campaigns, product launches, and offers that need a dedicated conversion page.",
-    timeline: "Usually 1-3 weeks depending on content complexity and integration needs.",
-    outcomes: [
-      "A focused page built around one campaign goal",
-      "Clearer offer structure, proof, objections, and calls to action",
-      "Mobile-first sections for paid traffic",
-      "Tracking-ready structure for enquiries, clicks, or form submissions",
-    ],
-    deliverables: [
-      "Campaign landing page",
-      "Offer and CTA structure",
-      "Responsive interface design and development",
-      "Lead capture or contact integration",
-      "Performance and launch checks",
-      "Repository handoff and documentation",
-    ],
-  },
-  "mvp-development-for-founders": {
-    subheading:
-      "Lean product builds for founders who need a usable first version with clear user flows, reliable technical foundations, and launch momentum.",
-    fit: "Good for first-time founders, SaaS pilots, and products that need to validate demand before scaling.",
-    timeline: "Usually 4-8 weeks depending on feature scope, integrations, and data complexity.",
-    outcomes: [
-      "A scoped first version focused on the core workflow",
-      "Clear user flows for testing the product with real users",
-      "Reliable frontend, backend, and data foundations",
-      "A product base that can grow after launch",
-    ],
-    deliverables: [
-      "MVP scope and feature planning",
-      "Responsive product interface design and development",
-      "Core user flow and data model implementation",
-      "Backend/API setup where needed",
-      "Deployment and launch checks",
-      "Repository handoff and documentation",
-    ],
-  },
-  "wordpress-website-development": {
-    subheading:
-      "Business-ready WordPress websites using Elementor, WooCommerce, and Yoast SEO where they fit the project goals.",
-    fit: "Good for businesses that need content control, e-commerce, or non-technical team handoff.",
-    timeline: "Usually 2-4 weeks depending on page count, e-commerce setup, and plugin integrations.",
-    outcomes: [
-      "A WordPress website that is easier to manage",
-      "Clearer page structure and stronger visual hierarchy",
-      "Practical plugin choices without unnecessary bloat",
-      "Basic SEO and performance improvements",
-    ],
-    deliverables: [
-      "Homepage and core website pages",
-      "Responsive WordPress design and development",
-      "Contact, e-commerce, or lead enquiry flow",
-      "Yoast SEO and plugin setup",
-      "Performance and launch checks",
-      "Repository handoff and documentation",
-    ],
-  },
-} as const;
-
 export function generateStaticParams() {
   return services.map((service) => ({
     slug: service.slug,
@@ -126,24 +25,23 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
-  const detail = serviceDetails[slug as keyof typeof serviceDetails];
 
-  if (!service || !detail) {
+  if (!service) {
     return {
       title: "Service not found",
     };
   }
 
   return {
-    title: service.title,
-    description: detail.subheading,
+    title: service.metaTitle,
+    description: service.metaDescription,
     keywords: service.seoKeywords,
     alternates: {
       canonical: `/services/${service.slug}`,
     },
     openGraph: {
-      title: `${service.title} | Edwin Promise`,
-      description: detail.subheading,
+      title: `${service.metaTitle} | Edwin Promise`,
+      description: service.metaDescription,
       type: "website",
       url: `/services/${service.slug}`,
       images: [
@@ -157,8 +55,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${service.title} | Edwin Promise`,
-      description: detail.subheading,
+      title: `${service.metaTitle} | Edwin Promise`,
+      description: service.metaDescription,
       images: ["/images/homepage.jpg"],
     },
     robots: {
@@ -175,9 +73,8 @@ export default async function ServiceDetailPage({
 }) {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
-  const detail = serviceDetails[slug as keyof typeof serviceDetails];
 
-  if (!service || !detail) {
+  if (!service) {
     notFound();
   }
 
@@ -201,7 +98,7 @@ export default async function ServiceDetailPage({
               {service.title}
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-8 text-silver md:text-base">
-              {detail.subheading}
+              {service.description}
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -210,7 +107,7 @@ export default async function ServiceDetailPage({
                 tracking={{ type: "contact_click", location: "service_detail_hero", label: service.title }}
                 className="inline-flex items-center gap-2 rounded-full border border-brass bg-brass px-5 py-3 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5 hover:bg-cream focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brass"
               >
-                Start this project
+                {service.ctaLabel}
                 <ArrowUpRight size={15} />
               </TrackedLink>
               <TrackedLink
@@ -232,13 +129,19 @@ export default async function ServiceDetailPage({
               <article className="rounded-[1.45rem] border border-white/10 bg-white/[0.03] p-4">
                 <p className="text-xs text-silver">Fit</p>
                 <p className="mt-3 text-sm leading-7 text-cream">
-                  {detail.fit}
+                  {service.startingPoint}
                 </p>
               </article>
               <article className="rounded-[1.45rem] border border-white/10 bg-white/[0.03] p-4">
                 <p className="text-xs text-silver">Timeline</p>
                 <p className="mt-3 text-sm leading-7 text-cream">
-                  {detail.timeline}
+                  {service.timeline}
+                </p>
+              </article>
+              <article className="rounded-[1.45rem] border border-white/10 bg-white/[0.03] p-4">
+                <p className="text-xs text-silver">Investment</p>
+                <p className="mt-3 text-sm leading-7 text-cream">
+                  Starting from {service.investment.startingFrom}
                 </p>
               </article>
             </div>
@@ -253,7 +156,7 @@ export default async function ServiceDetailPage({
             What this service is designed to improve.
           </p>
           <ol className="mt-8 grid gap-4 md:grid-cols-2">
-            {detail.outcomes.map((outcome, index) => (
+            {service.outcomes.map((outcome, index) => (
               <li
                 key={outcome}
                 className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5"
@@ -266,11 +169,75 @@ export default async function ServiceDetailPage({
         </section>
 
         <section className="mt-12">
+          <div className="max-w-3xl">
+            <h2 className="font-display text-4xl text-balance md:text-5xl">
+              Who this is for
+            </h2>
+            <p className="mt-4 text-sm leading-8 text-silver md:text-base">
+              A clearer way to decide whether this service matches the problem you need solved.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+            <article className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5">
+              <h3 className="text-base font-semibold text-cream">Good fit</h3>
+              <ul className="mt-5 space-y-3">
+                {service.fit.good.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-7 text-silver">
+                    <span aria-hidden="true" className="shrink-0">✅</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5">
+              <h3 className="text-base font-semibold text-cream">Not ideal for</h3>
+              <ul className="mt-5 space-y-3">
+                {service.fit.notIdeal.map((item) => {
+                  const betterService = item.betterServiceSlug
+                    ? getServiceBySlug(item.betterServiceSlug)
+                    : null;
+
+                  return (
+                    <li key={item.text} className="flex gap-3 text-sm leading-7 text-silver">
+                      <span aria-hidden="true" className="shrink-0">❌</span>
+                      <span>
+                        {item.text}
+                        {betterService ? (
+                          <>
+                            {" "}
+                            <Link
+                              href={`/services/${betterService.slug}`}
+                              className="text-brass underline-offset-4 transition hover:underline"
+                            >
+                              See {betterService.shortTitle}.
+                            </Link>
+                          </>
+                        ) : null}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section className="mt-12 rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
+          <p className="eyebrow text-xs text-brass">Investment</p>
+          <h2 className="mt-4 font-display text-4xl text-balance md:text-5xl">
+            Typical investment: Starting from {service.investment.startingFrom}
+          </h2>
+          <p className="mt-4 max-w-3xl text-sm leading-8 text-silver md:text-base">
+            Typical investment starts from {service.investment.startingFrom} depending on scope, content, integrations, and timeline. {service.investment.note}
+          </p>
+        </section>
+
+        <section className="mt-12">
           <h2 className="font-display text-4xl text-balance md:text-5xl">
             Deliverables
           </h2>
           <ul className="mt-8 grid gap-3 md:grid-cols-2">
-            {detail.deliverables.map((deliverable) => (
+            {service.deliverables.map((deliverable) => (
               <li
                 key={deliverable}
                 className="flex gap-3 rounded-[1.35rem] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm leading-7 text-silver"
@@ -285,22 +252,99 @@ export default async function ServiceDetailPage({
         <section className="mt-12">
           <div className="max-w-3xl">
             <h2 className="font-display text-4xl text-balance md:text-5xl">
+              Timeline
+            </h2>
+            <p className="mt-4 text-sm leading-8 text-silver md:text-base">
+              {service.timelineDetail.typical}
+            </p>
+          </div>
+          <ol className="mt-8 grid gap-3">
+            {service.timelineDetail.weeks.map((item, index) => (
+              <li
+                key={item}
+                className="flex gap-4 rounded-[1.35rem] border border-white/10 bg-white/[0.03] p-4 text-sm leading-7 text-silver"
+              >
+                <span className="shrink-0 text-brass">{String(index + 1).padStart(2, "0")}</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-4 max-w-3xl text-sm leading-8 text-silver">
+            {service.timelineDetail.note}
+          </p>
+        </section>
+
+        <section className="mt-12">
+          <div className="max-w-3xl">
+            <h2 className="font-display text-4xl text-balance md:text-5xl">
               Process
             </h2>
             <p className="mt-4 text-sm leading-8 text-silver md:text-base">
-              A simple path from unclear brief to launched work.
+              A focused path matched to this service, from first decisions to launch-ready handoff.
             </p>
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {defaultProcess.map((step) => (
-              <article key={step.number} className="section-card rounded-[1.8rem] p-6">
-                <p className="text-3xl text-brass">{step.number}</p>
+            {service.process.map((step, index) => (
+              <article key={step.title} className="section-card rounded-[1.8rem] p-6">
+                <p className="text-3xl text-brass">{String(index + 1).padStart(2, "0")}</p>
                 <h3 className="mt-5 text-base font-semibold text-cream">
                   {step.title}
                 </h3>
                 <p className="mt-4 text-sm leading-8 text-silver">
                   {step.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12">
+          <div className="max-w-3xl">
+            <h2 className="font-display text-4xl text-balance md:text-5xl">
+              Relevant project examples
+            </h2>
+            <p className="mt-4 text-sm leading-8 text-silver md:text-base">
+              Contribution-focused examples without invented performance numbers.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+            {service.proofProjects.map((project) => (
+              <article
+                key={project.title}
+                className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5"
+              >
+                <h3 className="font-display text-3xl text-balance text-cream">
+                  {project.title}
+                </h3>
+                <p className="mt-4 text-sm leading-7 text-silver">
+                  {project.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="faq" className="mt-12">
+          <div className="max-w-3xl">
+            <h2 className="font-display text-4xl text-balance md:text-5xl">
+              FAQs
+            </h2>
+            <p className="mt-4 text-sm leading-8 text-silver md:text-base">
+              Quick answers before you decide whether to start this service.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {service.faqs.map((faq) => (
+              <article
+                key={faq.question}
+                className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5"
+              >
+                <h3 className="text-base font-semibold text-cream">
+                  {faq.question}
+                </h3>
+                <p className="mt-4 text-sm leading-7 text-silver">
+                  {faq.answer}
                 </p>
               </article>
             ))}
@@ -323,11 +367,35 @@ export default async function ServiceDetailPage({
               tracking={{ type: "email_click", location: "service_detail_cta", label: service.title }}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal! transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brass"
             >
-              Email me
+              {service.ctaLabel}
               <ArrowUpRight size={15} />
             </TrackedLink>
           </div>
         </section>
+
+        {service.relatedInsights?.length ? (
+          <section className="mt-12">
+            <h2 className="font-display text-4xl text-balance md:text-5xl">
+              Related insights
+            </h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {service.relatedInsights.map((insight) => (
+                <Link
+                  key={insight.href}
+                  href={insight.href}
+                  className="group rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5 transition hover:border-brass/50 hover:bg-white/[0.045]"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="text-base font-semibold text-cream">
+                      {insight.title}
+                    </h3>
+                    <ArrowUpRight size={16} className="mt-1 shrink-0 text-silver transition group-hover:text-brass" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className="mt-12">
           <h2 className="font-display text-4xl text-balance md:text-5xl">
