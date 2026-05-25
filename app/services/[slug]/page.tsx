@@ -334,13 +334,13 @@ export default async function ServiceDetailPage({
               Quick answers before you decide whether to start this service.
             </p>
           </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="mt-6 space-y-3">
             {service.faqs.map((faq) => (
               <article
                 key={faq.question}
-                className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5"
+                className="rounded-3xl border border-white/10 bg-white/[0.03] p-5"
               >
-                <h3 className="text-base font-semibold text-cream">
+                <h3 className="text-base font-semibold leading-7 text-cream">
                   {faq.question}
                 </h3>
                 <p className="mt-4 text-sm leading-7 text-silver">
