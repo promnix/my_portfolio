@@ -374,6 +374,11 @@ export const services: Service[] = [
         body:
           "Contributed to website pages, content management, SEO support, and performance improvements for a laundry service website.",
       },
+      {
+        title: "Twist",
+        body:
+          "Built a modern design agency landing page for a subscription-based offer, covering services, benefits, pricing, testimonials, featured work, and FAQs in a focused conversion layout.",
+      },
     ],
     faqs: [
       {
