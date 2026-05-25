@@ -175,7 +175,7 @@ export const services: Service[] = [
     },
     startingPoint: "Good for new builds, redesigns, and websites that need clearer structure.",
     investment: {
-      startingFrom: "$800",
+      startingFrom: "$500",
       note:
         "Final pricing depends on page count, content readiness, custom features, integrations, and launch timeline.",
     },
@@ -230,11 +230,6 @@ export const services: Service[] = [
       ],
     },
     proofProjects: [
-      {
-        title: "Build With Promise / Promnix portfolio",
-        body:
-          "Personal portfolio and service site built with Next.js, SEO structure, blog/content system, service pages, schema, and a performance-focused setup.",
-      },
       {
         title: "Freshly Folded",
         body:
@@ -321,7 +316,7 @@ export const services: Service[] = [
     },
     startingPoint: "Good when traffic is coming in but the current page is unclear or too general.",
     investment: {
-      startingFrom: "$500",
+      startingFrom: "$200",
       note:
         "Final pricing depends on page count, content readiness, custom features, integrations, and launch timeline.",
     },
@@ -374,11 +369,6 @@ export const services: Service[] = [
       ],
     },
     proofProjects: [
-      {
-        title: "Build With Promise / Promnix portfolio",
-        body:
-          "Personal portfolio and service site built with clear service CTAs, SEO structure, blog/content system, schema, and performance-focused implementation.",
-      },
       {
         title: "Freshly Folded",
         body:
@@ -456,7 +446,7 @@ export const services: Service[] = [
     },
     startingPoint: "Good when you have a clear product idea and need help shaping the first buildable version.",
     investment: {
-      startingFrom: "$1,500",
+      startingFrom: "$1,200",
       note:
         "Final pricing depends on page count, content readiness, custom features, integrations, and launch timeline.",
     },
@@ -510,11 +500,11 @@ export const services: Service[] = [
       ],
     },
     proofProjects: [
-      {
-        title: "Bellefood MVP",
-        body:
-          "Food ordering MVP built with Next.js and Supabase, including menu, cart, delivery zone logic, and WhatsApp order flow.",
-      },
+      // {
+      //   title: "Bellefood MVP",
+      //   body:
+      //     "Food ordering MVP built with Next.js and Supabase, including menu, cart, delivery zone logic, and WhatsApp order flow.",
+      // },
       {
         title: "Build With Promise / Promnix portfolio",
         body:
@@ -592,7 +582,7 @@ export const services: Service[] = [
     },
     startingPoint: "Good for new WordPress builds, redesigns, cleanup work, and performance improvements.",
     investment: {
-      startingFrom: "$700",
+      startingFrom: "$400",
       note:
         "Final pricing depends on page count, content readiness, custom features, integrations, and launch timeline.",
     },
