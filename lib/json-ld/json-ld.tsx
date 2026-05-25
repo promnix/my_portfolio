@@ -164,6 +164,13 @@ function getServiceOffer(service: Service) {
     return {
         "@type": "Offer",
         url: `${BASE_URL}/services/${service.slug}`,
+        priceSpecification: service.investment
+            ? {
+                "@type": "PriceSpecification",
+                priceCurrency: "USD",
+                description: `Starting from ${service.investment.startingFrom}. ${service.investment.note}`,
+            }
+            : undefined,
         itemOffered: {
             "@type": "Service",
             "@id": `${BASE_URL}/services/${service.slug}#service`,
@@ -443,6 +450,21 @@ export const getServicesSchema = () => {
 
 export const getServiceSchema = (service: Service) => {
     const pageUrl = `${BASE_URL}/services/${service.slug}`
+    const faqNode = service.faqs.length
+        ? {
+            "@type": "FAQPage",
+            "@id": `${pageUrl}#faq`,
+            url: `${pageUrl}#faq`,
+            mainEntity: service.faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                    "@type": "Answer",
+                    text: faq.answer,
+                },
+            })),
+        }
+        : null
 
     return {
         "@context": "https://schema.org",
@@ -459,6 +481,7 @@ export const getServiceSchema = (service: Service) => {
                 isPartOf: { "@id": WEBSITE_ID },
                 about: { "@id": `${pageUrl}#service` },
                 mainEntity: { "@id": `${pageUrl}#service` },
+                hasPart: faqNode ? [{ "@id": `${pageUrl}#faq` }] : undefined,
                 primaryImageOfPage: {
                     "@type": "ImageObject",
                     url: `${BASE_URL}/images/homepage.jpg`,
@@ -514,6 +537,7 @@ export const getServiceSchema = (service: Service) => {
                 offers: getServiceOffer(service),
                 mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
             },
+            ...(faqNode ? [faqNode] : []),
         ],
     }
 }

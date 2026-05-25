@@ -33,13 +33,44 @@ export type Service = {
   description: string;
   audience: string;
   timeline: string;
+  timelineDetail: {
+    typical: string;
+    weeks: string[];
+    note: string;
+  };
   startingPoint: string;
+  investment: {
+    startingFrom: string;
+    note: string;
+  };
   outcomes: string[];
   deliverables: string[];
   process: {
     title: string;
     body: string;
   }[];
+  fit: {
+    good: string[];
+    notIdeal: {
+      text: string;
+      betterServiceSlug?: string;
+    }[];
+  };
+  proofProjects: {
+    title: string;
+    body: string;
+  }[];
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
+  relatedInsights?: {
+    title: string;
+    href: string;
+  }[];
+  ctaLabel: string;
+  metaTitle: string;
+  metaDescription: string;
   relatedSkills: string[];
   seoKeywords: string[];
 };
@@ -132,8 +163,22 @@ export const services: Service[] = [
       "A practical website build for businesses that need a stronger online presence, clearer messaging, and a site that makes it easy for customers to understand the offer and get in touch.",
     audience:
       "Best for service businesses, consultants, agencies, local companies, and founders who need a polished website that supports enquiries.",
-    timeline: "Usually 2-5 weeks depending on content, page count, and integrations.",
+    timeline: "3-4 weeks typical",
+    timelineDetail: {
+      typical: "3-4 weeks typical",
+      weeks: [
+        "Week 1: Discovery, structure, and content planning",
+        "Week 2-3: Design, development, mobile layout, and SEO setup",
+        "Week 4: Testing, revisions, tracking, and launch prep",
+      ],
+      note: "Rush builds may be possible when content is ready. Larger sites, custom integrations, or heavy copy support can extend the timeline.",
+    },
     startingPoint: "Good for new builds, redesigns, and websites that need clearer structure.",
+    investment: {
+      startingFrom: "$500",
+      note:
+        "Final pricing depends on page count, content readiness, custom features, integrations, and launch timeline.",
+    },
     outcomes: [
       "A polished website that explains the offer clearly",
       "Responsive pages that work well across mobile and desktop",
@@ -141,26 +186,106 @@ export const services: Service[] = [
       "Clear enquiry paths through contact, WhatsApp, or booking links",
     ],
     deliverables: [
-      "Homepage and core service pages",
-      "Responsive interface design and development",
-      "Contact or lead enquiry flow",
-      "Basic technical SEO setup",
-      "Performance and launch checks",
+      "Homepage",
+      "4-6 core pages",
+      "Contact section or form",
+      "Mobile responsive layout",
+      "Basic on-page SEO",
+      "Metadata",
+      "Schema where relevant",
+      "Google Analytics or tracking setup",
+      "2 rounds of revisions",
+      "Handoff walkthrough",
     ],
     process: [
       {
-        title: "Clarify the offer",
-        body: "We define the pages, messages, proof points, and calls to action the website needs before design starts.",
+        title: "Clarify the business and offer",
+        body: "We define what the business does, who it serves, what makes the offer credible, and what action visitors should take.",
       },
       {
-        title: "Design the experience",
-        body: "I shape the layout, hierarchy, and content flow so visitors can understand the business quickly.",
+        title: "Plan the page structure and conversion flow",
+        body: "The pages, section order, proof points, CTAs, and enquiry paths are mapped before design and development begin.",
       },
       {
-        title: "Build and launch",
-        body: "The site is developed, optimized, tested, and prepared for launch with the right technical basics in place.",
+        title: "Design, build, optimize, and launch",
+        body: "The website is built responsively, optimized for speed and search basics, tested, connected to tracking, and prepared for launch.",
       },
     ],
+    fit: {
+      good: [
+        "You need a professional website that explains your services clearly.",
+        "Your current site looks dated, unclear, or hard to trust.",
+        "You want customers to contact you through forms, email, WhatsApp, or booking links.",
+        "You need SEO basics, metadata, mobile responsiveness, and launch support handled properly.",
+      ],
+      notIdeal: [
+        {
+          text: "You only need one focused campaign page for ads or a launch.",
+          betterServiceSlug: "landing-pages-for-ads-and-campaigns",
+        },
+        {
+          text: "You need a working software product with accounts, data, and app workflows.",
+          betterServiceSlug: "mvp-development-for-founders",
+        },
+      ],
+    },
+    proofProjects: [
+      {
+        title: "Freshly Folded",
+        body:
+          "Contributed to website pages, content management, SEO support, and performance improvements for a laundry service website.",
+      },
+      {
+        title: "Scarsdale Solicitors",
+        body:
+          "Contributed to website pages, SEO-focused content management, performance improvements, and service/practice area page support for a law firm website.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do I need to provide the content?",
+        answer:
+          "You can provide final copy, rough notes, or an existing website. I can help organize and improve the page copy, but deeper copywriting may affect scope and timeline.",
+      },
+      {
+        question: "Can I update the website after launch?",
+        answer:
+          "Yes. The handoff can include a walkthrough, documentation, and guidance on what can be updated safely after launch.",
+      },
+      {
+        question: "Do you handle hosting and domain setup?",
+        answer:
+          "I can help connect hosting, domain DNS, SSL, redirects, and launch settings. Hosting or domain fees stay separate from the build cost.",
+      },
+      {
+        question: "Will the website be mobile responsive?",
+        answer:
+          "Yes. Mobile responsiveness is included, with checks for layout, forms, navigation, and CTA visibility across common screen sizes.",
+      },
+      {
+        question: "Do you include SEO basics?",
+        answer:
+          "Yes. The build includes basic on-page SEO, metadata, headings, internal links where relevant, and schema where it fits the page content.",
+      },
+    ],
+    relatedInsights: [
+      {
+        title: "Is your slow website losing customers before they contact you?",
+        href: "/blog/is-your-slow-website-losing-customers-before-they-contact-you",
+      },
+      {
+        title: "How to check if your website is optimized",
+        href: "/blog/how-to-check-if-your-website-is-optimized",
+      },
+      {
+        title: "Social media vs website for business: what should come first?",
+        href: "/blog/social-media-vs-website-for-business-what-should-come-first",
+      },
+    ],
+    ctaLabel: "Request a website quote",
+    metaTitle: "Business Website Design & Development",
+    metaDescription:
+      "Business website design and development for credible, SEO-ready sites that help customers understand your offer and get in touch.",
     relatedSkills: ["Next.js", "WordPress", "Tailwind CSS", "SEO", "Responsive Design"],
     seoKeywords: [
       "business website design",
@@ -179,8 +304,22 @@ export const services: Service[] = [
       "A focused landing page service for businesses spending time or money on traffic and needing a page that explains the offer, builds trust, and gives visitors one practical next step.",
     audience:
       "Best for paid ad campaigns, service offers, lead magnets, product launches, waitlists, and seasonal promotions.",
-    timeline: "Usually 1-3 weeks depending on copy, proof, and tracking requirements.",
+    timeline: "1-2 weeks typical",
+    timelineDetail: {
+      typical: "1-2 weeks typical",
+      weeks: [
+        "Day 1-2: Campaign goal, audience, offer, and CTA planning",
+        "Week 1: Page copy structure, design, and responsive build",
+        "Week 2: Tracking, form/WhatsApp/email connection, QA, and launch prep",
+      ],
+      note: "Rush timelines work best when the offer, copy inputs, assets, and tracking requirements are ready before kickoff.",
+    },
     startingPoint: "Good when traffic is coming in but the current page is unclear or too general.",
+    investment: {
+      startingFrom: "$200",
+      note:
+        "Final pricing depends on page count, content readiness, custom features, integrations, and launch timeline.",
+    },
     outcomes: [
       "A sharper campaign page built around one offer",
       "Clear section flow for benefits, proof, objections, and action",
@@ -188,26 +327,100 @@ export const services: Service[] = [
       "Tracking-ready structure for measuring enquiries or clicks",
     ],
     deliverables: [
-      "Campaign landing page",
-      "Offer and CTA structure",
-      "Responsive build",
-      "Lead capture or contact integration",
-      "Launch QA and performance checks",
+      "One focused landing page",
+      "Offer, benefits, proof, objections, and CTA section flow",
+      "Mobile responsive campaign layout",
+      "Lead capture form, WhatsApp, email, or booking link integration",
+      "Tracking/analytics setup support",
+      "Metadata and social sharing basics",
+      "Speed and launch QA",
+      "1-2 rounds of revisions",
     ],
     process: [
       {
-        title: "Focus the campaign",
-        body: "We identify the audience, traffic source, promise, proof, and action the landing page must support.",
+        title: "Define the campaign goal and target audience",
+        body: "We clarify the traffic source, audience, offer, promise, proof, and single action the page must drive.",
       },
       {
-        title: "Build the page flow",
-        body: "The page is structured to answer the visitor's key questions in the order they naturally appear.",
+        title: "Build a focused page around one action",
+        body: "The page is structured around one conversion path, with sections that answer questions and reduce hesitation before the CTA.",
       },
       {
-        title: "Prepare for traffic",
-        body: "The final page is tested on mobile and desktop, then prepared for campaign launch and measurement.",
+        title: "Test speed, mobile layout, tracking, and CTA flow",
+        body: "Before launch, the page is checked for mobile behavior, load speed, tracking events, forms, links, and CTA visibility.",
       },
     ],
+    fit: {
+      good: [
+        "You are sending paid ads, email traffic, or social traffic to one offer.",
+        "You need a campaign page for a launch, lead magnet, waitlist, event, or promotion.",
+        "Your current page has too many distractions or unclear CTAs.",
+        "You want tracking, forms, WhatsApp, email, or booking links set up for the campaign.",
+      ],
+      notIdeal: [
+        {
+          text: "You need a full website with multiple pages and a broader business presence.",
+          betterServiceSlug: "business-website-design-development",
+        },
+        {
+          text: "You need user accounts, dashboards, or product workflows.",
+          betterServiceSlug: "mvp-development-for-founders",
+        },
+      ],
+    },
+    proofProjects: [
+      {
+        title: "Freshly Folded",
+        body:
+          "Contributed to website pages, content management, SEO support, and performance improvements for a laundry service website.",
+      },
+      {
+        title: "Twist",
+        body:
+          "Built a modern design agency landing page for a subscription-based offer, covering services, benefits, pricing, testimonials, featured work, and FAQs in a focused conversion layout.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can this be used for paid ads?",
+        answer:
+          "Yes. Landing pages are built around focused traffic, clear offers, fast mobile loading, and a single action that supports campaign measurement.",
+      },
+      {
+        question: "Do you help with the page copy?",
+        answer:
+          "Yes. I can help structure and refine the copy from your notes, offer details, proof points, and campaign goal.",
+      },
+      {
+        question: "Can you add tracking or analytics?",
+        answer:
+          "Yes. I can add Google Analytics or event tracking support for CTA clicks, form submissions, WhatsApp clicks, or other agreed actions.",
+      },
+      {
+        question: "How fast can a landing page be launched?",
+        answer:
+          "A straightforward landing page can usually launch in 1-2 weeks when the offer, assets, and feedback are ready. Rush builds depend on scope.",
+      },
+      {
+        question: "Can it connect to WhatsApp, email, or forms?",
+        answer:
+          "Yes. The page can connect to WhatsApp, email, contact forms, booking links, or other lightweight lead capture tools.",
+      },
+    ],
+    relatedInsights: [
+      {
+        title: "Landing page for small business ads: how to stop wasting paid traffic",
+        href: "/blog/landing-page-for-small-business-ads-how-to-stop-wasting-paid-traffic",
+      },
+      {
+        title: "How to make a business website look professional without overcomplicating it",
+        href: "/blog/how-to-make-a-business-website-look-professional-without-overcomplicating-it",
+      },
+    ],
+    ctaLabel: "Plan your landing page",
+    metaTitle: "Landing Pages for Ads & Campaigns",
+    metaDescription:
+      "Focused landing pages for ads, launches, and campaigns with clear CTA flow, mobile layout, tracking, and conversion structure.",
     relatedSkills: ["Conversion", "SEO", "Performance", "Responsive Design", "Analytics"],
     seoKeywords: [
       "landing page for small business ads",
@@ -226,8 +439,22 @@ export const services: Service[] = [
       "A focused MVP build for founders and startups who need to turn an idea into a usable product without overbuilding before the first launch or validation cycle.",
     audience:
       "Best for founders, early startups, internal tools, portals, booking flows, dashboards, and product prototypes that need to become real software.",
-    timeline: "Usually 4-10 weeks depending on product scope, data model, and integrations.",
+    timeline: "4-8 weeks typical",
+    timelineDetail: {
+      typical: "4-8 weeks typical",
+      weeks: [
+        "Week 1: Scope, feature prioritization, user flows, and data planning",
+        "Week 2-5: Iterative build of core screens, backend, database, and integrations",
+        "Week 6-8: Testing, deployment, fixes, handoff, and next-version planning",
+      ],
+      note: "Complex apps, payment flows, role-based permissions, or changing feature requirements can extend the build into a longer phased roadmap.",
+    },
     startingPoint: "Good when you have a clear product idea and need help shaping the first buildable version.",
+    investment: {
+      startingFrom: "$1,200",
+      note:
+        "Final pricing depends on page count, content readiness, custom features, integrations, and launch timeline.",
+    },
     outcomes: [
       "A scoped first version that focuses on the core workflow",
       "Clean frontend and backend foundations",
@@ -235,26 +462,101 @@ export const services: Service[] = [
       "A product base that can grow after launch",
     ],
     deliverables: [
-      "Product scope and flow planning",
+      "MVP scope and feature priority list",
+      "Core user flows and screen structure",
       "Responsive product interface",
       "Backend/API implementation where needed",
-      "Database and integration setup",
+      "Database setup and data model",
+      "Auth, forms, dashboard, cart, or workflow features as scoped",
       "Deployment and launch support",
+      "Testing checklist and handoff notes",
+      "Repository access and walkthrough",
     ],
     process: [
       {
-        title: "Define the first version",
-        body: "We reduce the idea to the core user journey and decide what must be built now versus what can wait.",
+        title: "Scope and feature prioritization",
+        body: "We turn the idea into a buildable first version by separating must-have workflows from later-version features.",
       },
       {
-        title: "Build the product base",
-        body: "I implement the main interface, data flow, and backend pieces needed for the product to work.",
+        title: "Iterative build in stages",
+        body: "The product is built in practical stages so core screens, data flow, integrations, and feedback can be reviewed as the MVP takes shape.",
       },
       {
-        title: "Launch and learn",
-        body: "The MVP is tested, deployed, and prepared for real usage so the next decisions can be based on feedback.",
+        title: "Deploy, test, and handoff",
+        body: "The MVP is deployed, tested against the agreed flows, documented, and handed off with clear next steps for iteration.",
       },
     ],
+    fit: {
+      good: [
+        "You have a product idea and need a usable first version.",
+        "You need accounts, forms, dashboards, databases, carts, or workflow logic.",
+        "You want to validate a product before investing in a larger platform.",
+        "You need a technical partner who can help reduce scope and ship in stages.",
+      ],
+      notIdeal: [
+        {
+          text: "You only need a credibility website for your business.",
+          betterServiceSlug: "business-website-design-development",
+        },
+        {
+          text: "You only need a single conversion page for ads or a launch.",
+          betterServiceSlug: "landing-pages-for-ads-and-campaigns",
+        },
+      ],
+    },
+    proofProjects: [
+      // {
+      //   title: "Bellefood MVP",
+      //   body:
+      //     "Food ordering MVP built with Next.js and Supabase, including menu, cart, delivery zone logic, and WhatsApp order flow.",
+      // },
+      {
+        title: "Build With Promise / Promnix portfolio",
+        body:
+          "Personal portfolio and service site built with Next.js, SEO structure, blog/content system, service pages, schema, and performance focus.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How do we avoid scope creep?",
+        answer:
+          "We start with a defined feature priority list, agree what belongs in version one, and move non-essential ideas into a later roadmap.",
+      },
+      {
+        question: "Do I own the code after launch?",
+        answer:
+          "Yes. You receive repository access and handoff guidance for the code and deployment setup used for the agreed MVP build.",
+      },
+      {
+        question: "Can the MVP scale later?",
+        answer:
+          "The MVP is built with a practical foundation so it can be improved after validation, but scale requirements should be discussed early.",
+      },
+      {
+        question: "Can you continue after the first version?",
+        answer:
+          "Yes. After launch, we can plan follow-up improvements, new features, bug fixes, performance work, or product iteration.",
+      },
+      {
+        question: "What happens if features change mid-project?",
+        answer:
+          "We review the impact on timeline and budget, then decide whether the change replaces an existing feature or becomes a new phase.",
+      },
+    ],
+    relatedInsights: [
+      {
+        title: "What to ask a web developer before hiring",
+        href: "/blog/what-to-ask-a-web-developer-before-hiring",
+      },
+      {
+        title: "Website performance optimization",
+        href: "/blog/website-performance-optimization",
+      },
+    ],
+    ctaLabel: "Discuss your MVP idea",
+    metaTitle: "MVP Development for Founders",
+    metaDescription:
+      "MVP development for founders who need scoped features, staged builds, deployment, testing, and handoff for a usable first version.",
     relatedSkills: ["Next.js", "React", "Laravel", "REST APIs", "MySQL", "Supabase"],
     seoKeywords: [
       "MVP development",
@@ -273,8 +575,22 @@ export const services: Service[] = [
       "A WordPress build service for businesses that need a manageable website, CMS flexibility, SEO structure, and a clean front-end experience without unnecessary complexity.",
     audience:
       "Best for small businesses, service websites, content-heavy websites, simple ecommerce, and teams that prefer managing content in WordPress.",
-    timeline: "Usually 2-6 weeks depending on pages, ecommerce needs, and content readiness.",
+    timeline: "2-4 weeks typical",
+    timelineDetail: {
+      typical: "2-4 weeks typical",
+      weeks: [
+        "Week 1: Platform, theme, plugin, hosting, and content planning",
+        "Week 2-3: Page build, content setup, SEO plugin setup, forms, and responsive checks",
+        "Week 4: Performance cleanup, revisions, admin walkthrough, and launch prep",
+      ],
+      note: "WooCommerce, content-heavy sites, plugin conflicts, or existing-site cleanup can require a longer timeline.",
+    },
     startingPoint: "Good for new WordPress builds, redesigns, cleanup work, and performance improvements.",
+    investment: {
+      startingFrom: "$400",
+      note:
+        "Final pricing depends on page count, content readiness, custom features, integrations, and launch timeline.",
+    },
     outcomes: [
       "A WordPress site that is easier to manage",
       "Cleaner page structure and stronger visual hierarchy",
@@ -283,25 +599,101 @@ export const services: Service[] = [
     ],
     deliverables: [
       "WordPress setup or redesign",
-      "Elementor page building where appropriate",
-      "WooCommerce setup for simple stores",
-      "Yoast SEO basics",
-      "Speed, responsive, and launch checks",
+      "Theme and plugin planning",
+      "Homepage and core page build",
+      "Elementor setup where appropriate",
+      "WooCommerce setup for simple stores when scoped",
+      "SEO plugin configuration",
+      "Forms, menus, and basic content management setup",
+      "Mobile responsive checks",
+      "Performance cleanup and launch checks",
+      "Admin access walkthrough",
     ],
     process: [
       {
-        title: "Audit or plan the site",
-        body: "We review the existing setup or define the pages, plugins, and content model needed for the new site.",
+        title: "Platform, theme, plugin, and hosting planning",
+        body: "We review the current WordPress setup or plan the theme, plugins, hosting, pages, and content structure before the build.",
       },
       {
-        title: "Build the WordPress experience",
-        body: "The pages are designed and built with a focus on clarity, speed, responsive behavior, and maintainability.",
+        title: "Build pages, configure content, SEO, and forms",
+        body: "The site pages, menus, forms, SEO plugin settings, and content areas are configured with maintainability in mind.",
       },
       {
-        title: "Clean up for launch",
-        body: "I check SEO basics, plugin load, mobile behavior, forms, and performance before the site goes live.",
+        title: "Training, handoff, and admin access walkthrough",
+        body: "Before launch, I walk through the admin area, update process, plugin basics, and handoff steps so the site can be managed confidently.",
       },
     ],
+    fit: {
+      good: [
+        "You want a website your team can update through WordPress.",
+        "You need service pages, blog/content management, forms, or simple ecommerce.",
+        "Your current WordPress site needs cleanup, better page structure, or performance support.",
+        "You prefer Elementor, WooCommerce, Yoast SEO, or a familiar CMS workflow where appropriate.",
+      ],
+      notIdeal: [
+        {
+          text: "You want a custom Next.js website with more control over performance and structure.",
+          betterServiceSlug: "business-website-design-development",
+        },
+        {
+          text: "You need a custom web app or MVP with database-driven product workflows.",
+          betterServiceSlug: "mvp-development-for-founders",
+        },
+      ],
+    },
+    proofProjects: [
+      {
+        title: "Freshly Folded",
+        body:
+          "Contributed to website pages, content management, SEO support, and performance improvements for a laundry service website.",
+      },
+      {
+        title: "Scarsdale Solicitors",
+        body:
+          "Contributed to website pages, SEO-focused content management, performance improvements, and service/practice area page support for a law firm website.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can I edit the content myself?",
+        answer:
+          "Yes. WordPress is a good fit when you want to update pages, posts, images, menus, and basic content without editing code.",
+      },
+      {
+        question: "Do you use Elementor or custom WordPress setup?",
+        answer:
+          "I can use Elementor where it fits the project, or a more custom setup when performance, maintainability, or design needs call for it.",
+      },
+      {
+        question: "Can you help with SEO plugins?",
+        answer:
+          "Yes. I can configure SEO plugin basics, metadata, titles, descriptions, redirects where relevant, and page-level SEO structure.",
+      },
+      {
+        question: "Do you handle WooCommerce?",
+        answer:
+          "Yes, for simple WooCommerce stores or product/service checkout needs. More complex ecommerce flows should be scoped separately.",
+      },
+      {
+        question: "Do you provide a handoff walkthrough?",
+        answer:
+          "Yes. The handoff includes an admin walkthrough so you understand how to update common areas and manage the site after launch.",
+      },
+    ],
+    relatedInsights: [
+      {
+        title: "Next.js vs WordPress for business websites: which should you choose?",
+        href: "/blog/nextjs-vs-wordpress-for-business-websites-which-should-you-choose",
+      },
+      {
+        title: "Affordable website for small business: what you should pay for and what can wait",
+        href: "/blog/affordable-website-for-small-business-what-you-should-pay-for-and-what-can-wait",
+      },
+    ],
+    ctaLabel: "Build your WordPress website",
+    metaTitle: "WordPress Website Development",
+    metaDescription:
+      "WordPress website development with page builds, SEO plugin setup, forms, performance cleanup, and admin handoff walkthrough.",
     relatedSkills: ["WordPress", "Elementor", "WooCommerce", "Yoast SEO", "Performance"],
     seoKeywords: [
       "WordPress website developer",
