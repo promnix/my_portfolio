@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import { BlogBrowser } from "@/components/blog-browser";
-import { editorialPillars } from "@/lib/site-data";
+import { blogPosts as fallbackBlogPosts, editorialPillars, type BlogPost } from "@/lib/site-data";
 import { TrackedLink } from "@/components/tracked-link";
 import { client } from "@/sanity/lib/client";
 import { allPostsQuery } from "@/sanity/lib/queries";
@@ -61,14 +61,41 @@ function formatReadingTime(readingTime?: string | null) {
   return readingTime.includes("min") ? readingTime : `${readingTime} min read`;
 }
 
-export default async function BlogPage() {
-  const posts: IPost[] = await client.fetch(allPostsQuery, {}, 
-    {
+function toFallbackPost(post: BlogPost, index: number): IPost {
+  return {
+    _id: `fallback-${post.slug}`,
+    title: post.title,
+    slug: post.slug,
+    category: post.category,
+    excerpt: post.excerpt,
+    publishedAt: post.publishedAt,
+    readingTime: post.readingTime,
+    isFeatured: index === 0,
+    topics: post.topics,
+    coverImage: null,
+  };
+}
+
+async function getBlogPosts() {
+  try {
+    const posts = await client.fetch<IPost[]>(allPostsQuery, {}, {
       next: {
         revalidate: 60,
       },
+    });
+
+    if (posts.length > 0) {
+      return posts;
     }
-  );
+  } catch (error) {
+    console.error("Failed to fetch Sanity blog posts for /blog", error);
+  }
+
+  return fallbackBlogPosts.map(toFallbackPost);
+}
+
+export default async function BlogPage() {
+  const posts = await getBlogPosts();
   const featuredPost = posts.find((post) => post.isFeatured) ?? posts[0];
 
   const jsonLd = getBlogSchema(posts)
