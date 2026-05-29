@@ -41,6 +41,7 @@ export const blogPostSchema = defineType({
           { title: "Website Planning", value: "Website Planning" },
           { title: "Online Presence", value: "Online Presence" },
           { title: "Landing Pages", value: "Landing Pages" },
+          { title: "MVP Development", value: "MVP Development" },
         ],
       },
       validation: (Rule) => Rule.required(),
