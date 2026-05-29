@@ -9,10 +9,13 @@ import { Metadata } from "next";
 
 export const revalidate = 60
 
+const homeMetaDescription =
+  "Fast, SEO-ready business websites and MVPs built with Next.js and WordPress. Edwin Promise helps small businesses and founders launch, convert, and compete online.";
+
 // home page metadata
 export const metadata: Metadata = {
   title: "Edwin Promise | Web Developer for Business Websites & MVPs",
-  description: "Edwin Promise designs and builds fast, responsive, SEO-ready websites and MVPs for businesses, founders, and startups that want to look credible and convert visitors.",
+  description: homeMetaDescription,
   keywords: [
     "Edwin Promise",
     "web developer in Nigeria",
@@ -36,8 +39,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Edwin Promise | Fast, Modern Websites for Businesses",
-    description:
-      "I design and build fast, responsive, SEO-ready websites that help businesses look credible, build trust, and convert visitors into customers.",
+    description: homeMetaDescription,
     url: siteConfig.url,
     siteName: "Edwin Promise",
     type: "website",
@@ -54,8 +56,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Edwin Promise | Web Developer for Business Websites & MVPs",
-    description:
-      "Fast, responsive, SEO-ready websites and MVPs for businesses, founders, and startups.",
+    description: homeMetaDescription,
     images: ["/images/homepage.jpg"],
   },
   robots: {

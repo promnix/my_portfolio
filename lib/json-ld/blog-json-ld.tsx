@@ -81,9 +81,9 @@ export function generateBlogPostJsonLd({ post }: BlogPostJsonLdProps) {
             mainEntity: { "@id": `${pageUrl}#article` },
         },
 
-        // ── BlogPosting ──
+        // ── Article / BlogPosting ──
         {
-            "@type": "BlogPosting",
+            "@type": ["Article", "BlogPosting"],
             "@id": `${pageUrl}#article`,
             headline: post.title,
             name: title,

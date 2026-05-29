@@ -6,6 +6,15 @@ import { allPostsQuery, allProjectsQuery } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Search",
+  description:
+    "Search Edwin Promise's services, projects, and practical writing on web development, SEO, performance, and product builds.",
+  alternates: {
+    canonical: "/search",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default async function SearchPage({

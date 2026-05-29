@@ -6,6 +6,8 @@ const BASE_URL = siteConfig.url.replace(/\/$/, "")
 const PERSON_ID = `${BASE_URL}/#person`
 const WEBSITE_ID = `${BASE_URL}/#website`
 const SERVICE_ID = `${BASE_URL}/#service`
+const HOME_META_DESCRIPTION =
+    "Fast, SEO-ready business websites and MVPs built with Next.js and WordPress. Edwin Promise helps small businesses and founders launch, convert, and compete online."
 
 const REAL_SOCIALS = socials.map((social) => social.href)
 const CONTACT_EMAIL = "promnix10@gmail.com"
@@ -186,6 +188,22 @@ function getServiceOffer(service: Service) {
     }
 }
 
+function getBreadcrumbList(
+    pageUrl: string,
+    items: Array<{ name: string; item: string }>,
+) {
+    return {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: items.map((item, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: item.name,
+            item: item.item,
+        })),
+    }
+}
+
 // ─── Home Page ────────────────────────────────────────────────────────────────
 
 export const getHomeSchema = () => {
@@ -200,8 +218,7 @@ export const getHomeSchema = () => {
                 "@id": `${BASE_URL}/#webpage`,
                 url: BASE_URL,
                 name: "Edwin Promise | Web Developer for Business Websites & MVPs",
-                description:
-                    "Edwin Promise designs and builds fast, responsive, SEO-ready websites and MVPs for businesses, founders, and startups that want to look credible and convert visitors.",
+                description: HOME_META_DESCRIPTION,
                 isPartOf: { "@id": WEBSITE_ID },
                 about: { "@id": PERSON_ID },
                 primaryImageOfPage: {
@@ -212,19 +229,9 @@ export const getHomeSchema = () => {
                 },
                 mainEntity: { "@id": SERVICE_ID },
                 inLanguage: "en",
-                breadcrumb: {
-                    "@type": "BreadcrumbList",
-                    "@id": `${BASE_URL}/#breadcrumb`,
-                    itemListElement: [
-                        {
-                            "@type": "ListItem",
-                            position: 1,
-                            name: "Home",
-                            item: BASE_URL,
-                        },
-                    ],
-                },
+                breadcrumb: { "@id": `${BASE_URL}#breadcrumb` },
             },
+            getBreadcrumbList(BASE_URL, [{ name: "Home", item: BASE_URL }]),
         ],
     }
 }
@@ -258,25 +265,12 @@ export const getAboutSchema = () => {
                 about: { "@id": PERSON_ID },
                 mainEntity: { "@id": PERSON_ID },
                 inLanguage: "en",
-                breadcrumb: {
-                    "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}#breadcrumb`,
-                    itemListElement: [
-                        {
-                            "@type": "ListItem",
-                            position: 1,
-                            name: "Home",
-                            item: BASE_URL,
-                        },
-                        {
-                            "@type": "ListItem",
-                            position: 2,
-                            name: "About",
-                            item: pageUrl,
-                        },
-                    ],
-                },
+                breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
             },
+            getBreadcrumbList(pageUrl, [
+                { name: "Home", item: BASE_URL },
+                { name: "About", item: pageUrl },
+            ]),
         ],
     }
 }
@@ -359,25 +353,12 @@ export const getProjectsSchema = () => {
                         inLanguage: "en",
                     },
                 ],
-                breadcrumb: {
-                    "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}#breadcrumb`,
-                    itemListElement: [
-                        {
-                            "@type": "ListItem",
-                            position: 1,
-                            name: "Home",
-                            item: BASE_URL,
-                        },
-                        {
-                            "@type": "ListItem",
-                            position: 2,
-                            name: "Projects",
-                            item: pageUrl,
-                        },
-                    ],
-                },
+                breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
             },
+            getBreadcrumbList(pageUrl, [
+                { name: "Home", item: BASE_URL },
+                { name: "Projects", item: pageUrl },
+            ]),
         ],
     }
 }
@@ -424,26 +405,13 @@ export const getServicesSchema = () => {
                         { "@type": "Place", name: "Worldwide" },
                     ],
                     keywords: service.seoKeywords.join(", "),
-                })),
-                breadcrumb: {
-                    "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}#breadcrumb`,
-                    itemListElement: [
-                        {
-                            "@type": "ListItem",
-                            position: 1,
-                            name: "Home",
-                            item: BASE_URL,
-                        },
-                        {
-                            "@type": "ListItem",
-                            position: 2,
-                            name: "Services",
-                            item: pageUrl,
-                        },
-                    ],
-                },
+                    })),
+                breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
             },
+            getBreadcrumbList(pageUrl, [
+                { name: "Home", item: BASE_URL },
+                { name: "Services", item: pageUrl },
+            ]),
         ],
     }
 }
@@ -489,30 +457,7 @@ export const getServiceSchema = (service: Service) => {
                     height: 630,
                 },
                 inLanguage: "en",
-                breadcrumb: {
-                    "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}#breadcrumb`,
-                    itemListElement: [
-                        {
-                            "@type": "ListItem",
-                            position: 1,
-                            name: "Home",
-                            item: BASE_URL,
-                        },
-                        {
-                            "@type": "ListItem",
-                            position: 2,
-                            name: "Services",
-                            item: `${BASE_URL}/services`,
-                        },
-                        {
-                            "@type": "ListItem",
-                            position: 3,
-                            name: service.title,
-                            item: pageUrl,
-                        },
-                    ],
-                },
+                breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
             },
             {
                 "@type": "Service",
@@ -537,6 +482,11 @@ export const getServiceSchema = (service: Service) => {
                 offers: getServiceOffer(service),
                 mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
             },
+            getBreadcrumbList(pageUrl, [
+                { name: "Home", item: BASE_URL },
+                { name: "Services", item: `${BASE_URL}/services` },
+                { name: service.title, item: pageUrl },
+            ]),
             ...(faqNode ? [faqNode] : []),
         ],
     }
@@ -551,7 +501,7 @@ function getBlogPostSchema(posts: IPost[], pageUrl: string) {
             : `${BASE_URL}/og-image.jpg`
 
         return {
-            "@type": "BlogPosting",
+            "@type": ["Article", "BlogPosting"],
             url: `${BASE_URL}/blog/${post.slug}`,
             name: post.title,
             headline: post.title,
@@ -611,25 +561,12 @@ export const getBlogSchema = (posts: IPost[] = []) => {
                     { "@type": "Thing", name: "MVP Development" },
                 ],
                 blogPost: getBlogPostSchema(posts, pageUrl),
-                breadcrumb: {
-                    "@type": "BreadcrumbList",
-                    "@id": `${pageUrl}#breadcrumb`,
-                    itemListElement: [
-                        {
-                            "@type": "ListItem",
-                            position: 1,
-                            name: "Home",
-                            item: BASE_URL,
-                        },
-                        {
-                            "@type": "ListItem",
-                            position: 2,
-                            name: "Blog",
-                            item: pageUrl,
-                        },
-                    ],
-                },
+                breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
             },
+            getBreadcrumbList(pageUrl, [
+                { name: "Home", item: BASE_URL },
+                { name: "Blog", item: pageUrl },
+            ]),
         ],
     }
 }
