@@ -236,6 +236,45 @@ export const getHomeSchema = () => {
     }
 }
 
+// ─── Privacy Policy Page ─────────────────────────────────────────────────────
+
+const PRIVACY_POLICY_META_DESCRIPTION =
+    "Learn how BuildWithPromise collects, uses, and protects personal information submitted through website forms, TikTok Lead Ads, email, WhatsApp, and analytics tools."
+
+export const getPrivacyPolicySchema = (lastModified: string) => {
+    const pageUrl = `${BASE_URL}/privacy-policy`
+
+    return {
+        "@context": "https://schema.org",
+        "@graph": [
+            personNode,
+            websiteNode,
+            {
+                "@type": "WebPage",
+                "@id": `${pageUrl}#webpage`,
+                url: pageUrl,
+                name: "Privacy Policy | BuildWithPromise",
+                description: PRIVACY_POLICY_META_DESCRIPTION,
+                dateModified: lastModified,
+                isPartOf: { "@id": WEBSITE_ID },
+                about: {
+                    "@type": "Organization",
+                    name: "BuildWithPromise",
+                    email: "hello@buildwithpromise.com",
+                    founder: { "@id": PERSON_ID },
+                },
+                publisher: { "@id": PERSON_ID },
+                inLanguage: "en",
+                breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+            },
+            getBreadcrumbList(pageUrl, [
+                { name: "Home", item: BASE_URL },
+                { name: "Privacy Policy", item: pageUrl },
+            ]),
+        ],
+    }
+}
+
 // ─── About Page ───────────────────────────────────────────────────────────────
 
 export const getAboutSchema = () => {
